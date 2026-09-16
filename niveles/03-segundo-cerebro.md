@@ -124,8 +124,8 @@ Tu agente sabe cómo agregar un servidor MCP por HTTP en su propia herramienta (
 
 **¿Ya intentaste esto y no conectó?** Hay dos causas posibles, no una sola:
 
-1. **Probaste el puerto 27124 (HTTPS)** — falla por el certificado autofirmado, como se explica arriba. Solución: usar 27123.
-2. **Probaste el 27123 y tampoco respondía nada** — este plugin trae el servidor sin cifrar APAGADO por defecto. Si por algún motivo el toggle no quedó activado (por ejemplo, si Obsidian ya había corrido una vez antes de que tu agente escribiera `data.json`), el puerto directamente no va a escuchar, sin importar a cuál apuntes. Andá a Obsidian → Settings (⚙️) → Community plugins → Local REST API, y activá manualmente la opción de servidor sin cifrar (HTTP) — recién ahí 27123 responde.
+1. **Probaste el puerto 27124 (HTTPS)** — ese puerto usa un "certificado autofirmado" (una credencial de seguridad que el propio plugin se inventa a sí mismo, en vez de una emitida por una autoridad reconocida) y la mayoría de los agentes lo rechazan por eso. Solución: usar 27123.
+2. **Probaste el 27123 y tampoco respondía nada** — este plugin trae APAGADO por defecto el modo simple, sin ese certificado (tranquilo: sigue siendo seguro, porque solo funciona dentro de tu propia computadora, nunca expuesto a internet). Si por algún motivo no quedó activado (por ejemplo, si Obsidian ya había corrido una vez antes de que tu agente escribiera `data.json`), el puerto directamente no va a escuchar, sin importar a cuál apuntes. Andá a Obsidian → Settings (⚙️) → Community plugins → Local REST API, y activá manualmente la opción de servidor sin cifrar (HTTP) — recién ahí 27123 responde.
 
 **3. La parte que realmente importa: etiquetas consistentes, no un caos de tags distintos**
 
