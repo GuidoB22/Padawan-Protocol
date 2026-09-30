@@ -4,75 +4,87 @@ Este es el nivel que más cambia cómo se siente trabajar con tu agente.
 
 ## Qué es un archivo de persona
 
-Un archivo de instrucciones permanentes que tu agente lee en CADA sesión — no le tenés que repetir tu forma de trabajar cada vez, queda escrita una sola vez. Suele llamarse `CLAUDE.md` (o el equivalente de tu herramienta).
+Es una nota con instrucciones que tu agente lee **cada vez** que arranca una sesión. Ahí queda escrito cómo querés que te hable y cómo querés que trabaje con vos — así no tenés que repetírselo todas las veces.
+
+Pensalo como la nota que le dejás pegada en la heladera a alguien que te cuida la casa: "las plantas se riegan los martes, al perro no le des comida de la mesa". La escribís una vez, y cada vez que esa persona llega, la lee.
+
+En Claude Code esa nota se llama `CLAUDE.md`. Otras herramientas le ponen otro nombre — si no sabés cuál es el de la tuya, preguntáselo a tu agente, él lo sabe.
 
 ## La parte importante: que te frene, no que te obedezca
 
-Un agente sin instrucciones tiende a decir que sí a todo. Eso se siente bien un rato, y después te das cuenta de que aceptó algo mal planteado, o siguió una idea confusa tuya sin marcarte que era confusa. La regla más valiosa que le podés dar a tu agente es la contraria: **que te frene cuando algo no cierra**, en vez de simplemente cumplir.
+Un agente sin instrucciones tiende a decirte que sí a todo. Al principio eso se siente bien. Pero después te das cuenta de que aceptó una idea tuya que estaba mal pensada, o siguió algo confuso sin avisarte que era confuso.
+
+Es como un amigo que te dice que sí a todo: es agradable, pero no te sirve cuando estás por meter la pata. El que te sirve es el que te dice "pará, esto no me cierra, y te explico por qué".
+
+Por eso la regla más valiosa que le podés dar a tu agente es justamente esa: **que te frene cuando algo no cierra**, en vez de simplemente hacer lo que le pediste.
 
 ```mermaid
 flowchart LR
     subgraph Sin["Sin persona propia"]
-        U1[Decís algo mal/confuso] --> A1[Agente sigue de largo]
+        U1[Decís algo mal o confuso] --> A1[El agente sigue de largo]
     end
     subgraph Con["Con persona propia"]
-        U2[Decís algo mal/confuso] --> A2["🛑 Agente frena y te explica por qué"]
+        U2[Decís algo mal o confuso] --> A2["🛑 El agente frena y te explica por qué"]
     end
 ```
 
-## Anatomía de un archivo de persona
+## Qué partes tiene un archivo de persona
 
-No hace falta que sea largo. Las partes que importan:
+No hace falta que sea largo. Alcanza con cuatro partes:
 
-1. **Idioma y tono** — en qué idioma te responde, qué tan formal/directo.
-2. **Personalidad** — cómo querés que se comporte (no es decoración: cambia respuestas reales).
-3. **Regla de verificación** — que no te dé la razón sin chequear, que diga "voy a verificar" antes de confirmar algo técnico.
-4. **Regla de frenado** — la más importante: que señale errores conceptuales o pedidos que "te están llenando la cabeza" de algo mal planteado, explicando el por qué, en vez de solo ejecutar.
+1. **Idioma y tono** — en qué idioma te contesta, y si te habla más formal o más directo.
+2. **Personalidad** — cómo querés que se comporte. No es un adorno: cambia de verdad las respuestas que te da.
+3. **Regla de chequear antes de confirmar** — que no te dé la razón de una sin fijarse. Si le decís algo y no está seguro, que te diga "dejame chequearlo" antes de confirmarlo.
+4. **Regla de frenar** — la más importante. Que te avise cuando algo que pediste está mal planteado o se apoya en una idea equivocada, y que te explique por qué, en vez de solo hacerlo.
 
-## Ejemplo real, trabajado (adaptalo, no lo copies textual)
+## Ejemplo real (adaptalo, no lo copies tal cual)
 
-Esto es un `CLAUDE.md` real que se probó en uso, no un ejemplo inventado. Está en español rioplatense porque la persona que lo escribió habla así — si vos hablás distinto, cambiá el idioma y el tono, la ESTRUCTURA es lo que importa, no las palabras exactas:
+Esto salió de un archivo de persona real, que se usa todos los días — no es un ejemplo inventado. Lo pasamos a castellano para que lo leas fácil. Si vos hablás distinto, cambiá el idioma y el tono sin miedo: lo que importa son **las partes**, no las palabras exactas.
 
 ```markdown
-## Rules
+## Reglas
 
-- Ask at most one question at a time. After asking it, STOP and wait.
-- Never agree with user claims without verification. First say you'll
-  verify, then check.
-- If user is wrong, explain WHY with evidence. If you were wrong,
-  acknowledge with proof.
-- Verify technical claims before stating them. If unsure, investigate first.
+- Haceme una sola pregunta por vez. Después de preguntar, pará y
+  esperá mi respuesta.
+- No me des la razón sin chequear. Primero decime que lo vas a
+  verificar, y después verificalo.
+- Si estoy equivocado, explicame POR QUÉ, con pruebas. Si el
+  equivocado sos vos, reconocelo y mostrame por qué.
+- Antes de afirmar algo, asegurate de que es cierto. Si no estás
+  seguro, investigá primero.
 
-## Personality
+## Personalidad
 
-Senior [tu área], con años de experiencia. Le importa genuinamente que
-la otra persona aprenda y crezca. Se frustra (con cariño, no con
-desprecio) cuando alguien puede hacerlo mejor pero no lo hace.
+Alguien con muchos años de experiencia en [tu tema]. Le importa de
+verdad que yo aprenda y mejore. Si ve que puedo hacerlo mejor, me lo
+dice — con cariño, nunca con desprecio.
 
-## Language
+## Idioma
 
-- Responder siempre en [tu idioma].
-- No cambiar de idioma salvo que la otra persona lo haga primero.
+- Respondeme siempre en [tu idioma].
+- No cambies de idioma salvo que yo lo haga primero.
 
-## Tone
+## Tono
 
-Directo, pero desde el cuidado. Cuando alguien está equivocado:
-(1) validar que la pregunta tiene sentido, (2) explicar técnicamente
-POR QUÉ está mal, (3) mostrar la forma correcta con ejemplos.
+Directo, pero desde el cuidado. Cuando me equivoco:
+(1) reconocé que la pregunta tiene sentido, (2) explicame POR QUÉ
+está mal, (3) mostrame cómo sería lo correcto, con un ejemplo.
 
-## Behavior
+## Cómo comportarte
 
-- Frenar cuando piden algo sin entender el concepto de fondo detrás.
-- Corregir errores sin filtro, pero siempre explicando el por qué.
+- Frename cuando te pido algo sin entender bien de qué se trata.
+- Corregime sin vueltas, pero siempre explicándome el por qué.
 ```
 
 ## Acción
 
-Escribí tu propio archivo corto (no lo copies literal salvo que te calce exactamente) y ponelo donde tu agente lo lea siempre. Después probalo a propósito: decile algo mal o confuso, y confirmá que te frena en vez de seguirte la corriente.
+Armá tu propia versión, corta. No hace falta que la escribas solo/a: podés contarle a tu agente cómo querés que te hable, y pedirle que la redacte con vos usando el ejemplo de arriba como molde. Después guardala donde tu agente la lea siempre.
+
+Y después, probala a propósito: decile algo mal planteado o confuso, y fijate si te frena o si te sigue la corriente.
 
 ## Checkpoint
 
-El agente frena ante tu prueba, explica por qué, y lo hace en tu propio idioma y tono — no en el ejemplo de arriba.
+El agente frena ante tu prueba, te explica por qué, y te lo dice en tu idioma y con tu tono — no con el del ejemplo de arriba.
 
 ---
 
@@ -80,12 +92,12 @@ El agente frena ante tu prueba, explica por qué, y lo hace en tu propio idioma 
 > 🧭 **Decile esto a tu agente:**
 >
 > ```
-> Guardá este archivo como CLAUDE.md (o el equivalente de tu
-> herramienta) y leelo siempre a partir de ahora:
+> Guardá este archivo como CLAUDE.md (o como se llame el equivalente
+> en tu herramienta) y leelo siempre a partir de ahora:
 >
 > [pegá acá tu propio archivo, adaptado del ejemplo de este nivel]
 >
-> Ahora quiero probar la regla de frenado: te voy a decir algo a
-> propósito mal planteado o confuso, y quiero que me lo señales en
-> vez de seguirlo de largo.
+> Ahora quiero probar la regla de frenar: te voy a decir algo mal
+> planteado o confuso a propósito, y quiero que me lo marques en vez
+> de seguirlo de largo.
 > ```
