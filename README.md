@@ -57,6 +57,10 @@ Todo lo demás (memoria, base de conocimiento, vocabulario, tu propia forma de t
 
 **¿Cuánto tarda todo esto, y cuándo puedo pausar?** Ver [FASES.md](FASES.md) — tabla con tiempo estimado por fase y desde dónde podés parar y seguir después (incluso con otro agente).
 
+## 🎓 ¿Ya terminaste los 7 niveles?
+
+Hay un paso más, opcional, para cuando quieras entender el **por qué** de lo que ya armaste — con evidencia real citada, ejemplos y una rutina que lo mantiene al día solo. Ver [maestria/00-bienvenida-maestria.md](maestria/00-bienvenida-maestria.md). No es necesario para usar tu agente bien — es para quien quiere ir más profundo.
+
 ## ¿Te trabaste o te dio bronca en algún momento?
 
 Es normal, y es útil — esto es un proyecto vivo, no algo terminado. Mirá [COMO-PEDIR-AYUDA.md](COMO-PEDIR-AYUDA.md) — podés dejarlo anotado en Discord o como issue de GitHub, y capaz ya está resuelto en [PROBLEMAS-FRECUENTES.md](PROBLEMAS-FRECUENTES.md).
