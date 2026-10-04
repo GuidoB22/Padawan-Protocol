@@ -37,3 +37,13 @@ Se arma con lo que va apareciendo en Discord y en los issues de GitHub — cada 
 → **Solución**: en `.obsidian/plugins/obsidian-local-rest-api/data.json` confirmar que `"enableInsecureServer"` esté en `true` (el agente puede escribirlo antes de que abras Obsidian por primera vez), o si ya abriste Obsidian antes de eso, activarlo a mano desde Obsidian → Settings → Community plugins → Local REST API → toggle del servidor sin cifrar.
 
 Ver Nivel 03, sección de conexión MCP, para el detalle completo de las dos causas.
+
+---
+
+## "En Linux instalé el agente pero la terminal dice `command not found`"
+
+**Síntoma**: el instalador terminó bien, pero al escribir el nombre del agente (por ejemplo `claude`) la terminal no lo encuentra.
+
+**Causa**: el instalador agregó el programa a una carpeta que la terminal abierta todavía no conoce. Solo la "ve" una terminal nueva.
+
+**Solución**: cerrá la terminal y abrí una nueva. Si sigue igual, pedile a tu agente (desde otra terminal o en tu otra compu) que agregue la carpeta del instalador al `PATH` en `~/.bashrc`. Ver [guias/linux-mint.md](guias/linux-mint.md).

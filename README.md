@@ -57,6 +57,10 @@ Todo lo demás (memoria, base de conocimiento, vocabulario, tu propia forma de t
 
 **¿Cuánto tarda todo esto, y cuándo puedo pausar?** Ver [FASES.md](FASES.md) — tabla con tiempo estimado por fase y desde dónde podés parar y seguir después (incluso con otro agente).
 
+## 🐧 ¿Querés hacerla en Linux?
+
+Funciona igual. Ver [guias/linux-mint.md](guias/linux-mint.md): cómo conseguir Linux Mint de la página oficial, probarlo en una máquina virtual sin riesgo o instalarlo con un pendrive y Rufus, y arrancar la guía ahí con tu agente.
+
 ## 🎓 ¿Ya terminaste los 7 niveles?
 
 Hay un paso más, opcional, para cuando quieras entender el **por qué** de lo que ya armaste — con evidencia real citada, ejemplos y una rutina que lo mantiene al día solo. Ver [maestria/00-bienvenida-maestria.md](maestria/00-bienvenida-maestria.md). No es necesario para usar tu agente bien — es para quien quiere ir más profundo.
