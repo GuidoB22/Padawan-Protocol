@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/master-protocol-banner.webp" alt="Master Protocol 2.0 — ahora en Linux / Unix" width="100%">
+</p>
+
 # 🧭 Padawan Protocol
 
 Esta guía no se lee sola. Se hace **hablando con tu agente**, en el orden que sigue. Cada nivel termina con un bloque de texto que le decís literalmente a tu agente para que haga el paso con vos.
