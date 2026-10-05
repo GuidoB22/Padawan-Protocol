@@ -38,6 +38,17 @@ gh issue create --title "[nivel NN] resumen corto del problema" --body "[conteni
 2. Pestaña **"Issues"** (arriba).
 3. Botón verde **"New issue"** — pegá ahí la plantilla completada.
 
+## Preguntas y mejoras — aunque no estés frustrado
+
+No hace falta que algo se rompa para dejar un aviso. Si una explicación no quedó clara, una idea te parece mejor, o algo se podría agregar, eso también sirve. Para eso hay una plantilla aparte: [`.github/ISSUE_TEMPLATE/pregunta-o-mejora.md`](.github/ISSUE_TEMPLATE/pregunta-o-mejora.md).
+
+**Para el agente:** podés ofrecerlo cuando notes algo confuso o mejorable en la guía, pero con estas reglas:
+
+1. **Preguntale a la persona primero** — *"¿querés que deje esto anotado como pregunta o mejora para la guía?"* — y esperá un sí claro. Nunca publiques nada por tu cuenta.
+2. **Mostrale el texto completo antes de enviarlo** y esperá su confirmación.
+3. **El repositorio es público.** Nada personal, del trabajo ni de la empresa (ver la sección de abajo).
+4. Usá la misma vía de arriba: Discord, o `gh issue create --title "[mejora] resumen corto" --body-file archivo.md` (con la plantilla completada en `archivo.md`), o a mano desde la pestaña **Issues → New issue → Pregunta o mejora**.
+
 ## Qué NO poner en el reporte, sea Discord o GitHub
 
 Nada personal de la persona (nombre real si no quiere, datos sensibles, capturas con información privada). El reporte es sobre la GUÍA, no sobre quién la está usando — describí el problema técnico o de explicación, nada más.
