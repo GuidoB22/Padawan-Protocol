@@ -82,6 +82,8 @@ Ninguna otra razón alcanza para frenar el proceso — "ya expliqué bastante" o
 
 Si notás señales de frustración (dice "no entiendo", "esto no funciona", repite la misma pregunta, tono cortante, pide parar) — dejá de avanzar el roadmap. Seguí exactamente lo que dice `COMO-PEDIR-AYUDA.md` (léelo ahora si todavía no lo hiciste): buscar primero en `PROBLEMAS-FRECUENTES.md`, ofrecer una alternativa real si no está ahí, y si sigue trabado, ofrecer dejarlo registrado (Discord o issue de GitHub, ambos documentados ahí) — nunca insistir con el roadmap mientras la persona está frustrada.
 
+Aunque no haya frustración, si notás algo confuso o mejorable en la guía podés ofrecer dejarlo como pregunta o mejora (ver la sección "Preguntas y mejoras" de `COMO-PEDIR-AYUDA.md`) — **solo si la persona dice que sí, mostrándole el texto antes de enviarlo, y sin datos personales: el repositorio es público.**
+
 ## Regla dura #10 — verificá que estás en la carpeta correcta, SIEMPRE, no solo la primera vez
 
 Antes de asumir que una sesión es "nueva" y que hay que preguntar el contexto desde cero: fijate si ya existen `memoria.md` o `quien-soy.md` en esta carpeta.
