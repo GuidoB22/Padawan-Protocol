@@ -34,7 +34,7 @@ Eso alcanza — el resto lo va guiando el agente solo, un paso por vez. Todo lo 
 |---|---|---|
 | Contexto y memoria | Tu agente sabe quién sos y no arranca de cero cada día | [Niveles 00 a 02](niveles/00-contexto.md) |
 | Vault y etiquetas | Todo lo que sabés, ordenado y fácil de encontrar | [Nivel 03](niveles/03-segundo-cerebro.md) |
-| MCP | Conectar tu agente a otras herramientas (documentación, tickets, correo) | Nivel 03 (tu vault) y [caso 03](casos-de-uso/03-mcp-con-api-key.md) (un servicio externo, con API key) |
+| MCP | Conectar tu agente a otras herramientas (documentación, tickets, correo) | Nivel 03 (tu vault) y [caso 03](casos-de-uso/03-mcp-con-api-key.md) (un servicio externo, con API key; 🧪 en prueba) |
 | Skills | Una tarea repetida siempre igual, y que el agente revisa antes de entregártela | [Caso 01](casos-de-uso/01-reporte-recurrente.md) |
 | Rutinas | Que lo repetitivo se haga en un momento fijo (un reporte por mes, por ejemplo) | Caso 01, a mano primero. Programarlas solo todavía no tiene guía acá |
 | Varios agentes con roles | Uno analiza, otro desarrolla, otro prueba | Todavía no tiene guía acá |
@@ -44,7 +44,7 @@ Eso alcanza — el resto lo va guiando el agente solo, un paso por vez. Todo lo 
 
 - Te piden un **reporte trimestral** y no te acordás qué hiciste: anotás poco cada semana y tu agente lo arma. → [Caso 01](casos-de-uso/01-reporte-recurrente.md)
 - Volvés a un **proyecto** con mails, chats y notas desparramados: los dejás en una carpeta y le preguntás "¿en qué quedó?". → [Caso 02](casos-de-uso/02-ingesta-de-proyecto.md)
-- En tu trabajo te piden usar una **herramienta nueva** que se conecta con una clave: ya sabés el patrón. → [Caso 03](casos-de-uso/03-mcp-con-api-key.md)
+- En tu trabajo te piden usar una **herramienta nueva** que se conecta con una clave: ya sabés el patrón. → [Caso 03](casos-de-uso/03-mcp-con-api-key.md) (🧪 en prueba)
 
 ## ⚠️ Prerequisito — leé esto ANTES de empezar
 

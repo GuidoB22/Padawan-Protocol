@@ -2,6 +2,9 @@
 
 **Requiere: Nivel 03.** Tiempo estimado: 30 a 40 minutos. Usamos solo proveedores oficiales.
 
+> [!WARNING]
+> **Este caso está en prueba.** Está armado con la documentación oficial de Microsoft y de Google, pero todavía nadie lo siguió de punta a punta. El Paso A (sin clave) es el más seguro para empezar. Si algo no coincide con lo que ves en pantalla, confiá en la pantalla y avisanos en [COMO-PEDIR-AYUDA.md](../COMO-PEDIR-AYUDA.md).
+
 > [!NOTE]
 > Los comandos `claude mcp ...` son de Claude Code. Si usás otro agente (Codex, Cursor, etc.), pedile que te diga cuál es el equivalente para agregar un MCP remoto.
 

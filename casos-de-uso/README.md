@@ -14,7 +14,7 @@ Los **7 niveles siguen siendo el camino principal** y no se tocan. Los casos de 
 |------|--------------|----------|
 | [01 — Reporte recurrente](01-reporte-recurrente.md) | Anotar poco cada semana y que tu agente arme el reporte trimestral o anual que siempre te olvidás o te da pereza | Nivel 03 |
 | [02 — Ingesta de proyecto](02-ingesta-de-proyecto.md) | Meter en tu vault los mails, chats y notas de un proyecto, y después preguntar "¿en qué quedó?" | Nivel 03 |
-| [03 — MCP con API key](03-mcp-con-api-key.md) | Conectar tu agente a un servicio externo oficial, guardando la credencial de forma segura | Nivel 03 |
+| [03 — MCP con API key](03-mcp-con-api-key.md) (🧪 en prueba) | Conectar tu agente a un servicio externo oficial, guardando la credencial de forma segura | Nivel 03 |
 | [04 — Conectar con el trabajo](04-conectar-con-el-trabajo.md) | Saber qué herramienta de tu empresa se puede conectar, pedirle el permiso a IT con un mensaje claro y tener un plan B | Nivel 03 y caso 03 |
 
 ## Una cosa importante
