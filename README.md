@@ -24,6 +24,28 @@ Abrí esta carpeta con tu agente y decile, literal:
 
 Eso alcanza — el resto lo va guiando el agente solo, un paso por vez. Todo lo que sigue en este README es referencia, no hace falta leerlo entero antes de arrancar.
 
+## 🎯 Qué vas a lograr, y cómo
+
+**El qué:** mejorar tu trabajo de todos los días con tu agente de IA. Que se acuerde de quién sos y de lo que venís haciendo, que haga solo lo repetitivo y que se conecte a las herramientas que ya usás.
+
+**El cómo:** con un puñado de piezas que se van sumando una arriba de la otra. Al principio un agente es como un chat: cada día arranca de cero y vos le explicás todo de nuevo. Con estas piezas pasa a ser un compañero que ya conoce tu contexto.
+
+| Pieza | Para qué te sirve | Dónde se aprende |
+|---|---|---|
+| Contexto y memoria | Tu agente sabe quién sos y no arranca de cero cada día | [Niveles 00 a 02](niveles/00-contexto.md) |
+| Vault y etiquetas | Todo lo que sabés, ordenado y fácil de encontrar | [Nivel 03](niveles/03-segundo-cerebro.md) |
+| MCP | Conectar tu agente a otras herramientas (documentación, tickets, correo) | Nivel 03 (tu vault) y [caso 03](casos-de-uso/03-mcp-con-api-key.md) (un servicio externo, con API key) |
+| Skills | Una tarea repetida siempre igual, y que el agente revisa antes de entregártela | [Caso 01](casos-de-uso/01-reporte-recurrente.md) |
+| Rutinas | Que lo repetitivo se haga en un momento fijo (un reporte por mes, por ejemplo) | Caso 01, a mano primero. Programarlas solo todavía no tiene guía acá |
+| Varios agentes con roles | Uno analiza, otro desarrolla, otro prueba | Todavía no tiene guía acá |
+| [gentle-ai](https://github.com/Gentleman-Programming/gentle-ai) | Un instalador que le arma a tu agente memoria, flujos y skills ya listos | Opcional y externo: no hace falta para esta guía |
+
+**Tres situaciones donde se nota:**
+
+- Te piden un **reporte trimestral** y no te acordás qué hiciste: anotás poco cada semana y tu agente lo arma. → [Caso 01](casos-de-uso/01-reporte-recurrente.md)
+- Volvés a un **proyecto** con mails, chats y notas desparramados: los dejás en una carpeta y le preguntás "¿en qué quedó?". → [Caso 02](casos-de-uso/02-ingesta-de-proyecto.md)
+- En tu trabajo te piden usar una **herramienta nueva** que se conecta con una clave: ya sabés el patrón. → [Caso 03](casos-de-uso/03-mcp-con-api-key.md)
+
 ## ⚠️ Prerequisito — leé esto ANTES de empezar
 
 Esto **no funciona con un chat común** (ChatGPT en chatgpt.com, Claude en claude.ai, Gemini, etc.). Esos chats pueden hablar con vos, pero no pueden tocar archivos en tu computadora — y esta guía es, literalmente, crear y editar archivos junto a tu agente. Si intentás hacer esto en un chat común, el agente no va a poder ejecutar nada real: como mucho te va a *describir* qué archivo crearía, y ahí es donde la cosa empieza a andar en círculos (inventa una alternativa a mano, te promete algo que no puede cumplir, etc.).
@@ -60,6 +82,10 @@ Todo lo demás (memoria, base de conocimiento, vocabulario, tu propia forma de t
 | [06 — Avanzado (opcional)](niveles/06-avanzado-opcional.md) | Para cuando ya tengas todo lo anterior andando |
 
 **¿Cuánto tarda todo esto, y cuándo puedo pausar?** Ver [FASES.md](FASES.md) — tabla con tiempo estimado por fase y desde dónde podés parar y seguir después (incluso con otro agente).
+
+## 🧰 ¿Querés aplicarlo ya a tu trabajo?
+
+Después del Nivel 03 podés hacer los **casos de uso**: recetas de trabajo real (un reporte recurrente, ordenar la información de un proyecto, conectar un servicio con una API key). Son independientes entre sí y no cambian el camino de los 7 niveles. Ver [casos-de-uso/README.md](casos-de-uso/README.md).
 
 ## 🐧 ¿Querés hacerla en Linux?
 
