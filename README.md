@@ -35,7 +35,7 @@ Eso alcanza — el resto lo va guiando el agente solo, un paso por vez. Todo lo 
 | Contexto y memoria | Tu agente sabe quién sos y no arranca de cero cada día | [Niveles 00 a 02](niveles/00-contexto.md) |
 | Vault y etiquetas | Todo lo que sabés, ordenado y fácil de encontrar | [Nivel 03](niveles/03-segundo-cerebro.md) |
 | MCP | Conectar tu agente a otras herramientas (documentación, tickets, correo) | Nivel 03 (tu vault) y [caso 03](casos-de-uso/03-mcp-con-api-key.md) (un servicio externo, con API key; 🧪 en prueba) |
-| Skills | Una tarea repetida siempre igual, y que el agente revisa antes de entregártela | [Caso 01](casos-de-uso/01-reporte-recurrente.md) |
+| Skills | Una tarea repetida siempre igual, y que el agente revisa antes de entregártela | [Caso 01](casos-de-uso/01-reporte-recurrente.md) y [caso 05](casos-de-uso/05-tu-propio-skill.md) (🧪 en prueba) |
 | Rutinas | Que lo repetitivo se haga en un momento fijo (un reporte por mes, por ejemplo) | Caso 01, a mano primero. Programarlas solo todavía no tiene guía acá |
 | Varios agentes con roles | Uno analiza, otro desarrolla, otro prueba | Todavía no tiene guía acá |
 | [gentle-ai](https://github.com/Gentleman-Programming/gentle-ai) | Un instalador que le arma a tu agente memoria, flujos y skills ya listos | Opcional y externo: no hace falta para esta guía |
