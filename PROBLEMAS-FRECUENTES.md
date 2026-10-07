@@ -47,3 +47,28 @@ Ver Nivel 03, sección de conexión MCP, para el detalle completo de las dos cau
 **Causa**: el instalador agregó el programa a una carpeta que la terminal abierta todavía no conoce. Solo la "ve" una terminal nueva.
 
 **Solución**: cerrá la terminal y abrí una nueva. Si sigue igual, pedile a tu agente (desde otra terminal o en tu otra compu) que agregue la carpeta del instalador al `PATH` en `~/.bashrc`. Ver [guias/linux-mint.md](guias/linux-mint.md).
+
+---
+
+## "Pegué una clave o una contraseña en el chat con mi agente"
+
+**Síntoma**: en un apuro, escribiste o pegaste una API key, un token o una contraseña en la conversación.
+
+**Causa**: pasa seguido, porque es natural "pasarle todo" al agente. Pero lo que escribís en el chat queda guardado en el historial de esa conversación.
+
+**Solución**: considerá esa clave como **ya no secreta**. Revocala en la página del servicio, creá una nueva y cargala solo en tu terminal, nunca en el chat. Un agente bien configurado no te la pide, y si te la pide, es señal para frenar. Ver el apartado "Si pegaste la clave por error" del [caso 03](casos-de-uso/03-mcp-con-api-key.md).
+
+---
+
+## "Mi agente dice que no puede ejecutar nada, o se queda trabado con los permisos"
+
+**Síntoma**: el agente intenta correr un comando o editar un archivo y recibe un error del estilo "no se pudo verificar el permiso" o "acción bloqueada", aunque antes funcionaba. Puede pasar incluso con comandos de solo lectura.
+
+**Causa**: muchos agentes revisan cada acción antes de ejecutarla (con un verificador automático o pidiéndote confirmación). A veces ese verificador falla por un problema del servicio, no por algo que hayas pedido mal. Puede ser pasajero.
+
+**Solución**:
+
+1. Esperá unos minutos y volvé a pedir lo mismo. Muchas veces se arregla solo.
+2. Si el agente reintenta una y otra vez, pedile que **pare**: insistir en bucle no ayuda.
+3. Si sigue, cambiá el **modo de permisos** del agente desde su propia configuración, para que las acciones te las pida a vos. Eso lo cambiás vos, no el agente: no le pidas que se dé permisos a sí mismo.
+4. No aceptes "permitir todo" sin entender qué estás aprobando.

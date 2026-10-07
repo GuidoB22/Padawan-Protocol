@@ -117,3 +117,5 @@ Cada bloque de acción ("Decile esto a tu agente") usa siempre el mismo formato 
 ```
 
 🧭 (brújula) es la marca recurrente de la guía — va en el título de cada nivel (`# 🧭 Nivel 0X — ...`) y en cada bloque de acción. Si agregás un nivel o un bloque nuevo, seguí el mismo patrón en vez de uno propio.
+
+🧪 **"en prueba"** marca un caso que se armó con la documentación oficial pero todavía nadie lo siguió de punta a punta. Va en el índice y con un `> [!WARNING]` al inicio del archivo. Se saca recién cuando alguien lo completa y lo confirma.
