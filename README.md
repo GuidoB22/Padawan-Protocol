@@ -9,7 +9,7 @@ Esta guía no se lee sola. Se hace **hablando con tu agente**, en el orden que s
 **Pensada para cualquiera, sin importar cuánto sepas de computadoras.** Si nunca usaste algo así, tranquilo/a — está armada para que tu agente te vaya llevando de la mano, un paso genuinamente chico a la vez.
 
 > [!IMPORTANT]
-> **¿Empezás de cero?** Para usar esta guía necesitás **un agente de código instalado** y **esta carpeta abierta con él**. Si todavía no los tenés, empezá por el [**Paso 0: de cero a tu primer mensaje**](guias/paso-0-primeros-pasos.md) (🧪 en prueba), que te lleva de la mano. Es normal que esa parte sea la más incómoda: acá todavía no te guía el agente, porque todavía no lo tenés.
+> **¿Empezás de cero?** Para usar esta guía necesitás **un agente de código instalado** y **esta carpeta abierta con él**. Si todavía no los tenés, empezá por el [**Paso 0: de cero a tu primer mensaje**](guias/paso-0-primeros-pasos.md) (🧪 en prueba), que te lleva de la mano. Sirve con **cualquier agente de código**; con **Claude Code** el camino es más detallado, porque es el que probamos y donde tenemos más control. Es normal que esa parte sea la más incómoda: acá todavía no te guía el agente, porque todavía no lo tenés.
 
 ## 👉 Primer paso, siempre: decile esto a tu agente
 
