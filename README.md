@@ -105,6 +105,20 @@ Tres cosas que conviene saber desde el día uno, para que no te agarren de sorpr
 
 **¿Cuánto tarda todo esto, y cuándo puedo pausar?** Ver [FASES.md](FASES.md) — tabla con tiempo estimado por fase y desde dónde podés parar y seguir después (incluso con otro agente).
 
+## 🗺️ Así se va a ver tu avance
+
+<p align="center">
+  <img src="assets/mapa-ejemplo.svg" alt="Mapa del Padawan, ejemplo a mitad de camino: tres niveles en verde, uno en amarillo y el resto en naranja, con mini naves viajando por las flechas hacia lo que ya está habilitado" width="100%">
+</p>
+
+Esto es un **ejemplo**, a mitad de camino. Tu mapa se va armando solo mientras hacés la guía:
+
+- 🟢 **Verde:** lo que ya tenés.
+- 🟡 **Amarillo:** lo que estás armando ahora.
+- 🟠 **Naranja:** lo que viene.
+
+Las naves viajan hacia lo que ya está habilitado. Cada vez que terminás un nivel, tu agente lo actualiza y te lo abre. Para verlo grande, abrí `progreso/mapa-de-progreso.html` en tu navegador, y mirá [progreso/LEEME.md](progreso/LEEME.md) para ver qué significa cada cosa.
+
 ## 🧰 ¿Querés aplicarlo ya a tu trabajo?
 
 Después del Nivel 03 podés hacer los **casos de uso**: recetas de trabajo real (un reporte recurrente, ordenar la información de un proyecto, conectar un servicio con una API key). Son independientes entre sí y no cambian el camino de los 7 niveles. Ver [casos-de-uso/README.md](casos-de-uso/README.md).
