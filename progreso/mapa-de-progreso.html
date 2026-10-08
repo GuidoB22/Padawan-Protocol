@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa del Padawan</title>
+<style id="css">
+:root{
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace;
+  --sans:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --bg:#f1f5f9;--panel:#ffffff;--grid:#cbd5e1;--ink:#0f172a;--muted:#64748b;--dim:#94a3b8;--border:#e2e8f0;
+  --edge:#94a3b8;--band:rgba(148,163,184,.06);
+  --frontend-s:#0891b2;--frontend-f:#cffafe;
+  --backend-s:#059669;--backend-f:#d1fae5;
+  --database-s:#7c3aed;--database-f:#ede9fe;
+  --cloud-s:#d97706;--cloud-f:#fef3c7;
+  --security-s:#e11d48;--security-f:#ffe4e6;
+  --bus-s:#ea580c;--bus-f:#ffedd5;
+  --external-s:#64748b;--external-f:#e2e8f0;
+}
+:root[data-theme="dark"]{
+  --bg:#020617;--panel:#0b1222;--grid:#1e293b;--ink:#f8fafc;--muted:#94a3b8;--dim:#64748b;--border:#1e293b;
+  --edge:#64748b;--band:rgba(148,163,184,.04);
+  --frontend-s:#22d3ee;--frontend-f:rgba(34,211,238,.13);
+  --backend-s:#34d399;--backend-f:rgba(52,211,153,.13);
+  --database-s:#a78bfa;--database-f:rgba(167,139,250,.14);
+  --cloud-s:#fbbf24;--cloud-f:rgba(251,191,36,.12);
+  --security-s:#fb7185;--security-f:rgba(251,113,133,.13);
+  --bus-s:#fb923c;--bus-f:rgba(251,146,60,.13);
+  --external-s:#94a3b8;--external-f:rgba(148,163,184,.12);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#020617;--panel:#0b1222;--ink:#f8fafc}}
+.t-frontend{--s:var(--frontend-s);--f:var(--frontend-f)} .t-backend{--s:var(--backend-s);--f:var(--backend-f)}
+.t-database{--s:var(--database-s);--f:var(--database-f)} .t-cloud{--s:var(--cloud-s);--f:var(--cloud-f)}
+.t-security{--s:var(--security-s);--f:var(--security-f)} .t-bus{--s:var(--bus-s);--f:var(--bus-f)}
+.t-external{--s:var(--external-s);--f:var(--external-f)}
+.e-default{--es:var(--edge)} .e-main{--es:var(--backend-s)} .e-async{--es:var(--database-s)}
+.e-security{--es:var(--security-s)} .e-return{--es:var(--dim)}
+
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}
+body{padding:24px 16px 48px}
+.wrap{max-width:1600px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 4px 18px}
+h1{font-size:22px;margin:0;display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
+h1::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--frontend-s);box-shadow:0 0 0 3px var(--frontend-f)}
+.subtitle{margin:4px 0 0 19px;color:var(--muted);font-size:13px}
+.tools{display:flex;gap:8px;align-items:center}
+button{font:500 12px var(--mono);color:var(--ink);background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;cursor:pointer;transition:border-color .15s}
+button:hover{border-color:var(--frontend-s)}
+button:focus-visible{outline:2px solid var(--frontend-s);outline-offset:2px}
+#warn{font:600 11px var(--mono);color:var(--security-s);border:1px solid var(--security-s);border-radius:99px;padding:4px 10px}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px;overflow-x:auto}
+#d{display:block;margin:0 auto;max-width:100%;height:auto}
+#legend{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;padding:10px 8px 2px;font:500 11px var(--mono);color:var(--muted)}
+#legend b{font:700 12px var(--sans);color:var(--ink);margin-right:4px}
+.chip{display:inline-flex;align-items:center;gap:6px}
+.sw{width:16px;height:11px;border-radius:3px;border:1.5px solid var(--s);background:var(--f)}
+.cnt{font-size:10px;border:1px solid var(--border);border-radius:99px;padding:0 6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+.card h3{margin:0 0 8px;font-size:14px;display:flex;align-items:center;gap:8px}
+.card h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--s)}
+.card ul{margin:0;padding-left:16px;color:var(--muted);font-size:12.5px;line-height:1.7}
+.card li::marker{color:var(--s)}
+
+/* svg */
+.bg{fill:var(--panel)} .dots circle{fill:var(--grid)}
+.box{fill:var(--f);stroke:var(--s);stroke-width:1.5}
+.inner{fill:none;stroke-width:1}
+.icon{fill:none;stroke:var(--s);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.nl{font:700 12.5px var(--mono);fill:var(--ink)}
+.ns{font:400 10px var(--mono);fill:var(--muted)}
+.line{fill:none;stroke:var(--es);stroke-width:1.5}
+.e-main .line{stroke-width:2.2}
+.e-async .line,.e-security .line{stroke-dasharray:6 4}
+.e-return .line{stroke-dasharray:4 4}
+.arrow{fill:var(--es)}
+.lab text,.mtext{font:500 10px var(--mono);fill:var(--es);paint-order:stroke;stroke:var(--panel);stroke-width:4px;stroke-linejoin:round}
+.mtext{font-size:10.5px}
+.bound{fill:var(--f);fill-opacity:.35;stroke:var(--s);stroke-width:1.3;stroke-dasharray:6 4}
+.bl{font:600 10.5px var(--mono);fill:var(--s);paint-order:stroke;stroke:var(--panel);stroke-width:6px;stroke-linejoin:round}
+.band{fill:var(--band);stroke:var(--border);stroke-width:1.2;stroke-dasharray:5 4}
+.band.exception{stroke:var(--security-s);stroke-opacity:.45}
+.bandl{font:600 10px var(--mono);fill:var(--dim);letter-spacing:.04em}
+.life{stroke:var(--dim);stroke-dasharray:3 5;stroke-width:1}
+.bar{fill:var(--f);stroke:var(--s);stroke-width:1.2}
+.start{fill:var(--backend-s)} .startl{stroke:var(--backend-s);stroke-width:2}
+.tbl-body{fill:var(--panel)} .tbl-sep{stroke:var(--s);stroke-width:1;stroke-opacity:.45}
+.tn{font:700 12.5px var(--mono);fill:var(--ink)}
+.cn{font:500 11px var(--mono);fill:var(--ink)} .cn.nul{fill:var(--muted)}
+.ct{font:400 10px var(--mono);fill:var(--muted)}
+.key{font:700 8.5px var(--mono);fill:var(--s);letter-spacing:.04em} .key.pk{fill:var(--cloud-s)}
+.erm{fill:none;stroke:var(--es);stroke-width:1.5} .erm-o{fill:var(--panel);stroke:var(--es);stroke-width:1.5}
+.hit{fill:none;stroke:transparent;stroke-width:12;pointer-events:stroke}
+g.node text,.icon,.lab text{pointer-events:none}
+.rowbg{fill:transparent} .rowbg.hot{fill:var(--f)}
+.e-hot{--es:var(--frontend-s)}
+svg.focus g.edge.hot .line{stroke:var(--frontend-s);stroke-width:2.4}
+svg.focus g.lab.hot text,svg.focus g.edge.hot .mtext{fill:var(--frontend-s)}
+svg.zoomed{cursor:grab} svg.zoomed:active{cursor:grabbing}
+.panel{position:relative}
+.clean .tools,.clean .zoom{display:none}
+.zoom{position:absolute;top:12px;right:12px;display:flex;gap:4px;z-index:1}
+.zoom button{padding:4px 9px;font-size:11px;min-width:30px}
+.panel:fullscreen{overflow:auto;display:flex;flex-direction:column;justify-content:center;border-radius:0}
+.panel:fullscreen #d{max-height:88vh;width:auto}
+g.node,g.edge,g.lab{transition:opacity .16s}
+svg.focus g.node:not(.hot),svg.focus g.edge:not(.hot),svg.focus g.lab:not(.hot){opacity:.18}
+@media (prefers-reduced-motion:reduce){g.node,g.edge,g.lab{transition:none}}
+</style>
+<style id="padawan-extra">
+/* Padawan: capa visual sobre la plantilla (estrellas, brillo de holograma, estados, puntitos). */
+:root[data-theme="dark"]{background:#02030a}
+:root[data-theme="dark"] body{
+  min-height:100vh;
+  background:#02030a;
+  background-image:
+    radial-gradient(ellipse at 15% -5%, rgba(40,80,190,.30), transparent 55%),
+    radial-gradient(ellipse at 95% 105%, rgba(130,50,160,.20), transparent 50%);
+  background-attachment:fixed;
+}
+#stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+#stars i{position:absolute;width:1px;height:1px;border-radius:50%;background:#cfe0ff;box-shadow:0 0 3px 1px rgba(160,190,255,.55);animation:pdw-twinkle 4s ease-in-out infinite}
+:root[data-theme="light"] #stars{display:none}
+.wrap,.panel,.cards,header{position:relative;z-index:1}
+
+:root[data-theme="dark"] .panel{
+  border-color:rgba(90,160,255,.35);
+  box-shadow:0 0 38px rgba(60,120,255,.14), inset 0 0 40px rgba(60,120,255,.05);
+}
+:root[data-theme="dark"] .panel::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:repeating-linear-gradient(0deg, rgba(120,170,255,.035) 0 1px, transparent 1px 4px);
+}
+:root[data-theme="dark"] .card{border-color:rgba(90,160,255,.22);background:rgba(8,14,32,.82)}
+#rankbar{margin:10px 0 0;height:6px;max-width:420px;border-radius:99px;background:rgba(120,160,255,.15);overflow:hidden}
+#rankbar>b{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#34d399,#7dd3fc);box-shadow:0 0 10px rgba(52,211,153,.6)}
+
+/* Estados de las cajas */
+g.node.s-listo{filter:drop-shadow(0 0 6px rgba(52,211,153,.5))}
+g.node.s-curso{animation:pdw-pulse 2.2s ease-in-out infinite}
+g.node.s-pend{opacity:.82}
+g.edge.s-pend{opacity:.4}
+g.edge.s-pend .line{stroke-dasharray:3 6}
+.dot{pointer-events:none;fill:#e8fff6;filter:drop-shadow(0 0 4px #34d399)}
+.dot.dot-curso{fill:#fff7d6;filter:drop-shadow(0 0 4px #fbbf24)}
+
+@keyframes pdw-twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes pdw-pulse{0%,100%{filter:drop-shadow(0 0 2px rgba(251,191,36,.35))}50%{filter:drop-shadow(0 0 11px rgba(251,191,36,.95))}}
+@media (prefers-reduced-motion:reduce){
+  #stars i,g.node.s-curso{animation:none}
+}
+
+/* Mini TIE fighters (reemplazan a los puntitos) */
+.tie{pointer-events:none}
+.tie polygon,.tie circle{fill:var(--tie);stroke:var(--tie);stroke-width:.5}
+.tie line{stroke:var(--tie);stroke-width:1.2}
+.tie-listo{--tie:#d9fff0;filter:drop-shadow(0 0 3px #34d399)}
+.tie-curso{--tie:#fff4cc;filter:drop-shadow(0 0 3px #fbbf24)}
+.card.glosario{grid-column:1/-1}
+.card.glosario ul li:first-child{color:var(--ink);list-style:none;margin-left:-16px;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1 id="title"></h1><p class="subtitle" id="subtitle" hidden></p></div>
+    <div class="tools">
+      <span id="warn" hidden></span>
+      <button id="theme" type="button" aria-label="Toggle theme">◐ theme</button>
+      <button id="svgbtn" type="button">SVG</button>
+      <button id="pngbtn" type="button">PNG</button>
+    </div>
+  </header>
+  <div class="panel">
+    <div class="zoom" title="Ctrl + wheel zooms, drag pans, double click resets">
+      <button type="button" data-z="out" aria-label="Zoom out">−</button>
+      <button type="button" data-z="fit" id="zpct" aria-label="Reset zoom">100%</button>
+      <button type="button" data-z="in" aria-label="Zoom in">+</button>
+      <button type="button" data-z="full" aria-label="Fullscreen">⛶</button>
+    </div>
+    <svg id="d" xmlns="http://www.w3.org/2000/svg" role="img"></svg>
+    <div id="legend"></div>
+  </div>
+  <section class="cards" id="notes"></section>
+</div>
+<pre id="diagram-report" hidden></pre>
+
+<!--
+  ESTADO DEL MAPA: cada caja tiene un `type` en el JSON de abajo (script id="spec").
+    bus     = pendiente (naranja)
+    cloud   = en curso (amarillo)
+    backend = habilitado (verde)
+  Para actualizar el avance, cambiá solo el `type` de las cajas. Nada más.
+  Base: plantilla del skill diagram (adaptada de archify, MIT). Ver LICENCIA-archify.md.
+-->
+<script type="application/json" id="spec">
+{
+  "type": "workflow",
+  "title": "Mapa del Padawan",
+  "subtitle": "Que la Fuerza te acompañe",
+  "theme": "dark",
+  "rows": [
+    {"label": "Tu camino"},
+    {"label": "Lo que ya podés usar"}
+  ],
+  "nodes": [
+    {"id": "n0", "label": "Nivel 00", "sub": "Contexto", "type": "cloud", "row": 0, "col": 0, "start": true, "note": "Tres preguntas para que tu agente sepa quién sos."},
+    {"id": "n1", "label": "Nivel 01", "sub": "Fundamentos", "type": "bus", "row": 0, "col": 1, "note": "Comprobar que tu agente puede leer y escribir en tu carpeta."},
+    {"id": "n2", "label": "Nivel 02", "sub": "Memoria", "type": "bus", "row": 0, "col": 2, "note": "Que tu agente se acuerde de lo que hicieron en sesiones anteriores."},
+    {"id": "n3", "label": "Nivel 03", "sub": "Segundo cerebro", "type": "bus", "row": 0, "col": 3, "note": "Armar tu cuaderno de notas y conectarlo con tu agente."},
+    {"id": "n4", "label": "Nivel 04", "sub": "Vocabulario", "type": "bus", "row": 0, "col": 4, "note": "Ponerle nombre a las cosas para organizar tu trabajo sin perderte."},
+    {"id": "n5", "label": "Nivel 05", "sub": "Persona propia", "type": "bus", "row": 0, "col": 5, "note": "Escribir tus reglas para que tu agente te hable como querés."},
+    {"id": "n6", "label": "Nivel 06", "sub": "Avanzado", "type": "bus", "row": 0, "col": 6.5, "end": true, "note": "Opcional: cosas más avanzadas, para cuando ya tengas todo lo anterior."},
+    {"id": "t0", "label": "quien-soy.md", "sub": "tu contexto", "type": "cloud", "row": 1, "col": 0, "note": "Una hoja donde queda escrito quién sos y para qué querés usar el agente. Así no tenés que explicarlo cada vez."},
+    {"id": "t2", "label": "memoria.md", "sub": "recuerda tus sesiones", "type": "bus", "row": 1, "col": 2, "note": "El cuaderno donde tu agente anota lo que hicieron juntos, para acordarse mañana."},
+    {"id": "t3", "label": "Vault + MCP", "sub": "notas conectadas", "type": "bus", "row": 1, "col": 3, "h": 112, "note": "Tu cuaderno de notas ordenado (el vault) conectado con tu agente. El MCP es el cable que los une, así tu agente puede leerlo y escribir en él."},
+    {"id": "t5", "label": "Tu persona", "sub": "tus reglas escritas", "type": "bus", "row": 1, "col": 5, "note": "Un archivo con tus reglas: cómo querés que te hable tu agente y qué tiene que hacer o no hacer."},
+    {"id": "t6", "label": "Skills", "sub": "tareas con reglas", "type": "bus", "row": 1, "col": 6, "h": 84, "note": "Recetas guardadas: una tarea que repetís, con sus reglas, para que tu agente la haga siempre igual."},
+    {"id": "t7", "label": "Rutinas", "sub": "se repiten solas", "type": "bus", "row": 1, "col": 7, "h": 84, "note": "Tareas que se hacen solas cada cierto tiempo (por ejemplo, un resumen por mes), como un despertador que le avisa a tu agente."}
+  ],
+  "edges": [
+    {"from": "n0", "to": "n1", "style": "main"},
+    {"from": "n1", "to": "n2", "style": "main"},
+    {"from": "n2", "to": "n3", "style": "main"},
+    {"from": "n3", "to": "n4", "style": "main"},
+    {"from": "n4", "to": "n5", "style": "main"},
+    {"from": "n5", "to": "n6", "style": "main"},
+    {"from": "n0", "to": "t0", "style": "default"},
+    {"from": "n2", "to": "t2", "style": "default"},
+    {"from": "n3", "to": "t3", "style": "default"},
+    {"from": "n5", "to": "t5", "style": "default"},
+    {"from": "n6", "to": "t6", "style": "default"},
+    {"from": "n6", "to": "t7", "style": "default"}
+  ],
+  "legend": {"backend": "Habilitado", "cloud": "En curso", "bus": "Pendiente"},
+  "edge_legend": {"main": "Tu camino", "default": "Lo que habilita"},
+  "notes": [{"title": "Tu progreso", "type": "backend", "items": ["Se completa solo al abrir el mapa"]}]
+}
+</script>
+
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const spec = JSON.parse(document.getElementById('spec').textContent);
+const svg = document.getElementById('d');
+const issues = [];
+const stats = {};   // informative, not failures: e.g. how many line crossings were left after routing
+
+const TYPES = ['frontend', 'backend', 'database', 'cloud', 'security', 'bus', 'external'];
+const ALIAS = {active: 'frontend', client: 'frontend', ui: 'frontend', service: 'backend', success: 'backend',
+  done: 'backend', start: 'backend', db: 'database', storage: 'database', decision: 'database', data: 'database',
+  waiting: 'cloud', infra: 'cloud', failure: 'security', error: 'security', policy: 'security',
+  messagebus: 'bus', queue: 'bus', event: 'bus', stream: 'bus', user: 'external', person: 'external', neutral: 'external'};
+const TYPE_NAMES = {frontend: 'Frontend', backend: 'Backend', database: 'Data store', cloud: 'Cloud / infra',
+  security: 'Security / policy', bus: 'Messaging', external: 'External'};
+const EDGE_NAMES = {main: 'main path', default: 'call', async: 'async', security: 'security / policy', return: 'return'};
+const typeOf = t => { t = ALIAS[t] || t; return TYPES.includes(t) ? t : 'external'; };
+const styleOf = s => EDGE_NAMES[s] ? s : 'default';
+
+// Icons: 12x12 stroke glyphs, one per semantic type.
+const ICON = {
+  frontend: 'M1 2h10v8H1z M1 4.5h10',
+  backend: 'M4 3L1 6l3 3 M8 3l3 3-3 3',
+  database: 'M2 2.5c0-1.5 8-1.5 8 0v7c0 1.5-8 1.5-8 0z M2 2.5c0 1.5 8 1.5 8 0',
+  cloud: 'M3.5 9.5h5.5a2.2 2.2 0 0 0 .3-4.4A3 3 0 0 0 3.6 4.6 2.5 2.5 0 0 0 3.5 9.5z',
+  security: 'M6 1l4.5 1.8v3.2c0 2.6-2 4.3-4.5 5-2.5-.7-4.5-2.4-4.5-5V2.8z',
+  bus: 'M1.5 3h9 M1.5 6h9 M1.5 9h9',
+  external: 'M5 2H2v8h8V7 M7 1.5h3.5V5 M10.5 1.5L6 6',
+  // Extra glyphs, picked with "icon" on a node (or implied by lifecycle-style types).
+  user: 'M6 6a2.2 2.2 0 1 0 0-4.4A2.2 2.2 0 0 0 6 6z M1.5 11c.6-2.4 2.3-3.6 4.5-3.6s3.9 1.2 4.5 3.6',
+  doc: 'M2.5 1h5l2.5 2.5V11h-7.5z M7.5 1v2.5H10 M4.5 6h3.5 M4.5 8.5h3.5',
+  money: 'M1 3h10v6H1z M6 7.4a1.4 1.4 0 1 0 0-2.8 1.4 1.4 0 0 0 0 2.8z',
+  clock: 'M6 11a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M6 3.5V6l1.8 1.2',
+  check: 'M6 11a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M3.8 6.1l1.5 1.5 2.9-3',
+  x: 'M6 11a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M4.2 4.2l3.6 3.6 M7.8 4.2L4.2 7.8',
+  alert: 'M6 1.2l5 9.3H1z M6 4.6v2.6 M6 8.8v.1',
+  diamond: 'M6 1l5 5-5 5-5-5z',
+  pulse: 'M1 6h2.3l1.4-3.2 2.2 6.4L8.4 6H11',
+  gear: 'M6 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z M6 .8v1.6 M6 9.6v1.6 M.8 6h1.6 M9.6 6h1.6 M2.3 2.3l1.1 1.1 M8.6 8.6l1.1 1.1 M2.3 9.7l1.1-1.1 M8.6 3.4l1.1-1.1',
+  mail: 'M1 2.5h10v7H1z M1 3l5 3.6L11 3',
+  home: 'M1.5 5.5L6 1.5l4.5 4V11h-9z M4.8 11V7.8h2.4V11',
+  lock: 'M2.5 5.5h7V11h-7z M4 5.5V4a2 2 0 0 1 4 0v1.5',
+  chat: 'M1.5 2h9v6.2H5.2L2.8 10.4V8.2H1.5z',
+  cart: 'M1 1.5h1.7l1.3 6.3h5.5l1-4.6H3.3 M4.6 10.4h.1 M9 10.4h.1',
+};
+const ICON_FOR_TYPE = {waiting: 'clock', success: 'check', done: 'check', failure: 'x', error: 'x', decision: 'diamond',
+  active: 'pulse', user: 'user', person: 'user', policy: 'lock'};
+
+const ctx2d = document.createElement('canvas').getContext('2d');
+function tw(s, size, weight = 400) {
+  ctx2d.font = `${weight} ${size}px "JetBrains Mono", ui-monospace, monospace`;
+  return ctx2d.measureText(s || '').width;
+}
+function el(tag, attrs = {}, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function txt(parent, s, x, y, cls, anchor = 'middle') {
+  const t = el('text', {x, y, class: cls, 'text-anchor': anchor}, parent);
+  t.textContent = s;
+  return t;
+}
+const snap = (v, g = 8) => Math.round(v / g) * g;
+const overlap = (a, b, m = 0) => a.x < b.x + b.w + m && b.x < a.x + a.w + m && a.y < b.y + b.h + m && b.y < a.y + a.h + m;
+
+function sizeNode(n) {
+  n.t = typeOf(n.type);
+  const need = Math.max(tw(n.label, 12.5, 700), tw(n.sub || '', 10)) + 40;
+  n.w = n.w || Math.max(128, Math.ceil(need / 16) * 16);
+  n.h = n.h || (n.sub ? 56 : 40);
+}
+function drawNode(layer, n) {
+  const g = el('g', {class: `node t-${n.t}`, 'data-id': n.id, transform: `translate(${n.x},${n.y})`}, layer);
+  el('rect', {width: n.w, height: n.h, rx: 6, class: 'box'}, g);
+  if (n.end) el('rect', {x: 3, y: 3, width: n.w - 6, height: n.h - 6, rx: 4, class: 'box inner'}, g);
+  el('path', {d: ICON[n.icon] || ICON[ICON_FOR_TYPE[n.type]] || ICON[n.t], class: 'icon', transform: 'translate(8,7)'}, g);
+  txt(g, n.label, n.w / 2, n.sub ? n.h / 2 - 2 : n.h / 2 + 4.5, 'nl');
+  if (n.sub) txt(g, n.sub, n.w / 2, n.h / 2 + 14, 'ns');
+  el('title', {}, g).textContent = [n.label, n.sub, n.note].filter(Boolean).join(' — ');
+  if (tw(n.label, 12.5, 700) > n.w - 12) issues.push(`node "${n.id}": label wider than box`);
+}
+function markers(defs) {
+  // Every marker also exists as "-hot", in the highlight color, swapped in while a relation is focused.
+  for (const s of Object.keys(EDGE_NAMES)) for (const hot of ['', '-hot']) {
+    const m = el('marker', {id: `m-${s}${hot}`, class: hot ? 'e-hot' : `e-${s}`, viewBox: '0 0 10 10', refX: 9, refY: 5,
+      markerWidth: 9, markerHeight: 9, markerUnits: 'userSpaceOnUse', orient: 'auto-start-reverse'}, defs);
+    el('path', {d: 'M0,1 L10,5 L0,9 z', class: 'arrow'}, m);
+  }
+  // ER cardinality ends (crow's foot). x=20 sits on the table border; the start marker is reversed so the
+  // same drawing works at both ends of a relation.
+  const ER = {many: 'M20,3 L8,10 L20,17 M5,3 V17', one: 'M11,3 V17 M15,3 V17', 'zero-one': 'M15,3 V17'};
+  for (const [k, d] of Object.entries(ER)) for (const hot of ['', '-hot']) {
+    const m = el('marker', {id: `er-${k}${hot}`, class: hot ? 'e-hot' : 'e-default', viewBox: '0 0 20 20', refX: 20, refY: 10,
+      markerWidth: 20, markerHeight: 20, markerUnits: 'userSpaceOnUse', orient: 'auto-start-reverse'}, defs);
+    el('path', {d, class: 'erm'}, m);
+    if (k === 'zero-one') el('circle', {cx: 7, cy: 10, r: 3.5, class: 'erm-o'}, m);
+  }
+}
+
+// ---------- ER tables: header + one row per column; relations leave from the FK row ----------
+const ER_HEAD = 30, ER_ROW = 20;
+function sizeTable(t) {
+  t.t = typeOf(t.type || 'database');
+  t.label = t.label || t.id;
+  t.columns = t.columns || [];
+  const colW = Math.max(0, ...t.columns.map(c => 34 + tw(c.name, 11, 500) + 18 + tw(c.type || '', 10) + 12));
+  t.w = t.w || Math.max(176, Math.ceil(Math.max(colW, tw(t.label, 12.5, 700) + 48) / 16) * 16);
+  t.h = ER_HEAD + t.columns.length * ER_ROW + 6;
+}
+const rowY = (t, i) => t.y + ER_HEAD + i * ER_ROW + ER_ROW / 2 + 3;
+function drawTable(layer, t, byId) {
+  const g = el('g', {class: `node t-${t.t}`, 'data-id': t.id, transform: `translate(${t.x},${t.y})`}, layer);
+  el('rect', {width: t.w, height: t.h, rx: 6, class: 'box'}, g);
+  const b = t.h - 0.75, r = 5.25;
+  el('path', {d: `M0.75,${ER_HEAD} H${t.w - 0.75} V${b - r} Q${t.w - 0.75},${b} ${t.w - 0.75 - r},${b} H${0.75 + r} Q0.75,${b} 0.75,${b - r} Z`, class: 'tbl-body'}, g);
+  el('line', {x1: 0, y1: ER_HEAD, x2: t.w, y2: ER_HEAD, class: 'tbl-sep'}, g);
+  el('path', {d: ICON.database, class: 'icon', transform: 'translate(10,9)'}, g);
+  txt(g, t.label, 30, 19.5, 'tn', 'start');
+  t.columns.forEach((c, i) => {
+    const y = ER_HEAD + i * ER_ROW + ER_ROW / 2 + 7;
+    el('rect', {x: 1.5, y: ER_HEAD + 3 + i * ER_ROW, width: t.w - 3, height: ER_ROW, class: 'rowbg', 'data-i': i}, g);
+    if (c.pk) txt(g, 'PK', 10, y - 0.5, 'key pk', 'start');
+    if (c.fk) {
+      const target = byId[String(c.fk).split('.')[0]];
+      const kg = el('g', {class: `t-${target ? target.t : 'external'}`}, g);
+      txt(kg, 'FK', c.pk ? 23 : 10, y - 0.5, 'key', 'start');
+    }
+    txt(g, c.name, 34 + (c.pk && c.fk ? 10 : 0), y, `cn${c.nullable ? ' nul' : ''}`, 'start');
+    txt(g, (c.type || '') + (c.nullable ? '?' : ''), t.w - 10, y, 'ct', 'end');
+  });
+  el('title', {}, g).textContent = [t.label, t.note].filter(Boolean).join(' — ');
+}
+// hops[s] = x positions where horizontal segment s jumps over a crossing line (drawio-style line hop).
+const HOP = 4;
+function roundPath(p, r = 8, hops = []) {
+  let d = `M${p[0][0]},${p[0][1]}`, cur = p[0];
+  const hop = (s, to) => {
+    const hs = hops[s];
+    if (!hs || cur[1] !== to[1]) return '';
+    const dir = Math.sign(to[0] - cur[0]);
+    let out = '';
+    for (const hx of [...hs].sort((a, b) => (a - b) * dir)) {
+      if ((hx - cur[0]) * dir < HOP + 2 || (to[0] - hx) * dir < HOP + 2) continue;
+      out += ` L${hx - HOP * dir},${to[1]} A${HOP},${HOP} 0 0 ${dir > 0 ? 1 : 0} ${hx + HOP * dir},${to[1]}`;
+    }
+    return out;
+  };
+  for (let i = 1; i < p.length - 1; i++) {
+    const [x0, y0] = p[i - 1], [x1, y1] = p[i], [x2, y2] = p[i + 1];
+    const l1 = Math.hypot(x1 - x0, y1 - y0), l2 = Math.hypot(x2 - x1, y2 - y1);
+    const rr = Math.min(r, l1 / 2, l2 / 2);
+    const a = [x1 + (x0 - x1) / l1 * rr, y1 + (y0 - y1) / l1 * rr], b = [x1 + (x2 - x1) / l2 * rr, y1 + (y2 - y1) / l2 * rr];
+    d += hop(i - 1, a) + ` L${a[0]},${a[1]} Q${x1},${y1} ${b[0]},${b[1]}`;
+    cur = b;
+  }
+  const l = p[p.length - 1];
+  return d + hop(p.length - 2, l) + ` L${l[0]},${l[1]}`;
+}
+// Where a horizontal run of one edge crosses a vertical run of another: the crossing count for the report,
+// and the hop positions for roundPath.
+function findCrossings(edges) {
+  const runs = edges.map(e => e.pts.slice(1).map((q, i) => [e.pts[i], q]));
+  let n = 0;
+  edges.forEach((e, a) => runs[a].forEach(([p, q], s) => {
+    if (p[1] !== q[1]) return;
+    const x0 = Math.min(p[0], q[0]), x1 = Math.max(p[0], q[0]), y = p[1];
+    edges.forEach((o, b) => { if (b !== a) runs[b].forEach(([u, v]) => {
+      if (u[0] !== v[0]) return;
+      const x = u[0], y0 = Math.min(u[1], v[1]), y1 = Math.max(u[1], v[1]);
+      if (x > x0 + 1 && x < x1 - 1 && y > y0 + 1 && y < y1 - 1) { (e.hops ||= [])[s] = [...(e.hops[s] || []), x]; n++; }
+    }); });
+  }));
+  return n;
+}
+
+// ---------- Orthogonal router: A* on an 8px grid, nodes are obstacles ----------
+// Cost = length + bend penalty + penalty for running on top of an earlier edge.
+// A crossing costs about one bend: the router takes a short detour to avoid one, never a long one.
+const CELL = 8, MARGIN = 12, BEND = 14, OVERLAP = 40, CROSS = 12;
+const DX = [1, 0, -1, 0], DY = [0, 1, 0, -1];            // 0 right, 1 down, 2 left, 3 up
+const SIDE_DIR = {right: 0, bottom: 1, left: 2, top: 3};
+const SIDES = Object.keys(SIDE_DIR);
+
+function makeRouter(W, H, nodes) {
+  const cw = Math.ceil(W / CELL) + 1, ch = Math.ceil(H / CELL) + 1;
+  const blocked = new Uint8Array(cw * ch), usedH = new Uint8Array(cw * ch), usedV = new Uint8Array(cw * ch);
+  for (const n of nodes) {
+    const x0 = Math.max(0, Math.floor((n.x - MARGIN) / CELL)), x1 = Math.min(cw - 1, Math.ceil((n.x + n.w + MARGIN) / CELL));
+    const y0 = Math.max(0, Math.floor((n.y - MARGIN) / CELL)), y1 = Math.min(ch - 1, Math.ceil((n.y + n.h + MARGIN) / CELL));
+    for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) blocked[y * cw + x] = 1;
+  }
+  const clampC = (v, max) => Math.max(0, Math.min(max - 1, v));
+  // Port point on a node side; offset is along the side, in px from its middle.
+  function port(n, side, off = 0) {
+    if (side === 'right') return [n.x + n.w, n.y + n.h / 2 + off];
+    if (side === 'left') return [n.x, n.y + n.h / 2 + off];
+    if (side === 'top') return [n.x + n.w / 2 + off, n.y];
+    return [n.x + n.w / 2 + off, n.y + n.h];
+  }
+  // The free cell just outside the obstacle margin in front of a port.
+  function approach(p, side) {
+    const d = SIDE_DIR[side], k = Math.ceil(MARGIN / CELL) + 1;
+    const cx = clampC(Math.round(p[0] / CELL) + DX[d] * k, cw), cy = clampC(Math.round(p[1] / CELL) + DY[d] * k, ch);
+    return cy * cw + cx;
+  }
+  function search(starts, goals) {
+    const N = cw * ch * 4, g = new Float32Array(N).fill(Infinity), prev = new Int32Array(N).fill(-1);
+    const heap = [];
+    const push = (s, f) => { heap.push([f, s]); let i = heap.length - 1;
+      while (i > 0) { const p = (i - 1) >> 1; if (heap[p][0] <= heap[i][0]) break; [heap[p], heap[i]] = [heap[i], heap[p]]; i = p; } };
+    const pop = () => { const top = heap[0], last = heap.pop();
+      if (heap.length) { heap[0] = last; let i = 0; for (;;) { const l = 2 * i + 1, r = l + 1; let m = i;
+        if (l < heap.length && heap[l][0] < heap[m][0]) m = l; if (r < heap.length && heap[r][0] < heap[m][0]) m = r;
+        if (m === i) break; [heap[m], heap[i]] = [heap[i], heap[m]]; i = m; } } return top; };
+    const goalCells = [...goals.keys()].map(c => [c % cw, (c / cw) | 0]);
+    const h = c => { const x = c % cw, y = (c / cw) | 0; let b = Infinity;
+      for (const [gx, gy] of goalCells) b = Math.min(b, Math.abs(gx - x) + Math.abs(gy - y)); return b; };
+    for (const s of starts) { const st = s.c * 4 + s.d; if (s.g < g[st]) { g[st] = s.g; push(st, s.g + h(s.c)); } }
+    let best = Infinity, bestState = -1, bestGoal = null;
+    while (heap.length) {
+      const [f, st] = pop();
+      if (f >= best) break;
+      if (f > g[st] + h(st >> 2) + 1e-6) continue;
+      const c = st >> 2, d = st & 3;
+      const gl = goals.get(c);
+      if (gl) { const fin = g[st] + (d === gl.d ? 0 : BEND) + gl.extra; if (fin < best) { best = fin; bestState = st; bestGoal = gl; } }
+      const x = c % cw, y = (c / cw) | 0;
+      for (let nd = 0; nd < 4; nd++) {
+        if (nd === ((d + 2) & 3)) continue;
+        const nx = x + DX[nd], ny = y + DY[nd];
+        if (nx < 0 || ny < 0 || nx >= cw || ny >= ch) continue;
+        const nc = ny * cw + nx;
+        if (blocked[nc] && !goals.has(nc)) continue;
+        const horiz = nd === 0 || nd === 2;
+        const cost = 1 + (nd !== d ? BEND : 0) + (horiz ? usedH[nc] * OVERLAP + usedV[nc] * CROSS : usedV[nc] * OVERLAP + usedH[nc] * CROSS);
+        const ns = nc * 4 + nd, ng = g[st] + cost;
+        if (ng < g[ns]) { g[ns] = ng; prev[ns] = st; push(ns, ng + h(nc)); }
+      }
+    }
+    if (bestState < 0) return null;
+    const cells = [];
+    for (let s = bestState; s >= 0; s = prev[s]) cells.push(s >> 2);
+    cells.reverse();
+    return {cells, goal: bestGoal, start: starts.find(s => s.c === cells[0])};
+  }
+  function mark(cells) {
+    for (let i = 1; i < cells.length; i++) {
+      const a = cells[i - 1], b = cells[i];
+      const arr = Math.abs(a - b) === 1 ? usedH : usedV;
+      arr[a] = Math.min(3, arr[a] + 1); arr[b] = Math.min(3, arr[b] + 1);
+    }
+  }
+  // sides: optional fixed {from, to}; offsets: px offset of each port along its side.
+  function route(a, b, sides = {}, offs = {}) {
+    const vx = b.x + b.w / 2 - (a.x + a.w / 2), vy = b.y + b.h / 2 - (a.y + a.h / 2);
+    const away = (side, sx, sy) => { const d = SIDE_DIR[side], dot = DX[d] * sx + DY[d] * sy;
+      return dot < -1 ? 30 : Math.abs(dot) <= 1 ? 6 : 0; };
+    const starts = (sides.from ? [sides.from] : SIDES).map(s => {
+      const p = port(a, s, offs.from || 0);
+      return {c: approach(p, s), d: SIDE_DIR[s], g: sides.from ? 0 : away(s, vx, vy), side: s, p};
+    });
+    const goals = new Map();
+    for (const s of (sides.to ? [sides.to] : SIDES)) {
+      const p = port(b, s, offs.to || 0);
+      goals.set(approach(p, s), {d: (SIDE_DIR[s] + 2) & 3, extra: sides.to ? 0 : away(s, -vx, -vy), side: s, p});
+    }
+    const r = search(starts, goals);
+    if (!r) return null;
+    // Cells -> px corners; snap the first and last runs onto the real port coordinates.
+    let pts = r.cells.map(c => [(c % cw) * CELL, ((c / cw) | 0) * CELL]);
+    pts = [r.start.p, ...pts, r.goal.p];
+    const simple = [pts[0]];
+    for (let i = 1; i < pts.length - 1; i++) {
+      const [x0, y0] = simple[simple.length - 1], [x1, y1] = pts[i], [x2, y2] = pts[i + 1];
+      if ((x0 === x1 && x1 === x2) || (y0 === y1 && y1 === y2)) continue;
+      simple.push(pts[i]);
+    }
+    simple.push(pts[pts.length - 1]);
+    const fix = (portPt, side, i) => {
+      if (simple.length < 3) return;
+      const horiz = side === 'left' || side === 'right';
+      if (horiz) simple[i] = [simple[i][0], portPt[1]]; else simple[i] = [portPt[0], simple[i][1]];
+    };
+    fix(r.start.p, r.start.side, 1);
+    fix(r.goal.p, r.goal.side, simple.length - 2);
+    let out = simple.filter((p, i) => i === 0 || p[0] !== simple[i - 1][0] || p[1] !== simple[i - 1][1]);
+    if (out.length === 2 && out[0][0] !== out[1][0] && out[0][1] !== out[1][1]) {
+      const horiz = r.start.side === 'left' || r.start.side === 'right';
+      const [p, q] = out;
+      out = horiz ? [p, [(p[0] + q[0]) / 2, p[1]], [(p[0] + q[0]) / 2, q[1]], q]
+                  : [p, [p[0], (p[1] + q[1]) / 2], [q[0], (p[1] + q[1]) / 2], q];
+    }
+    return {pts: out, cells: r.cells, from: r.start.side, to: r.goal.side};
+  }
+  return {route, mark};
+}
+
+// ---------- Graph diagrams: architecture, workflow, dataflow, lifecycle ----------
+function renderGraph() {
+  const isER = spec.type === 'er';
+  const nodes = (isER ? spec.tables : spec.nodes).map(n => ({...n}));
+  const byId = Object.fromEntries(nodes.map(n => [n.id, n]));
+  if (Object.keys(byId).length !== nodes.length) issues.push('duplicate node ids');
+  for (const n of nodes) if (!(n.row >= 0 && n.col >= 0)) { issues.push(`node "${n.id}": row/col missing or negative`); n.row = Math.max(0, +n.row || 0); n.col = Math.max(0, +n.col || 0); }
+  nodes.forEach(isER ? sizeTable : sizeNode);
+  // ER relations are not written by hand: every column with "fk": "table.column" becomes one.
+  const erEdges = () => nodes.flatMap(t => t.columns.flatMap((c, i) => {
+    if (!c.fk) return [];
+    const [tid, cname] = String(c.fk).split('.'), target = byId[tid];
+    const j = target ? target.columns.findIndex(k => k.name === cname) : -1;
+    if (j < 0) { issues.push(`fk ${t.id}.${c.name} -> ${c.fk}: unknown table or column`); return []; }
+    return [{from: t.id, to: tid, fromRow: i, toRow: j, label: c.rel,
+      // An FK that is the table's whole primary key (subtype tables) is one-to-one, like an explicit unique.
+      card: {from: c.unique || (c.pk && t.columns.filter(k => k.pk).length === 1) ? 'one' : 'many',
+        to: c.nullable ? 'zero-one' : 'one'}}];
+  }));
+  const edges = (isER ? erEdges() : spec.edges || []).filter(e => {
+    const ok = byId[e.from] && byId[e.to];
+    if (!ok) issues.push(`edge ${e.from}->${e.to}: unknown node`);
+    return ok;
+  }).map((e, i) => ({...e, i, style: styleOf(e.style)}));
+  const rows = spec.rows || [], cols = spec.cols || [];
+  const k = spec.spacing || 1;
+  const maxH = Math.max(...nodes.map(n => n.h));
+  const nCols = Math.max(cols.length, ...nodes.map(n => Math.ceil(n.col + 1)));
+  // Columns are as wide as their widest node; a gap only grows when a same-row label must fit in it.
+  const colW = Array.from({length: nCols}, (_, c) =>
+    Math.max(cols.length ? 160 : 96, ...nodes.filter(n => Math.round(n.col) === c).map(n => n.w)));
+  const gap = Array(nCols).fill(snap((isER ? 112 : 64) * k, 16));
+  for (const e of edges.filter(e => e.label && byId[e.from].row === byId[e.to].row)) {
+    const a = Math.min(byId[e.from].col, byId[e.to].col), b = Math.max(byId[e.from].col, byId[e.to].col);
+    if (b - a !== 1 || a % 1) continue;
+    gap[a] = Math.max(gap[a], snap(tw(e.label, 10) + 40, 16));
+  }
+  const hasStart = nodes.some(n => n.start);
+  const H = snap(maxH + (rows.length ? 80 : 72) * k, 16);
+  // Rows share one height (lanes need it), except ER, where tables differ a lot: each row fits its tallest table.
+  const rowH = Array.from({length: Math.max(rows.length, ...nodes.map(n => Math.ceil(n.row + 1)))}, (_, r) =>
+    isER ? snap(Math.max(0, ...nodes.filter(n => Math.round(n.row) === r).map(n => n.h)) + 72 * k, 16) : H);
+  const rowTop = rowH.map((_, r) => rowH.slice(0, r).reduce((s, h) => s + h, 0));
+  const rowMid = r => { const i = Math.floor(r), f = r - i, m = j => rowTop[j] + rowH[j] / 2;
+    return f ? m(i) + (m(Math.min(i + 1, rowH.length - 1)) - m(i)) * f : m(i); };
+  const PAD = 40, left = PAD + (hasStart ? 32 : 0) + (rows.length ? 8 : 0), top = PAD + (cols.length ? 40 : 0);
+  const colX = [];   // column centers
+  let x = left;
+  for (let c = 0; c < nCols; c++) { colX.push(x + colW[c] / 2); x += colW[c] + gap[c]; }
+  const cx = c => { const i = Math.floor(c), f = c - i; return f ? colX[i] + (colX[Math.min(i + 1, nCols - 1)] - colX[i]) * f : colX[i]; };
+  for (const n of nodes) {
+    n.cx = snap(cx(n.col)); n.cy = snap(top + rowMid(n.row));
+    n.x = n.cx - n.w / 2; n.y = n.cy - n.h / 2;
+  }
+  const Wpx = snap(x - gap[nCols - 1] + PAD + (rows.length ? 8 : 0)), Hpx = top + rowH.reduce((s, h) => s + h, 0) + PAD;
+  // Smallest text is 10px; on a 1440px screen the panel is ~1380px wide. Below 7.5px it stops being readable.
+  const projected = 10 * Math.min(1, 1380 / Wpx);
+  if (projected < 7.5) issues.push(`diagram is ${Wpx}px wide: at a 1440px screen text drops to ~${projected.toFixed(1)}px; split it or use fewer columns`);
+  for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++)
+    if (overlap(nodes[i], nodes[j], 8)) issues.push(`nodes "${nodes[i].id}" and "${nodes[j].id}" overlap`);
+
+  svg.setAttribute('viewBox', `0 0 ${Wpx} ${Hpx}`);
+  svg.setAttribute('width', Wpx); svg.setAttribute('height', Hpx);
+  const defs = el('defs', {}, svg);
+  const pat = el('pattern', {id: 'dots', width: 16, height: 16, patternUnits: 'userSpaceOnUse', class: 'dots'}, defs);
+  el('circle', {cx: 1, cy: 1, r: 1}, pat);
+  markers(defs);
+  el('rect', {width: Wpx, height: Hpx, class: 'bg'}, svg);
+  el('rect', {width: Wpx, height: Hpx, fill: 'url(#dots)'}, svg);
+  const Lb = el('g', {}, svg), Le = el('g', {}, svg), Ln = el('g', {}, svg), Ll = el('g', {}, svg);
+
+  // Lanes (labeled rows) and stages (labeled columns).
+  rows.forEach((r, i) => {
+    const y = top + i * H + 8;
+    el('rect', {x: PAD - 16, y, width: Wpx - 2 * PAD + 32, height: H - 16, rx: 10, class: `band ${r.kind || ''}`}, Lb);
+    txt(Lb, `${String(i + 1).padStart(2, '0')} / ${r.label || r}`, PAD - 2, y + 18, 'bandl', 'start');
+  });
+  cols.forEach((c, i) => {
+    const w = colW[i] + 40, x = colX[i] - w / 2;
+    el('rect', {x, y: PAD - 8, width: w, height: Hpx - 2 * PAD + 16, rx: 10, class: `band ${c.kind || ''}`}, Lb);
+    txt(Lb, `${String(i + 1).padStart(2, '0')} / ${c.label || c}`, colX[i], PAD + 14, 'bandl');
+  });
+
+  // Boundaries: dashed regions around their member nodes; nested ones get less padding.
+  const bounds = (spec.boundaries || []).filter(b => {
+    const ok = (b.nodes || []).some(id => byId[id]);
+    if (!ok) issues.push(`boundary "${b.label}": no known nodes`);
+    return ok;
+  }).map(b => ({...b, t: typeOf(b.type || 'cloud'), set: new Set(b.nodes)}));
+  for (const b of bounds) {
+    const inner = bounds.filter(o => o !== b && [...o.set].every(id => b.set.has(id)) && o.set.size < b.set.size).length;
+    const m = b.nodes.map(id => byId[id]).filter(Boolean);
+    const pad = 18 + 16 * inner;
+    b.x = Math.min(...m.map(n => n.x)) - pad; b.y = Math.min(...m.map(n => n.y)) - pad - 6;
+    b.w = Math.max(...m.map(n => n.x + n.w)) + pad - b.x; b.h = Math.max(...m.map(n => n.y + n.h)) + pad - b.y;
+    for (const n of nodes) if (!b.set.has(n.id) && overlap(b, n)) issues.push(`node "${n.id}" sits inside boundary "${b.label}" without belonging to it`);
+  }
+  bounds.sort((a, b) => b.w * b.h - a.w * a.h).forEach(b => {
+    const g = el('g', {class: `t-${b.t}`}, Lb);
+    el('rect', {x: b.x, y: b.y, width: b.w, height: b.h, rx: 12, class: 'bound'}, g);
+    txt(g, b.label, b.x + 12, b.y + 4, 'bl', 'start');
+  });
+
+  // Routing: pass 1 picks the sides, pass 2 spreads ports per side and routes for real.
+  const router = makeRouter(Wpx, Hpx, nodes);
+  const fixed = e => e.from === e.to ? {from: e.from_side || 'right', to: e.to_side || 'right'} : {from: e.from_side, to: e.to_side};
+  // ER: ports sit on the FK and PK rows, left or right side only (facing sides; right-right when stacked).
+  if (isER) for (const e of edges) {
+    const a = byId[e.from], b = byId[e.to];
+    const dx = b.cx - a.cx;
+    e.sides = dx > 0 ? {from: 'right', to: 'left'} : dx < 0 ? {from: 'left', to: 'right'} : {from: 'right', to: 'right'};
+    e.offs = {from: rowY(a, e.fromRow) - (a.y + a.h / 2), to: rowY(b, e.toRow) - (b.y + b.h / 2)};
+  }
+  for (const e of isER ? [] : edges) {
+    const r = router.route(byId[e.from], byId[e.to], fixed(e));
+    e.sides = r ? {from: r.from, to: r.to} : fixed(e);
+  }
+  const slots = {};
+  for (const e of isER ? [] : edges) for (const end of ['from', 'to']) {
+    const n = byId[e[end]], other = byId[e[end === 'from' ? 'to' : 'from']], side = e.sides[end];
+    if (!side) continue;
+    (slots[n.id + side] ||= []).push({e, end, key: side === 'left' || side === 'right' ? other.cy : other.cx, len: side === 'left' || side === 'right' ? n.h : n.w});
+  }
+  for (const [key, list] of Object.entries(slots)) {
+    list.sort((a, b) => a.key - b.key);
+    const step = Math.min(16, (list[0].len - 16) / Math.max(1, list.length - 1));
+    let offs = list.map((s, i) => (i - (list.length - 1) / 2) * step);
+    // Keep a straight edge straight: the aligned counterpart takes the side's middle and the rest fan out on
+    // each side of it, squeezed to fit the room left on that side.
+    const n = byId[list[0].e[list[0].end]], horiz = /left|right$/.test(key);
+    const aligned = list.findIndex(s => s.key === (horiz ? n.cy : n.cx));
+    if (aligned >= 0) {
+      const room = list[0].len / 2 - 8, before = aligned, after = list.length - 1 - aligned;
+      const sb = before ? Math.min(16, room / before) : 0, sa = after ? Math.min(16, room / after) : 0;
+      offs = list.map((s, i) => i < aligned ? -(aligned - i) * sb : (i - aligned) * sa);
+    }
+    list.forEach((s, i) => { (s.e.offs ||= {})[s.end] = offs[i]; });
+  }
+  const order = {main: 0, default: 1, security: 2, async: 3, return: 4};
+  for (const e of [...edges].sort((a, b) => order[a.style] - order[b.style])) {
+    let r = router.route(byId[e.from], byId[e.to], e.sides, e.offs || {});
+    if (!r) {
+      issues.push(`edge ${e.from}->${e.to}: no clean route, drawn straight`);
+      const a = byId[e.from], b = byId[e.to];
+      r = {pts: [[a.cx, a.cy], [b.cx, b.cy]], cells: []};
+    }
+    router.mark(r.cells);
+    e.pts = r.pts;
+  }
+
+  stats.crossings = findCrossings(edges);
+  // Placement metrics to compare layouts by number: relations between two different nodes stacked in one
+  // column (they must loop around a side), bends, and total line length.
+  if (isER) stats.stacked = edges.filter(e => e.from !== e.to && byId[e.from].col === byId[e.to].col).length;
+  stats.bends = edges.reduce((s, e) => s + Math.max(0, e.pts.length - 2), 0);
+  stats.length = Math.round(edges.reduce((s, e) => s + e.pts.slice(1).reduce((t, q, i) =>
+    t + Math.abs(q[0] - e.pts[i][0]) + Math.abs(q[1] - e.pts[i][1]), 0), 0));
+  for (const e of edges) {
+    const g = el('g', {class: `edge e-${e.style}`, 'data-from': e.from, 'data-to': e.to, 'data-k': e.i,
+      'data-fr': e.fromRow, 'data-tr': e.toRow}, Le);
+    const d = roundPath(e.pts, 8, e.hops);
+    el('path', {d, class: 'hit'}, g);
+    el('path', {d, class: 'line',
+      'marker-end': e.card ? `url(#er-${e.card.to})` : `url(#m-${e.style})`,
+      'marker-start': e.card ? `url(#er-${e.card.from})` : null}, g);
+  }
+
+  // Edge labels sit beside their line, never on it: above a horizontal run, right of a vertical one
+  // (then the other side), on the longest run that has room and touches no node, label or line.
+  const placed = [...bounds.map(b => ({x: b.x + 8, y: b.y - 8, w: tw(b.label, 10.5, 600) + 10, h: 16}))];
+  const lines = edges.flatMap(e => e.pts.slice(1).map((q, i) => {
+    const p = e.pts[i];
+    return {x: Math.min(p[0], q[0]) - 1, y: Math.min(p[1], q[1]) - 1, w: Math.abs(p[0] - q[0]) + 2, h: Math.abs(p[1] - q[1]) + 2};
+  }));
+  for (const e of edges.filter(e => e.label)) {
+    const w = tw(e.label, 10) + 10, h = 15, GAP = 4;
+    const segs = e.pts.slice(1).map((p, i) => [e.pts[i], p]).map(([p, q]) => ({p, q, len: Math.abs(p[0] - q[0]) + Math.abs(p[1] - q[1])}))
+      .sort((a, b) => b.len - a.len);
+    const free = box => box.x >= 4 && box.y >= 4 && box.x + box.w <= Wpx - 4 && box.y + box.h <= Hpx - 4 && !nodes.some(n => overlap(box, n, 4)) && !placed.some(p => overlap(box, p, 2)) && !lines.some(l => overlap(box, l, 1));
+    let best = null;
+    for (const s of segs) {
+      const horiz = s.p[1] === s.q[1];
+      if (s.len < (horiz ? w + 24 : h + 28)) continue;
+      for (const t of [0.5, 0.35, 0.65]) {
+        const cx = s.p[0] + (s.q[0] - s.p[0]) * t, cy = s.p[1] + (s.q[1] - s.p[1]) * t;
+        const cands = horiz ? [{x: cx - w / 2, y: cy - h - GAP}, {x: cx - w / 2, y: cy + GAP}]
+                            : [{x: cx + GAP + 2, y: cy - h / 2}, {x: cx - w - GAP - 2, y: cy - h / 2}];
+        best = cands.map(c => ({...c, w, h})).find(free);
+        if (best) break;
+      }
+      if (best) break;
+    }
+    if (!best) {
+      const s = segs[0], cx = (s.p[0] + s.q[0]) / 2, cy = (s.p[1] + s.q[1]) / 2;
+      best = s.p[1] === s.q[1] ? {x: cx - w / 2, y: cy - h - GAP, w, h} : {x: cx + GAP + 2, y: cy - h / 2, w, h};
+      issues.push(`label "${e.label}" (${e.from}->${e.to}) has no free spot: widen spacing or move nodes`);
+    }
+    placed.push(best);
+    const g = el('g', {class: `lab e-${e.style}`, 'data-from': e.from, 'data-to': e.to, 'data-k': e.i}, Ll);
+    txt(g, e.label, best.x + best.w / 2, best.y + 11, '');
+  }
+
+  for (const n of nodes) {
+    if (isER) { drawTable(Ln, n, byId); continue; }
+    drawNode(Ln, n);
+    if (n.start) {
+      el('line', {x1: n.x - 20, y1: n.cy, x2: n.x, y2: n.cy, class: 'startl'}, Ln);
+      el('circle', {cx: n.x - 22, cy: n.cy, r: 5, class: 'start'}, Ln);
+    }
+  }
+  return {types: nodes.map(n => n.t), styles: edges.map(e => e.style)};
+}
+
+// ---------- Sequence diagrams ----------
+function renderSequence() {
+  const P = spec.participants.map(p => ({...p}));
+  P.forEach(sizeNode);
+  const idx = Object.fromEntries(P.map((p, i) => [p.id, i]));
+  const M = spec.messages.filter(m => {
+    const ok = Object.hasOwn(idx, m.from) && Object.hasOwn(idx, m.to);
+    if (!ok) issues.push(`message ${m.from}->${m.to}: unknown participant`);
+    return ok;
+  }).map(m => ({...m, a: idx[m.from], b: idx[m.to], style: styleOf(m.style), lw: m.label ? tw(m.label, 10.5, 500) + 28 : 0}));
+  const gaps = P.slice(1).map((p, i) => Math.max(P[i].w / 2 + p.w / 2 + 36, 150 * (spec.spacing || 1)));
+  for (const m of M) {
+    if (m.a === m.b) { if (m.a < gaps.length) gaps[m.a] = Math.max(gaps[m.a], m.lw + 60); continue; }
+    const lo = Math.min(m.a, m.b), hi = Math.max(m.a, m.b);
+    const span = gaps.slice(lo, hi).reduce((s, g) => s + g, 0);
+    if (span < m.lw) for (let i = lo; i < hi; i++) gaps[i] += (m.lw - span) / (hi - lo);
+  }
+  const PAD = 40;
+  const xs = [PAD + P[0].w / 2];
+  gaps.forEach(g => xs.push(xs[xs.length - 1] + g));
+  const headH = Math.max(...P.map(p => p.h));
+  const groups = (spec.groups || []).map(g => ({...g}));
+  let y = PAD + headH + 36;
+  M.forEach((m, i) => {
+    for (const g of groups) if (g.from === i) { y += 22; g.y0 = y - 30; }
+    m.y = y;
+    y += m.a === m.b ? 46 : 34;
+    for (const g of groups) if (g.to === i) { g.y1 = y - 14; y += 12; }
+  });
+  const lastSelf = Math.max(0, ...M.filter(m => m.a === P.length - 1 && m.a === m.b).map(m => m.lw + 60));
+  const Wpx = xs[xs.length - 1] + P[P.length - 1].w / 2 + PAD + lastSelf, Hpx = y + PAD;
+
+  svg.setAttribute('viewBox', `0 0 ${Wpx} ${Hpx}`);
+  svg.setAttribute('width', Wpx); svg.setAttribute('height', Hpx);
+  const defs = el('defs', {}, svg);
+  const pat = el('pattern', {id: 'dots', width: 16, height: 16, patternUnits: 'userSpaceOnUse', class: 'dots'}, defs);
+  el('circle', {cx: 1, cy: 1, r: 1}, pat);
+  markers(defs);
+  el('rect', {width: Wpx, height: Hpx, class: 'bg'}, svg);
+  el('rect', {width: Wpx, height: Hpx, fill: 'url(#dots)'}, svg);
+  const Lb = el('g', {}, svg), Le = el('g', {}, svg), Ln = el('g', {}, svg);
+
+  for (const g of groups) {
+    if (g.y0 == null || g.y1 == null || g.to < g.from) { issues.push(`group "${g.label}": from/to out of range`); continue; }
+    el('rect', {x: PAD - 16, y: g.y0, width: Wpx - 2 * PAD + 32, height: g.y1 - g.y0, rx: 10, class: `band ${g.kind || ''}`}, Lb);
+    txt(Lb, g.label, PAD - 4, g.y0 + 14, 'bandl', 'start');
+  }
+  P.forEach((p, i) => {
+    p.x = xs[i] - p.w / 2; p.y = PAD + headH - p.h; p.cx = xs[i];
+    el('line', {x1: xs[i], y1: PAD + headH, x2: xs[i], y2: y - 8, class: 'life'}, Lb);
+  });
+  // Activation bars: a participant is active on the messages it takes part in, plus while it waits
+  // for the reply to a call it made. Consecutive active messages merge into one bar.
+  const first = M.length ? M[0].a : -1;
+  const act = P.map((p, i) => {
+    if (i === first) return [];
+    const on = new Set();
+    M.forEach((m, j) => {
+      if (m.a !== i && m.b !== i) return;
+      if (m.a === i && !M.slice(0, j).some(o => o.b === i)) return;   // sends before it was ever called
+      on.add(j);
+      if (m.a === i && m.style !== 'return' && m.style !== 'async') {
+        const r = M.findIndex((o, k) => k > j && o.a === m.b && o.b === i && o.style === 'return');
+        for (let k = j; k <= r; k++) on.add(k);
+      }
+    });
+    const idx = [...on].sort((a, b) => a - b), bars = [];
+    for (const j of idx) {
+      const last = bars[bars.length - 1];
+      if (last && j <= last.to + 2) last.to = j; else bars.push({from: j, to: j});   // a one-message gap stays one bar
+    }
+    return bars.map(b => [M[b.from].y - 6, M[b.to].y + (b.from === b.to ? 10 : 6)]);
+  });
+  act.forEach((bars, i) => bars.forEach(a => {
+    const g = el('g', {class: `t-${P[i].t}`}, Ln);
+    el('rect', {x: xs[i] - 5, y: a[0], width: 10, height: a[1] - a[0], rx: 3, class: 'bar'}, g);
+  }));
+  const edgeX = (i, y, dir) => xs[i] + (act[i].some(a => y >= a[0] && y <= a[1]) ? 5 * dir : 0);
+  M.forEach((m, k) => {
+    const g = el('g', {class: `edge e-${m.style}`, 'data-from': m.from, 'data-to': m.to, 'data-k': k}, Le);
+    if (m.a === m.b) {
+      const x = edgeX(m.a, m.y, 1), d = roundPath([[x, m.y], [x + 36, m.y], [x + 36, m.y + 18], [x, m.y + 18]], 6);
+      el('path', {d, class: 'hit'}, g);
+      el('path', {d, class: 'line', 'marker-end': `url(#m-${m.style})`}, g);
+      if (m.label) txt(g, m.label, x + 44, m.y + 13, 'mtext', 'start');
+      return;
+    }
+    const dir = m.b > m.a ? 1 : -1;
+    const x1 = edgeX(m.a, m.y, dir), x2 = edgeX(m.b, m.y, -dir), d = `M${x1},${m.y} L${x2},${m.y}`;
+    el('path', {d, class: 'hit'}, g);
+    el('path', {d, class: 'line', 'marker-end': `url(#m-${m.style})`}, g);
+    if (m.label) txt(g, m.label, (x1 + x2) / 2, m.y - 7, 'mtext');
+  });
+  P.forEach(p => drawNode(Ln, p));
+  return {types: P.map(p => p.t), styles: M.map(m => m.style)};
+}
+
+// ---------- Page chrome: legend, notes, focus, theme, export ----------
+const esc = v => String(v).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
+function legend(used) {
+  const L = document.getElementById('legend');
+  const names = {...TYPE_NAMES, ...(spec.legend || {})};
+  const count = a => a.reduce((m, k) => (m[k] = (m[k] || 0) + 1, m), {});
+  const tc = count(used.types), sc = count(used.styles);
+  let html = '<b>Legend</b>';
+  for (const t of TYPES) if (tc[t]) html += `<span class="chip t-${t}"><span class="sw"></span>${esc(names[t])}<span class="cnt">${tc[t]}</span></span>`;
+  if (spec.type === 'er') for (const [k, name] of [['one', 'exactly one'], ['zero-one', 'zero or one'], ['many', 'one or many']])
+    html += `<span class="chip e-default"><svg width="34" height="20"><line x1="0" y1="10" x2="30" y2="10" class="line" marker-end="url(#er-${k})"/></svg>${name}</span>`;
+  for (const s of Object.keys(EDGE_NAMES)) if (sc[s] && (s !== 'default' || spec.type === 'sequence'))
+    html += `<span class="chip e-${s}"><svg width="28" height="10"><line x1="1" y1="5" x2="22" y2="5" class="line"/><path d="M20,1 L28,5 L20,9 z" class="arrow"/></svg>${esc((spec.edge_legend || {})[s] || EDGE_NAMES[s])}</span>`;
+  L.innerHTML = html;
+}
+function notes() {
+  const N = document.getElementById('notes');
+  for (const n of spec.notes || []) {
+    const c = document.createElement('div');
+    c.className = `card t-${typeOf(n.type || 'frontend')}`;
+    const h = document.createElement('h3'); h.textContent = n.title; c.appendChild(h);
+    const ul = document.createElement('ul');
+    for (const it of n.items || []) { const li = document.createElement('li'); li.textContent = it; ul.appendChild(li); }
+    c.appendChild(ul); N.appendChild(c);
+  }
+}
+// Highlight: hovering a line (or its label) lights that relation and the two nodes it joins; hovering an ER
+// row lights the relations that leave from or land on that row; hovering a node lights all of its relations.
+function focus() {
+  const edgeEls = [...svg.querySelectorAll('g.edge')];
+  const swap = (path, hot) => {
+    for (const a of ['marker-end', 'marker-start']) {
+      const v = path && path.getAttribute(a);
+      if (v) path.setAttribute(a, hot ? v.replace(/(-hot)?\)$/, '-hot)') : v.replace(/-hot\)$/, ')'));
+    }
+  };
+  const clear = () => {
+    svg.classList.remove('focus');
+    edgeEls.forEach(e => swap(e.querySelector('.line'), false));
+    svg.querySelectorAll('.rowbg.hot').forEach(r => r.classList.remove('hot'));
+  };
+  const show = pred => {
+    const hotNodes = new Set(), hotK = new Set();
+    for (const e of edgeEls) {
+      const on = pred(e);
+      e.classList.toggle('hot', on);
+      swap(e.querySelector('.line'), on);
+      if (on) { hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); hotK.add(e.dataset.k); }
+    }
+    svg.querySelectorAll('g.lab').forEach(l => l.classList.toggle('hot', hotK.has(l.dataset.k)));
+    svg.querySelectorAll('g.node').forEach(n => n.classList.toggle('hot', hotNodes.has(n.dataset.id)));
+    svg.querySelectorAll('.rowbg.hot').forEach(r => r.classList.remove('hot'));
+    for (const e of edgeEls) if (e.classList.contains('hot') && e.dataset.fr != null) {
+      svg.querySelector(`g.node[data-id="${CSS.escape(e.dataset.from)}"] .rowbg[data-i="${e.dataset.fr}"]`)?.classList.add('hot');
+      svg.querySelector(`g.node[data-id="${CSS.escape(e.dataset.to)}"] .rowbg[data-i="${e.dataset.tr}"]`)?.classList.add('hot');
+    }
+    svg.classList.add('focus');
+    return hotK.size;
+  };
+  svg.addEventListener('mouseover', ev => {
+    const t = ev.target, line = t.closest('g.edge') || t.closest('g.lab'), row = t.closest('.rowbg'), node = t.closest('g.node');
+    if (line) return show(e => e.dataset.k === line.dataset.k);
+    if (row) {
+      const id = node.dataset.id, i = row.dataset.i;
+      if (show(e => (e.dataset.from === id && e.dataset.fr === i) || (e.dataset.to === id && e.dataset.tr === i))) return;
+    }
+    if (node) return show(e => e.dataset.from === node.dataset.id || e.dataset.to === node.dataset.id);
+    clear();
+  });
+  svg.addEventListener('mouseleave', clear);
+}
+// Zoom and pan by moving the viewBox: Ctrl/⌘ + wheel (and trackpad pinch) zooms around the pointer, drag pans
+// while zoomed in, double click or "100%" resets, ⛶ goes fullscreen. Keys: + - 0 f.
+let fullBox = null;
+function zoomPan() {
+  const [, , W, H] = svg.getAttribute('viewBox').split(' ').map(Number);
+  fullBox = `0 0 ${W} ${H}`;
+  const panel = svg.closest('.panel'), pct = document.getElementById('zpct');
+  let vb = {x: 0, y: 0, w: W, h: H}, drag = null;
+  const set = () => {
+    svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+    pct.textContent = `${Math.round(W / vb.w * 100)}%`;
+    svg.classList.toggle('zoomed', vb.w < W);
+  };
+  const clamp = () => { vb.x = Math.max(0, Math.min(W - vb.w, vb.x)); vb.y = Math.max(0, Math.min(H - vb.h, vb.y)); };
+  const zoom = (f, cx = vb.x + vb.w / 2, cy = vb.y + vb.h / 2) => {
+    const nw = Math.max(W / 8, Math.min(W, vb.w * f)), s = nw / vb.w;
+    vb = {x: cx - (cx - vb.x) * s, y: cy - (cy - vb.y) * s, w: nw, h: vb.h * s};
+    clamp(); set();
+  };
+  const reset = () => { vb = {x: 0, y: 0, w: W, h: H}; set(); };
+  const full = () => document.fullscreenElement ? document.exitFullscreen() : panel.requestFullscreen?.();
+  svg.addEventListener('wheel', e => {
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    const r = svg.getBoundingClientRect();
+    zoom(e.deltaY > 0 ? 1.15 : 1 / 1.15, vb.x + (e.clientX - r.left) / r.width * vb.w, vb.y + (e.clientY - r.top) / r.height * vb.h);
+  }, {passive: false});
+  svg.addEventListener('pointerdown', e => {
+    if (vb.w >= W || e.button !== 0) return;
+    drag = {x: e.clientX, y: e.clientY, vx: vb.x, vy: vb.y};
+    svg.setPointerCapture(e.pointerId);
+  });
+  svg.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const r = svg.getBoundingClientRect();
+    vb.x = drag.vx - (e.clientX - drag.x) / r.width * vb.w;
+    vb.y = drag.vy - (e.clientY - drag.y) / r.height * vb.h;
+    clamp(); set();
+  });
+  svg.addEventListener('pointerup', () => { drag = null; });
+  svg.addEventListener('dblclick', reset);
+  panel.querySelectorAll('[data-z]').forEach(b => b.addEventListener('click', () =>
+    ({in: () => zoom(1 / 1.25), out: () => zoom(1.25), fit: reset, full})[b.dataset.z]()));
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey || e.altKey || /input|textarea/i.test(e.target.tagName)) return;
+    const act = {'+': () => zoom(1 / 1.25), '=': () => zoom(1 / 1.25), '-': () => zoom(1.25), '0': reset, f: full}[e.key];
+    if (act) { e.preventDefault(); act(); }
+  });
+}
+function standaloneSVG() {
+  const s = svg.cloneNode(true);
+  if (fullBox) s.setAttribute('viewBox', fullBox);
+  s.classList.remove('zoomed');
+  s.setAttribute('data-theme', document.documentElement.dataset.theme);
+  s.classList.remove('focus');
+  const st = document.createElementNS(NS, 'style');
+  st.textContent = document.getElementById('css').textContent;
+  s.insertBefore(st, s.firstChild);
+  return new XMLSerializer().serializeToString(s);
+}
+const slug = (spec.title || 'diagram').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function download(href, name) { const a = document.createElement('a'); a.href = href; a.download = name; a.click(); }
+document.getElementById('svgbtn').onclick = () =>
+  download(URL.createObjectURL(new Blob([standaloneSVG()], {type: 'image/svg+xml'})), `${slug}.svg`);
+document.getElementById('pngbtn').onclick = () => {
+  const img = new Image(), w = +svg.getAttribute('width'), h = +svg.getAttribute('height');
+  img.onload = () => {
+    const c = document.createElement('canvas'); c.width = w * 2; c.height = h * 2;
+    const g = c.getContext('2d'); g.scale(2, 2); g.drawImage(img, 0, 0, w, h);
+    download(c.toDataURL('image/png'), `${slug}.png`);
+  };
+  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(standaloneSVG());
+};
+const root = document.documentElement;
+try { root.dataset.theme = localStorage.getItem('diagram-theme') || spec.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+catch { root.dataset.theme = spec.theme || 'light'; }
+document.getElementById('theme').onclick = () => {
+  root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  try { localStorage.setItem('diagram-theme', root.dataset.theme); } catch {}
+};
+
+async function main() {
+  if (new URLSearchParams(location.search).has('clean')) document.body.classList.add('clean');   // screenshots for docs
+  try { await Promise.all([400, 500, 600, 700].map(w => document.fonts.load(`${w} 12px "JetBrains Mono"`))); await document.fonts.ready; } catch {}
+  document.title = spec.title || 'Diagram';
+  document.getElementById('title').textContent = spec.title || '';
+  if (spec.subtitle) { const s = document.getElementById('subtitle'); s.textContent = spec.subtitle; s.hidden = false; }
+  svg.setAttribute('aria-label', spec.title || 'diagram');
+  let used = {types: [], styles: []};
+  try { used = spec.type === 'sequence' ? renderSequence() : renderGraph(); }
+  catch (err) { issues.push('render failed: ' + err.message); console.error(err); }
+  legend(used); notes(); focus();
+  if (svg.getAttribute('viewBox')) zoomPan();
+  const w = document.getElementById('warn');
+  if (issues.length) { w.hidden = false; w.textContent = `${issues.length} layout issue${issues.length > 1 ? 's' : ''}`; w.title = issues.join('\n'); }
+  window.diagramIssues = issues;
+  const rep = document.getElementById('diagram-report');
+  window.diagramStats = stats;
+  rep.textContent = JSON.stringify({ok: issues.length === 0, issues, ...stats});
+  rep.dataset.done = '1';
+  console.log('[diagram]', issues.length ? issues : 'ok');
+}
+main();
+</script>
+<script id="padawan-extra-js">
+/* Padawan: estados, puntitos que viajan, rango y panel de información. Solo lee el spec; no usa la red. */
+(function () {
+  'use strict';
+  var spec = JSON.parse(document.getElementById('spec').textContent);
+  var STATE = { backend: 'listo', cloud: 'curso', bus: 'pend' };
+  var NAMES = { listo: 'Habilitado', curso: 'En curso', pend: 'Pendiente' };
+  var NEXT = {
+    n0: 'Respondé las 3 preguntas de contexto: quién sos, para qué querés usar un agente y qué esperás lograr.',
+    n1: 'Confirmá que tu agente puede leer y escribir en tu carpeta, y anotá cuál es.',
+    n2: 'Creá memoria.md para que tu agente recuerde tus sesiones.',
+    n3: 'Armá tu segundo cerebro: primeras notas, etiquetas y, si querés, Obsidian.',
+    n4: 'Definí cómo vas a organizar tu trabajo: vocabulario y patrones.',
+    n5: 'Escribí tu propia persona: cómo querés que te hable tu agente.',
+    n6: 'Explorá lo avanzado (opcional): candado de tareas y versionar con git.'
+  };
+  var TIPS = [
+    'Validá cada paso: abrí el archivo que se creó y comprobá que es lo que esperabas.',
+    'Leé cada pedido de permiso antes de aceptar. Al principio van a ser muchos.',
+    'Trabajá siempre en la misma carpeta: ahí vive tu memoria.',
+    'Al principio nada se automatiza: la confianza se gana de a poco.',
+    'Si algo te traba no es un fracaso: anotalo en COMO-PEDIR-AYUDA.md.'
+  ];
+
+  function stateOf(id) {
+    var n = spec.nodes.filter(function (x) { return x.id === id; })[0];
+    return n ? (STATE[n.type] || 'pend') : 'pend';
+  }
+
+  function stars() {
+    var box = document.createElement('div'); box.id = 'stars';
+    var seed = 7;
+    function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    for (var i = 0; i < 90; i++) {
+      var s = document.createElement('i');
+      s.style.left = (rnd() * 100) + '%'; s.style.top = (rnd() * 100) + '%';
+      s.style.animationDelay = (rnd() * 4) + 's'; s.style.animationDuration = (3 + rnd() * 4) + 's';
+      box.appendChild(s);
+    }
+    document.body.insertBefore(box, document.body.firstChild);
+  }
+
+  function card(title, type, items) {
+    var c = document.createElement('div'); c.className = 'card t-' + type;
+    var h = document.createElement('h3'); h.textContent = title; c.appendChild(h);
+    var ul = document.createElement('ul');
+    items.forEach(function (t) { var li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+    c.appendChild(ul); return c;
+  }
+
+  function panel() {
+    var levels = spec.nodes.filter(function (n) { return /^n\d+$/.test(n.id); });
+    var tools = spec.nodes.filter(function (n) { return /^t\d+$/.test(n.id); });
+    var done = levels.filter(function (n) { return stateOf(n.id) === 'listo'; });
+    var cur = levels.filter(function (n) { return stateOf(n.id) === 'curso'; })[0] ||
+              levels.filter(function (n) { return stateOf(n.id) === 'pend'; })[0];
+    var total = levels.length, d = done.length;
+    var rank = d >= total ? 'Maestro Jedi' : d >= 4 ? 'Caballero Jedi' : 'Padawan';
+
+    var sub = document.getElementById('subtitle');
+    sub.hidden = false;
+    sub.textContent = 'Que la Fuerza te acompañe · Rango: ' + rank + ' · ' + d + ' de ' + total + ' niveles';
+    var bar = document.createElement('div'); bar.id = 'rankbar';
+    bar.setAttribute('role', 'progressbar'); bar.setAttribute('aria-valuemin', '0');
+    bar.setAttribute('aria-valuemax', String(total)); bar.setAttribute('aria-valuenow', String(d));
+    var b = document.createElement('b'); b.style.width = Math.round(100 * d / Math.max(total, 1)) + '%';
+    bar.appendChild(b); sub.parentNode.appendChild(bar);
+
+    var enabled = tools.filter(function (n) { return stateOf(n.id) === 'listo'; })
+      .map(function (n) { return n.label; });
+    var prog = [
+      'Rango: ' + rank,
+      'Niveles completos: ' + d + ' de ' + total,
+      cur ? 'Ahora: ' + cur.label + ' · ' + (cur.sub || '') : 'Completaste todos los niveles',
+      'Herramientas habilitadas: ' + (enabled.length ? enabled.join(', ') : 'todavía ninguna')
+    ];
+    var next = cur ? NEXT[cur.id] : '¡Terminaste los 7 niveles! Probá los casos de uso o la pista de Maestría.';
+    var notes = document.getElementById('notes');
+    notes.textContent = '';
+    notes.appendChild(card('Tu progreso', 'backend', prog));
+    notes.appendChild(card('Próximo paso', 'cloud', [next]));
+    notes.appendChild(card('Consejo del Maestro', 'bus', [TIPS[d % TIPS.length]]));
+    // Glosario siempre visible (no depende del tooltip): las mismas palabras que va a usar tu agente.
+    var gl = tools.filter(function (n) { return n.note; })
+      .map(function (n) { return n.label + ': ' + n.note; });
+    if (gl.length) {
+      gl.unshift('Tu agente usa estas mismas palabras. Si una no te cierra, señalá la caja y preguntale: nunca des por entendido lo que no entendiste.');
+      var gc = card('Qué significa cada cosa', 'frontend', gl); gc.classList.add('glosario');
+      notes.appendChild(gc);
+    }
+  }
+
+  // Mini TIE fighter: dos paneles hexagonales, una barra y la cabina. Viaja en vez de un punto.
+  function tie(st) {
+    var NS = 'http://www.w3.org/2000/svg';
+    var g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'tie tie-' + st);
+    [-1, 1].forEach(function (sg) {
+      var p = document.createElementNS(NS, 'polygon');
+      p.setAttribute('points', [[0, -5.2], [2, -2.6], [2, 2.6], [0, 5.2], [-2, 2.6], [-2, -2.6]]
+        .map(function (q) { return (q[0] + sg * 6.2).toFixed(1) + ',' + q[1]; }).join(' '));
+      g.appendChild(p);
+    });
+    var l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', '-4.2'); l.setAttribute('x2', '4.2'); l.setAttribute('y1', '0'); l.setAttribute('y2', '0');
+    g.appendChild(l);
+    var c = document.createElementNS(NS, 'circle'); c.setAttribute('r', '2.6'); g.appendChild(c);
+    return g;
+  }
+
+  function dots() {
+    var NS = 'http://www.w3.org/2000/svg';
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var svg = document.getElementById('d'), order = 0;
+    svg.querySelectorAll('g.node').forEach(function (g) { g.classList.add('s-' + stateOf(g.dataset.id)); });
+    svg.querySelectorAll('g.edge').forEach(function (g) {
+      var st = stateOf(g.dataset.to);
+      g.classList.add('s-' + st);
+      if (st === 'pend' || reduce) return;
+      var line = g.querySelector('path.line'); if (!line) return;
+      var d = line.getAttribute('d'), dur = Math.max(1.6, line.getTotalLength() / 70);
+      for (var k = 0; k < 2; k++) {
+        var c = tie(st);
+        var m = document.createElementNS(NS, 'animateMotion');
+        m.setAttribute('path', d); m.setAttribute('dur', dur + 's');
+        m.setAttribute('begin', (k * dur / 2 + order * 0.35) + 's'); m.setAttribute('repeatCount', 'indefinite');
+        c.appendChild(m); g.appendChild(c);
+      }
+      order++;
+    });
+  }
+
+  // Formas propias de algunas herramientas. Se dibujan sobre la caja del skill y usan sus colores de estado.
+  // Todo se calcula con el ancho y el alto reales de la caja (spec: "h"), asi que sirve con cualquier tamano.
+  function shapes() {
+    var NS = 'http://www.w3.org/2000/svg';
+    var LINE = 'fill:none;stroke:var(--s);stroke-linecap:round;stroke-linejoin:round;pointer-events:none';
+    var DOT = 'fill:var(--s);pointer-events:none';
+    function mk(tag, attrs, parent, before) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (parent) { if (before) parent.insertBefore(e, before); else parent.appendChild(e); }
+      return e;
+    }
+    function node(id) { return document.querySelector('#d g.node[data-id="' + id + '"]'); }
+    function pt(cx, cy, r, deg) { var a = deg * Math.PI / 180; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
+    function size(g) {
+      var b = g.querySelector('rect.box'); return b ? { box: b, w: +b.getAttribute('width'), h: +b.getAttribute('height') } : null;
+    }
+
+    // Vault + MCP: cabeza de droide / cerebro de servidor. Reemplaza la caja por una silueta achaflanada.
+    var g = node('t3'), s = g && size(g);
+    if (s) {
+      var w = s.w, h = s.h, cx = w / 2, big = h > 80, c = Math.min(14, h / 5);
+      g.replaceChild(mk('path', { 'class': 'box',
+        d: 'M' + c + ' 0H' + (w - c) + 'L' + w + ' ' + c + 'V' + (h - c) + 'L' + (w - c) + ' ' + h + 'H' + c + 'L0 ' + (h - c) + 'V' + c + 'Z' }), s.box);
+      var ic = g.querySelector('path.icon'); if (ic) g.removeChild(ic);
+      var vw = big ? 76 : 60, vh = big ? 14 : 9, vy = big ? 12 : 6, ey = vy + vh / 2, er = big ? 3.4 : 2.2, ex = big ? 19 : 14;
+      mk('rect', { x: cx - vw / 2, y: vy, width: vw, height: vh, rx: vh / 2, style: LINE + ';opacity:.55' }, g);          // visor
+      mk('circle', { cx: cx - ex, cy: ey, r: er, style: DOT + ';opacity:.9' }, g);                                          // ojos
+      mk('circle', { cx: cx + ex, cy: ey, r: er, style: DOT + ';opacity:.9' }, g);
+      [-8, -2, 4].forEach(function (dy) {                                                                                  // rejillas laterales
+        mk('path', { d: 'M6 ' + (h / 2 + dy) + 'H12 M' + (w - 12) + ' ' + (h / 2 + dy) + 'H' + (w - 6), style: LINE + ';opacity:.35' }, g);
+      });
+      if (big) {                                                                                                            // rejilla de la "boca" / chip
+        [-6, 0, 6].forEach(function (dy) {
+          mk('path', { d: 'M' + (cx - 26) + ' ' + (h - 22 + dy) + 'H' + (cx + 26), style: LINE + ';opacity:.3' }, g);
+        });
+      }
+      mk('path', { d: 'M18 ' + (h - 8) + 'H42 M' + (w - 42) + ' ' + (h - 8) + 'H' + (w - 18), style: LINE + ';opacity:.3' }, g);   // circuito
+      mk('circle', { cx: 18, cy: h - 8, r: 1.4, style: DOT + ';opacity:.4' }, g);
+      mk('circle', { cx: w - 18, cy: h - 8, r: 1.4, style: DOT + ';opacity:.4' }, g);
+    }
+
+    // Skills: un libro abierto, casi imperceptible, detras del texto.
+    g = node('t6'); s = g && size(g);
+    if (s) {
+      var k1 = Math.min(1.4, s.h / 56 * 0.85);
+      mk('path', { d: 'M64 13C54 8 38 8 24 12V45C38 41 54 41 64 46Z M64 13C74 8 90 8 104 12V45C90 41 74 41 64 46Z ' +
+        'M74 21C81 19 91 19 97 21 M74 27C81 25 91 25 97 27 M31 21C38 19 48 19 55 21 M31 27C38 25 48 25 55 27',
+        transform: 'translate(' + s.w / 2 + ' ' + s.h / 2 + ') scale(' + k1.toFixed(3) + ') translate(-64 -28)',
+        style: LINE + ';stroke-width:1.1;opacity:.2' }, g, g.querySelector('text'));
+    }
+
+    // Rutinas: caja de extremos redondos, con un bucle de dos flechas y un reloj, casi imperceptible, detras del texto.
+    g = node('t7'); s = g && size(g);
+    if (s) {
+      s.box.setAttribute('rx', String(s.h / 2));
+      var m = [s.w / 2, s.h / 2], r = Math.min(26, 18 * s.h / 56 * 0.9), d = '', hl = r * 0.5;
+      [[-160, -30], [20, 150]].forEach(function (a) {                  // dos arcos en el mismo sentido (horario)
+        var p0 = pt(m[0], m[1], r, a[0]), p1 = pt(m[0], m[1], r, a[1]), th = a[1] * Math.PI / 180;
+        var tx = -Math.sin(th), ty = Math.cos(th), nx = Math.cos(th), ny = Math.sin(th);
+        var b1 = [p1[0] - tx * 5 + nx * 3, p1[1] - ty * 5 + ny * 3], b2 = [p1[0] - tx * 5 - nx * 3, p1[1] - ty * 5 - ny * 3];
+        d += 'M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + 'A' + r.toFixed(1) + ' ' + r.toFixed(1) + ' 0 0 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) +
+             'M' + b1[0].toFixed(1) + ' ' + b1[1].toFixed(1) + 'L' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + 'L' + b2[0].toFixed(1) + ' ' + b2[1].toFixed(1);
+      });
+      d += 'M' + m[0] + ' ' + m[1] + 'V' + (m[1] - hl * 1.5).toFixed(1) + 'M' + m[0] + ' ' + m[1] + 'H' + (m[0] + hl).toFixed(1);   // agujas
+      mk('path', { d: d, style: LINE + ';stroke-width:1.3;opacity:.3' }, g, g.querySelector('text'));
+      mk('circle', { cx: m[0], cy: m[1], r: 1.6, style: DOT + ';opacity:.35' }, g, g.querySelector('text'));
+    }
+  }
+
+  function ready(fn, tries) {
+    var rep = document.getElementById('diagram-report');
+    if (rep && rep.dataset.done) return fn();
+    if ((tries || 0) > 100) return;
+    setTimeout(function () { ready(fn, (tries || 0) + 1); }, 100);
+  }
+
+  stars();
+  ready(function () {
+    dots(); shapes(); panel();
+    document.querySelectorAll('#legend *').forEach(function (e) {
+      if (!e.children.length && e.textContent.trim() === 'Legend') e.textContent = 'Leyenda';
+    });
+  });
+})();
+</script>
+</body>
+</html>
