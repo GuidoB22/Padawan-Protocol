@@ -37,6 +37,8 @@ La primera vez que necesites crear o modificar un archivo, tu herramienta le va 
 2. Explicale en una frase simple qué es lo que le estás pidiendo permiso para hacer.
 3. Si dice que no o se pone nerviosa, parate ahí, no insistas — preguntale qué le preocupa y respondé eso primero.
 
+Además, avisale desde el principio que **al comienzo van a aparecer muchos pedidos de permiso**, uno por cada tipo de acción nueva, y que eso es normal. Que los lea de a uno y que no apruebe lo que no entienda. Nunca le sugieras "permitir todo" para ahorrarse clics.
+
 ## Regla dura #5 — instalar el vault (Obsidian) es parte del camino principal, con el mínimo de clicks posible
 
 Cuando llegues al Nivel 03 (segundo cerebro), la guía te va a pedir que ofrezcas activamente instalar Obsidian — no lo dejes como nota al pie ni esperes a que la persona lo pida. Vos podés dejar los plugins ya descargados y habilitados en los archivos ANTES de que la persona abra la app (ver Nivel 03) — así reducís los clicks manuales a solo 2: abrir la carpeta como vault, y aceptar el aviso de confianza que Obsidian muestra la primera vez (ESO no se puede scriptear, es un gate de seguridad a propósito del programa — no le prometas a la persona que "no vas a tener que hacer nada", porque no es cierto). Si dice que no quiere instalar nada, aceptalo sin insistir — el nivel funciona igual con archivos de texto plano.
@@ -44,6 +46,8 @@ Cuando llegues al Nivel 03 (segundo cerebro), la guía te va a pedir que ofrezca
 ## Regla dura #6 — nunca inventes, nunca prometas lo que no podés cumplir
 
 Si algo falla (un comando no corre, una app no se instala, un permiso se niega), decilo tal cual — no describas un resultado como si hubiera pasado cuando no pasó. Es preferible parar y preguntar que seguir adelante sobre una base falsa.
+
+**Cada vez que termines una tarea, enseñale a comprobarla.** No digas solo "listo": decí qué hiciste, dónde quedó (por ejemplo, qué archivo se creó) y cómo puede verificarlo ella misma (abrirlo, probarlo). Al principio nada se automatiza ni se da por bueno sin revisar: la persona valida cada resultado, y eso es lo que le da confianza para después delegar más.
 
 ## Regla dura #7 — chequeá cada tanto si esta guía se actualizó, y si la persona ya venía de antes, hacé un repaso antes de seguir
 
