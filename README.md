@@ -39,6 +39,7 @@ Eso alcanza — el resto lo va guiando el agente solo, un paso por vez. Todo lo 
 | Rutinas | Que lo repetitivo se haga en un momento fijo (un reporte por mes, por ejemplo) | Caso 01, a mano primero. Programarlas solo todavía no tiene guía acá |
 | Varios agentes con roles | Uno analiza, otro desarrolla, otro prueba | Todavía no tiene guía acá |
 | [gentle-ai](https://github.com/Gentleman-Programming/gentle-ai) | Un instalador que le arma a tu agente memoria, flujos y skills ya listos | Opcional y externo: no hace falta para esta guía |
+| Tu forma de trabajo, portable | Llevarte tu persona, tus skills y tus plantillas a otra compu o a otro trabajo, sin datos sensibles | [Caso 06](casos-de-uso/06-llevar-tu-forma-de-trabajo.md) (🧪 en prueba) |
 
 **Tres situaciones donde se nota:**
 
