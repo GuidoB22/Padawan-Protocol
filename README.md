@@ -63,6 +63,23 @@ La mayoría de estas herramientas tiene alguna forma de prueba gratuita o plan g
 
 Todo lo demás (memoria, base de conocimiento, vocabulario, tu propia forma de trabajar) lo vamos construyendo con archivos de texto simples, un nivel a la vez — con el agente correcto, ya elegido.
 
+## 👀 Qué esperar al principio
+
+Tres cosas que conviene saber desde el día uno, para que no te agarren de sorpresa:
+
+1. **Vas a tener que dar muchos permisos.** Al comienzo, cada tipo de acción nueva (crear un archivo, ejecutar un comando) hace aparecer una ventana pidiendo permiso. Es normal y es una protección: leé cada una, aprobá lo que entiendas y preguntale a tu agente lo que no. No elijas "permitir todo" para ahorrarte clics. Con el tiempo van apareciendo menos.
+2. **Al principio nada se automatiza.** Las primeras veces hacés cada tarea paso a paso, con tu agente, a mano. Recién cuando salió bien varias veces tiene sentido repetirla sola. Ir despacio acá no es perder tiempo: es lo que hace que después funcione.
+3. **Siempre validá lo que termina de hacer.** Tu agente puede equivocarse o decir "listo" sin que lo esté. Abrí el archivo, probá el resultado, pedile que te muestre cómo lo comprobó. Revisar no es desconfiar: es parte del método.
+
+> [!TIP]
+> 🧭 **Decile esto a tu agente:**
+>
+> ```
+> Cada vez que termines una tarea, decime qué hiciste, dónde quedó
+> y cómo puedo comprobarlo yo. Y avisame antes de pedirme un permiso
+> nuevo, explicándome para qué es.
+> ```
+
 ## Cómo usar esto
 
 1. Abrí esta carpeta con tu agente.
