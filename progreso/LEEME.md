@@ -15,6 +15,8 @@ Un mapa visual de tu avance en Padawan Protocol. Se abre en el navegador, **no n
 
 Los puntitos viajan por las flechas **solo hacia lo habilitado o en curso**. Lo pendiente queda apagado, con la línea punteada. Arriba ves tu **rango** (Padawan, Caballero Jedi o Maestro Jedi) y abajo, tres recuadros: tu progreso, el próximo paso y un consejo.
 
+Cada herramienta tiene su propia forma: **Vault + MCP** parece una cabeza de droide con visor (el cerebro del sistema), **Skills** lleva un libro apenas insinuado y **Rutinas** un bucle de dos flechas con un reloj en el centro.
+
 Abrilo con doble clic en `mapa-de-progreso.html`, o pedile a tu agente que lo abra.
 
 ## Para el agente: cómo actualizarlo
@@ -40,7 +42,7 @@ Cada vez que **confirmás el checkpoint de un nivel** (Regla #8 de `INSTRUCCIONE
 | 03 Segundo cerebro | `n3` | `t3` (Vault + MCP) |
 | 04 Vocabulario | `n4` | (ninguna) |
 | 05 Persona propia | `n5` | `t5` (`CLAUDE.md`) |
-| 06 Avanzado | `n6` | `t6` (Skills y rutinas) |
+| 06 Avanzado | `n6` | `t6` (Skills) y `t7` (Rutinas), las dos a la vez |
 
 4. **No toques nada más del archivo.** El rango, los puntitos y los recuadros se calculan solos.
 5. **Abrilo para la persona**: en Windows `start "" "progreso\mapa-de-progreso.html"`, en Mac `open progreso/mapa-de-progreso.html`, en Linux `xdg-open progreso/mapa-de-progreso.html`. Si no podés abrirlo, decile la ruta del archivo.
