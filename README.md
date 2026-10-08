@@ -8,9 +8,12 @@ Esta guía no se lee sola. Se hace **hablando con tu agente**, en el orden que s
 
 **Pensada para cualquiera, sin importar cuánto sepas de computadoras.** Si nunca usaste algo así, tranquilo/a — está armada para que tu agente te vaya llevando de la mano, un paso genuinamente chico a la vez.
 
+> [!IMPORTANT]
+> **¿Empezás de cero?** Para usar esta guía necesitás **un agente de código instalado** y **esta carpeta abierta con él**. Si todavía no los tenés, empezá por el [**Paso 0: de cero a tu primer mensaje**](guias/paso-0-primeros-pasos.md) (🧪 en prueba), que te lleva de la mano. Es normal que esa parte sea la más incómoda: acá todavía no te guía el agente, porque todavía no lo tenés.
+
 ## 👉 Primer paso, siempre: decile esto a tu agente
 
-Abrí esta carpeta con tu agente y decile, literal:
+Una vez que tengas tu agente abierto en esta carpeta, decile, literal:
 
 > [!TIP]
 > 🧭 **Decile esto a tu agente:**
@@ -57,7 +60,7 @@ Necesitás un **agente de código** — un programa que corre en tu computadora,
 - **Si usás ChatGPT**: el **Codex CLI** de OpenAI (agente de código, distinto del chat web).
 - Otras opciones válidas: Cursor (en modo agente), Windsurf, o cualquier herramienta que se describa a sí misma como "coding agent" / "agente de código" con acceso a archivos.
 
-La mayoría de estas herramientas tiene alguna forma de prueba gratuita o plan gratuito — están cambiando seguido, así que anda directo a la página oficial de la que elijas y fijate la oferta actual en vez de confiar en un número que alguien te pasó de memoria.
+**Ojo con el costo:** según la documentación oficial de Claude Code, **requiere un plan de pago** (Pro, Max, Team o Enterprise) o una cuenta de Console; el plan gratuito de claude.ai no lo incluye. Las otras herramientas tienen planes distintos y cambian seguido, así que andá directo a la página oficial de la que elijas y fijate la oferta actual en vez de confiar en un número que alguien te pasó de memoria.
 
 **¿No estás seguro si lo que tenés abierto es esto?** El checkpoint del Nivel 01 es justo ese chequeo — 30 segundos, y si falla ahí, es que no tenés la herramienta correcta, no que algo esté mal con la guía.
 
@@ -65,7 +68,7 @@ Todo lo demás (memoria, base de conocimiento, vocabulario, tu propia forma de t
 
 ## Cómo usar esto
 
-1. Abrí esta carpeta con tu agente.
+1. Abrí esta carpeta con tu agente (si no sabés cómo, está en el [Paso 0](guias/paso-0-primeros-pasos.md)).
 2. Decile la frase de arriba ("Leé INSTRUCCIONES-AGENTE.md...").
 3. Respondé las preguntas que te haga, hacé la acción de cada nivel, confirmá el checkpoint.
 4. El agente te va llevando de nivel en nivel — vos no tenés que acordarte del orden ni abrir los archivos a mano si no querés.
