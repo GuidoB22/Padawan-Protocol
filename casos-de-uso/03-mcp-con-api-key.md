@@ -71,6 +71,15 @@ Herramientas que expone: `search_documents`, `get_documents` y `answer_query`. C
 > search_documents y qué documento encontraste.
 > ```
 
+## Si pegaste la clave por error
+
+Pasa, incluso a quien armó esta guía. No es el fin del mundo, pero la clave ya no es secreta: quedó guardada en el historial de esa conversación. Lo que corresponde:
+
+1. **Revocá esa clave** en la página de credenciales del servicio (en Google, la misma página de **Credentials** donde la creaste) y borrala.
+2. **Creá una nueva** y cargala solo en tu terminal, como en el Paso B.
+3. **No reutilices la vieja**, aunque parezca que "no pasó nada".
+4. Si tu agente la guardó en un archivo, pedile que lo busque y lo borre, y que no lo suba a git.
+
 ## Lo que aprendiste vale para tu trabajo
 
 Esto es lo mismo que vas a hacer con Jira, Confluence, Drive o tu correo: **cambia el servicio, no el patrón.** Agregás el MCP, guardás la credencial bien, y probás con una pregunta chica.
@@ -82,4 +91,4 @@ Ojo: en herramientas del trabajo, el equipo de IT o seguridad tiene que aprobarl
 - [ ] `claude mcp list` muestra `microsoft_docs_mcp` conectado y lo probé con una pregunta.
 - [ ] (Paso B) Restringí la clave y la escribí solo en mi terminal; nunca en el chat ni en un archivo.
 - [ ] Mi agente usó `search_documents` para responder una pregunta de Google.
-- [ ] Sé cómo revocar la clave.
+- [ ] Sé cómo revocar la clave y qué hacer si la pego por error.
