@@ -151,6 +151,15 @@ g.edge.s-pend .line{stroke-dasharray:3 6}
 @media (prefers-reduced-motion:reduce){
   #stars i,g.node.s-curso{animation:none}
 }
+
+/* Mini TIE fighters (reemplazan a los puntitos) */
+.tie{pointer-events:none}
+.tie polygon,.tie circle{fill:var(--tie);stroke:var(--tie);stroke-width:.5}
+.tie line{stroke:var(--tie);stroke-width:1.2}
+.tie-listo{--tie:#d9fff0;filter:drop-shadow(0 0 3px #34d399)}
+.tie-curso{--tie:#fff4cc;filter:drop-shadow(0 0 3px #fbbf24)}
+.card.glosario{grid-column:1/-1}
+.card.glosario ul li:first-child{color:var(--ink);list-style:none;margin-left:-16px;margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -197,19 +206,19 @@ g.edge.s-pend .line{stroke-dasharray:3 6}
     {"label": "Lo que ya podés usar"}
   ],
   "nodes": [
-    {"id": "n0", "label": "Nivel 00", "sub": "Contexto", "type": "cloud", "row": 0, "col": 0, "start": true},
-    {"id": "n1", "label": "Nivel 01", "sub": "Fundamentos", "type": "bus", "row": 0, "col": 1},
-    {"id": "n2", "label": "Nivel 02", "sub": "Memoria", "type": "bus", "row": 0, "col": 2},
-    {"id": "n3", "label": "Nivel 03", "sub": "Segundo cerebro", "type": "bus", "row": 0, "col": 3},
-    {"id": "n4", "label": "Nivel 04", "sub": "Vocabulario", "type": "bus", "row": 0, "col": 4},
-    {"id": "n5", "label": "Nivel 05", "sub": "Persona propia", "type": "bus", "row": 0, "col": 5},
-    {"id": "n6", "label": "Nivel 06", "sub": "Avanzado", "type": "bus", "row": 0, "col": 6.5, "end": true},
-    {"id": "t0", "label": "quien-soy.md", "sub": "tu contexto", "type": "cloud", "row": 1, "col": 0},
-    {"id": "t2", "label": "memoria.md", "sub": "recuerda tus sesiones", "type": "bus", "row": 1, "col": 2},
-    {"id": "t3", "label": "Vault + MCP", "sub": "notas conectadas", "type": "bus", "row": 1, "col": 3},
-    {"id": "t5", "label": "CLAUDE.md", "sub": "tu forma de trabajo", "type": "bus", "row": 1, "col": 5},
-    {"id": "t6", "label": "Skills", "sub": "tareas con reglas", "type": "bus", "row": 1, "col": 6},
-    {"id": "t7", "label": "Rutinas", "sub": "se repiten solas", "type": "bus", "row": 1, "col": 7}
+    {"id": "n0", "label": "Nivel 00", "sub": "Contexto", "type": "cloud", "row": 0, "col": 0, "start": true, "note": "Tres preguntas para que tu agente sepa quién sos."},
+    {"id": "n1", "label": "Nivel 01", "sub": "Fundamentos", "type": "bus", "row": 0, "col": 1, "note": "Comprobar que tu agente puede leer y escribir en tu carpeta."},
+    {"id": "n2", "label": "Nivel 02", "sub": "Memoria", "type": "bus", "row": 0, "col": 2, "note": "Que tu agente se acuerde de lo que hicieron en sesiones anteriores."},
+    {"id": "n3", "label": "Nivel 03", "sub": "Segundo cerebro", "type": "bus", "row": 0, "col": 3, "note": "Armar tu cuaderno de notas y conectarlo con tu agente."},
+    {"id": "n4", "label": "Nivel 04", "sub": "Vocabulario", "type": "bus", "row": 0, "col": 4, "note": "Ponerle nombre a las cosas para organizar tu trabajo sin perderte."},
+    {"id": "n5", "label": "Nivel 05", "sub": "Persona propia", "type": "bus", "row": 0, "col": 5, "note": "Escribir tus reglas para que tu agente te hable como querés."},
+    {"id": "n6", "label": "Nivel 06", "sub": "Avanzado", "type": "bus", "row": 0, "col": 6.5, "end": true, "note": "Opcional: cosas más avanzadas, para cuando ya tengas todo lo anterior."},
+    {"id": "t0", "label": "quien-soy.md", "sub": "tu contexto", "type": "cloud", "row": 1, "col": 0, "note": "Una hoja donde queda escrito quién sos y para qué querés usar el agente. Así no tenés que explicarlo cada vez."},
+    {"id": "t2", "label": "memoria.md", "sub": "recuerda tus sesiones", "type": "bus", "row": 1, "col": 2, "note": "El cuaderno donde tu agente anota lo que hicieron juntos, para acordarse mañana."},
+    {"id": "t3", "label": "Vault + MCP", "sub": "notas conectadas", "type": "bus", "row": 1, "col": 3, "h": 112, "note": "Tu cuaderno de notas ordenado (el vault) conectado con tu agente. El MCP es el cable que los une, así tu agente puede leerlo y escribir en él."},
+    {"id": "t5", "label": "Tu persona", "sub": "tus reglas escritas", "type": "bus", "row": 1, "col": 5, "note": "Un archivo con tus reglas: cómo querés que te hable tu agente y qué tiene que hacer o no hacer."},
+    {"id": "t6", "label": "Skills", "sub": "tareas con reglas", "type": "bus", "row": 1, "col": 6, "h": 84, "note": "Recetas guardadas: una tarea que repetís, con sus reglas, para que tu agente la haga siempre igual."},
+    {"id": "t7", "label": "Rutinas", "sub": "se repiten solas", "type": "bus", "row": 1, "col": 7, "h": 84, "note": "Tareas que se hacen solas cada cierto tiempo (por ejemplo, un resumen por mes), como un despertador que le avisa a tu agente."}
   ],
   "edges": [
     {"from": "n0", "to": "n1", "style": "main"},
@@ -301,7 +310,7 @@ function sizeNode(n) {
   n.t = typeOf(n.type);
   const need = Math.max(tw(n.label, 12.5, 700), tw(n.sub || '', 10)) + 40;
   n.w = n.w || Math.max(128, Math.ceil(need / 16) * 16);
-  n.h = n.sub ? 56 : 40;
+  n.h = n.h || (n.sub ? 56 : 40);
 }
 function drawNode(layer, n) {
   const g = el('g', {class: `node t-${n.t}`, 'data-id': n.id, transform: `translate(${n.x},${n.y})`}, layer);
@@ -1096,6 +1105,31 @@ main();
     notes.appendChild(card('Tu progreso', 'backend', prog));
     notes.appendChild(card('Próximo paso', 'cloud', [next]));
     notes.appendChild(card('Consejo del Maestro', 'bus', [TIPS[d % TIPS.length]]));
+    // Glosario siempre visible (no depende del tooltip): las mismas palabras que va a usar tu agente.
+    var gl = tools.filter(function (n) { return n.note; })
+      .map(function (n) { return n.label + ': ' + n.note; });
+    if (gl.length) {
+      gl.unshift('Tu agente usa estas mismas palabras. Si una no te cierra, señalá la caja y preguntale: nunca des por entendido lo que no entendiste.');
+      var gc = card('Qué significa cada cosa', 'frontend', gl); gc.classList.add('glosario');
+      notes.appendChild(gc);
+    }
+  }
+
+  // Mini TIE fighter: dos paneles hexagonales, una barra y la cabina. Viaja en vez de un punto.
+  function tie(st) {
+    var NS = 'http://www.w3.org/2000/svg';
+    var g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'tie tie-' + st);
+    [-1, 1].forEach(function (sg) {
+      var p = document.createElementNS(NS, 'polygon');
+      p.setAttribute('points', [[0, -5.2], [2, -2.6], [2, 2.6], [0, 5.2], [-2, 2.6], [-2, -2.6]]
+        .map(function (q) { return (q[0] + sg * 6.2).toFixed(1) + ',' + q[1]; }).join(' '));
+      g.appendChild(p);
+    });
+    var l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', '-4.2'); l.setAttribute('x2', '4.2'); l.setAttribute('y1', '0'); l.setAttribute('y2', '0');
+    g.appendChild(l);
+    var c = document.createElementNS(NS, 'circle'); c.setAttribute('r', '2.6'); g.appendChild(c);
+    return g;
   }
 
   function dots() {
@@ -1110,8 +1144,7 @@ main();
       var line = g.querySelector('path.line'); if (!line) return;
       var d = line.getAttribute('d'), dur = Math.max(1.6, line.getTotalLength() / 70);
       for (var k = 0; k < 2; k++) {
-        var c = document.createElementNS(NS, 'circle');
-        c.setAttribute('r', '3.2'); c.setAttribute('class', 'dot dot-' + st);
+        var c = tie(st);
         var m = document.createElementNS(NS, 'animateMotion');
         m.setAttribute('path', d); m.setAttribute('dur', dur + 's');
         m.setAttribute('begin', (k * dur / 2 + order * 0.35) + 's'); m.setAttribute('repeatCount', 'indefinite');
@@ -1122,9 +1155,11 @@ main();
   }
 
   // Formas propias de algunas herramientas. Se dibujan sobre la caja del skill y usan sus colores de estado.
+  // Todo se calcula con el ancho y el alto reales de la caja (spec: "h"), asi que sirve con cualquier tamano.
   function shapes() {
     var NS = 'http://www.w3.org/2000/svg';
     var LINE = 'fill:none;stroke:var(--s);stroke-linecap:round;stroke-linejoin:round;pointer-events:none';
+    var DOT = 'fill:var(--s);pointer-events:none';
     function mk(tag, attrs, parent, before) {
       var e = document.createElementNS(NS, tag);
       for (var k in attrs) e.setAttribute(k, attrs[k]);
@@ -1133,52 +1168,59 @@ main();
     }
     function node(id) { return document.querySelector('#d g.node[data-id="' + id + '"]'); }
     function pt(cx, cy, r, deg) { var a = deg * Math.PI / 180; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
+    function size(g) {
+      var b = g.querySelector('rect.box'); return b ? { box: b, w: +b.getAttribute('width'), h: +b.getAttribute('height') } : null;
+    }
 
     // Vault + MCP: cabeza de droide / cerebro de servidor. Reemplaza la caja por una silueta achaflanada.
-    var g = node('t3');
-    if (g && g.querySelector('rect.box')) {
-      var box = g.querySelector('rect.box'), w = +box.getAttribute('width'), h = +box.getAttribute('height');
-      var head = mk('path', { 'class': 'box',
-        d: 'M12 0H' + (w - 12) + 'L' + w + ' 12V' + (h - 12) + 'L' + (w - 12) + ' ' + h + 'H12L0 ' + (h - 12) + 'V12Z' });
-      g.replaceChild(head, box);
+    var g = node('t3'), s = g && size(g);
+    if (s) {
+      var w = s.w, h = s.h, cx = w / 2, big = h > 80, c = Math.min(14, h / 5);
+      g.replaceChild(mk('path', { 'class': 'box',
+        d: 'M' + c + ' 0H' + (w - c) + 'L' + w + ' ' + c + 'V' + (h - c) + 'L' + (w - c) + ' ' + h + 'H' + c + 'L0 ' + (h - c) + 'V' + c + 'Z' }), s.box);
       var ic = g.querySelector('path.icon'); if (ic) g.removeChild(ic);
-      var cx = w / 2;
-      mk('rect', { x: cx - 30, y: 6, width: 60, height: 9, rx: 4.5, style: LINE + ';opacity:.55' }, g);       // visor
-      mk('circle', { cx: cx - 14, cy: 10.5, r: 2.2, style: 'fill:var(--s);opacity:.9;pointer-events:none' }, g); // ojos
-      mk('circle', { cx: cx + 14, cy: 10.5, r: 2.2, style: 'fill:var(--s);opacity:.9;pointer-events:none' }, g);
-      [22, 27, 32].forEach(function (y) {                                                                         // rejillas laterales
-        mk('path', { d: 'M6 ' + y + 'H12 M' + (w - 12) + ' ' + y + 'H' + (w - 6), style: LINE + ';opacity:.35' }, g);
+      var vw = big ? 76 : 60, vh = big ? 14 : 9, vy = big ? 12 : 6, ey = vy + vh / 2, er = big ? 3.4 : 2.2, ex = big ? 19 : 14;
+      mk('rect', { x: cx - vw / 2, y: vy, width: vw, height: vh, rx: vh / 2, style: LINE + ';opacity:.55' }, g);          // visor
+      mk('circle', { cx: cx - ex, cy: ey, r: er, style: DOT + ';opacity:.9' }, g);                                          // ojos
+      mk('circle', { cx: cx + ex, cy: ey, r: er, style: DOT + ';opacity:.9' }, g);
+      [-8, -2, 4].forEach(function (dy) {                                                                                  // rejillas laterales
+        mk('path', { d: 'M6 ' + (h / 2 + dy) + 'H12 M' + (w - 12) + ' ' + (h / 2 + dy) + 'H' + (w - 6), style: LINE + ';opacity:.35' }, g);
       });
-      mk('path', { d: 'M18 ' + (h - 7) + 'H42 M' + (w - 42) + ' ' + (h - 7) + 'H' + (w - 18), style: LINE + ';opacity:.3' }, g); // circuito
-      mk('circle', { cx: 18, cy: h - 7, r: 1.4, style: 'fill:var(--s);opacity:.4;pointer-events:none' }, g);
-      mk('circle', { cx: w - 18, cy: h - 7, r: 1.4, style: 'fill:var(--s);opacity:.4;pointer-events:none' }, g);
+      if (big) {                                                                                                            // rejilla de la "boca" / chip
+        [-6, 0, 6].forEach(function (dy) {
+          mk('path', { d: 'M' + (cx - 26) + ' ' + (h - 22 + dy) + 'H' + (cx + 26), style: LINE + ';opacity:.3' }, g);
+        });
+      }
+      mk('path', { d: 'M18 ' + (h - 8) + 'H42 M' + (w - 42) + ' ' + (h - 8) + 'H' + (w - 18), style: LINE + ';opacity:.3' }, g);   // circuito
+      mk('circle', { cx: 18, cy: h - 8, r: 1.4, style: DOT + ';opacity:.4' }, g);
+      mk('circle', { cx: w - 18, cy: h - 8, r: 1.4, style: DOT + ';opacity:.4' }, g);
     }
 
-    // Skills: un libro abierto, casi imperceptible, detrás del texto.
-    g = node('t6');
-    if (g) {
-      var first = g.querySelector('text');
+    // Skills: un libro abierto, casi imperceptible, detras del texto.
+    g = node('t6'); s = g && size(g);
+    if (s) {
+      var k1 = Math.min(1.4, s.h / 56 * 0.85);
       mk('path', { d: 'M64 13C54 8 38 8 24 12V45C38 41 54 41 64 46Z M64 13C74 8 90 8 104 12V45C90 41 74 41 64 46Z ' +
         'M74 21C81 19 91 19 97 21 M74 27C81 25 91 25 97 27 M31 21C38 19 48 19 55 21 M31 27C38 25 48 25 55 27',
-        style: LINE + ';stroke-width:1.1;opacity:.2' }, g, first);
+        transform: 'translate(' + s.w / 2 + ' ' + s.h / 2 + ') scale(' + k1.toFixed(3) + ') translate(-64 -28)',
+        style: LINE + ';stroke-width:1.1;opacity:.2' }, g, g.querySelector('text'));
     }
 
-    // Rutinas: caja de extremos redondos, con un bucle de dos flechas y un reloj, casi imperceptible, detrás del texto.
-    g = node('t7');
-    if (g && g.querySelector('rect.box')) {
-      var rb = g.querySelector('rect.box'), rw = +rb.getAttribute('width'), rh = +rb.getAttribute('height');
-      rb.setAttribute('rx', String(rh / 2));
-      var c = [rw / 2, rh / 2], r = 18, firstText = g.querySelector('text'), d = '';
+    // Rutinas: caja de extremos redondos, con un bucle de dos flechas y un reloj, casi imperceptible, detras del texto.
+    g = node('t7'); s = g && size(g);
+    if (s) {
+      s.box.setAttribute('rx', String(s.h / 2));
+      var m = [s.w / 2, s.h / 2], r = Math.min(26, 18 * s.h / 56 * 0.9), d = '', hl = r * 0.5;
       [[-160, -30], [20, 150]].forEach(function (a) {                  // dos arcos en el mismo sentido (horario)
-        var p0 = pt(c[0], c[1], r, a[0]), p1 = pt(c[0], c[1], r, a[1]), th = a[1] * Math.PI / 180;
+        var p0 = pt(m[0], m[1], r, a[0]), p1 = pt(m[0], m[1], r, a[1]), th = a[1] * Math.PI / 180;
         var tx = -Math.sin(th), ty = Math.cos(th), nx = Math.cos(th), ny = Math.sin(th);
         var b1 = [p1[0] - tx * 5 + nx * 3, p1[1] - ty * 5 + ny * 3], b2 = [p1[0] - tx * 5 - nx * 3, p1[1] - ty * 5 - ny * 3];
-        d += 'M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + 'A' + r + ' ' + r + ' 0 0 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) +
+        d += 'M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + 'A' + r.toFixed(1) + ' ' + r.toFixed(1) + ' 0 0 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) +
              'M' + b1[0].toFixed(1) + ' ' + b1[1].toFixed(1) + 'L' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + 'L' + b2[0].toFixed(1) + ' ' + b2[1].toFixed(1);
       });
-      d += 'M' + c[0] + ' ' + c[1] + 'V' + (c[1] - 9) + 'M' + c[0] + ' ' + c[1] + 'H' + (c[0] + 6);  // agujas del reloj
-      mk('path', { d: d, style: LINE + ';stroke-width:1.3;opacity:.3' }, g, firstText);
-      mk('circle', { cx: c[0], cy: c[1], r: 1.6, style: 'fill:var(--s);opacity:.35;pointer-events:none' }, g, firstText);
+      d += 'M' + m[0] + ' ' + m[1] + 'V' + (m[1] - hl * 1.5).toFixed(1) + 'M' + m[0] + ' ' + m[1] + 'H' + (m[0] + hl).toFixed(1);   // agujas
+      mk('path', { d: d, style: LINE + ';stroke-width:1.3;opacity:.3' }, g, g.querySelector('text'));
+      mk('circle', { cx: m[0], cy: m[1], r: 1.6, style: DOT + ';opacity:.35' }, g, g.querySelector('text'));
     }
   }
 

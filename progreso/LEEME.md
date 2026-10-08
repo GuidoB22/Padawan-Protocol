@@ -13,9 +13,13 @@ Un mapa visual de tu avance en Padawan Protocol. Se abre en el navegador, **no n
 | 🟡 Amarillo | **En curso**: lo estás armando ahora |
 | 🟠 Naranja | **Pendiente**: todavía no llegaste |
 
-Los puntitos viajan por las flechas **solo hacia lo habilitado o en curso**. Lo pendiente queda apagado, con la línea punteada. Arriba ves tu **rango** (Padawan, Caballero Jedi o Maestro Jedi) y abajo, tres recuadros: tu progreso, el próximo paso y un consejo.
+Las **mini naves TIE fighter** viajan por las flechas **solo hacia lo habilitado o en curso**. Lo pendiente queda apagado, con la línea punteada. Arriba ves tu **rango** (Padawan, Caballero Jedi o Maestro Jedi) y abajo, recuadros con tu progreso, el próximo paso, un consejo y **"Qué significa cada cosa"**: cada palabra nueva explicada con palabras de todos los días.
 
-Cada herramienta tiene su propia forma: **Vault + MCP** parece una cabeza de droide con visor (el cerebro del sistema), **Skills** lleva un libro apenas insinuado y **Rutinas** un bucle de dos flechas con un reloj en el centro.
+Cada herramienta tiene su propia forma y su propio tamaño: **Vault + MCP** parece una cabeza de droide con visor (el cerebro del sistema), **Skills** lleva un libro apenas insinuado y **Rutinas** un bucle de dos flechas con un reloj en el centro.
+
+## Un idioma común entre vos y tu agente
+
+El mapa no es solo para ver tu avance: es un **dibujo compartido**. Sirve para que vos y tu agente hablen de lo mismo, con las mismas palabras, sin dar nada por entendido. Si una palabra no te cierra, señalá la caja y preguntale. Y tu agente tiene que comprobar que entendiste (pedirte que se lo cuentes con tus palabras), no conformarse con un "ok".
 
 Abrilo con doble clic en `mapa-de-progreso.html`, o pedile a tu agente que lo abra.
 
@@ -41,7 +45,7 @@ Cada vez que **confirmás el checkpoint de un nivel** (Regla #8 de `INSTRUCCIONE
 | 02 Memoria | `n2` | `t2` (`memoria.md`) |
 | 03 Segundo cerebro | `n3` | `t3` (Vault + MCP) |
 | 04 Vocabulario | `n4` | (ninguna) |
-| 05 Persona propia | `n5` | `t5` (`CLAUDE.md`) |
+| 05 Persona propia | `n5` | `t5` (Tu persona: tu archivo de reglas) |
 | 06 Avanzado | `n6` | `t6` (Skills) y `t7` (Rutinas), las dos a la vez |
 
 4. **No toques nada más del archivo.** El rango, los puntitos y los recuadros se calculan solos.
