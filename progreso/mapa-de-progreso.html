@@ -1147,7 +1147,7 @@ main();
         var c = tie(st);
         var m = document.createElementNS(NS, 'animateMotion');
         m.setAttribute('path', d); m.setAttribute('dur', dur + 's');
-        m.setAttribute('begin', (k * dur / 2 + order * 0.35) + 's'); m.setAttribute('repeatCount', 'indefinite');
+        m.setAttribute('begin', '-' + ((k * dur / 2 + order * 0.35) % dur).toFixed(2) + 's');   // arranca ya en movimiento: sin naves paradas en el origen m.setAttribute('repeatCount', 'indefinite');
         c.appendChild(m); g.appendChild(c);
       }
       order++;
