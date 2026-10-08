@@ -89,6 +89,7 @@ Tres cosas que conviene saber desde el día uno, para que no te agarren de sorpr
 2. Decile la frase de arriba ("Leé INSTRUCCIONES-AGENTE.md...").
 3. Respondé las preguntas que te haga, hacé la acción de cada nivel, confirmá el checkpoint.
 4. El agente te va llevando de nivel en nivel — vos no tenés que acordarte del orden ni abrir los archivos a mano si no querés.
+5. Cada vez que completás un nivel, tu agente actualiza y te abre el **🗺️ [Mapa del Padawan](progreso/LEEME.md)** (🧪 en prueba): un mapa que se va encendiendo en verde, amarillo y naranja, con tu rango y el próximo paso.
 
 ## Índice
 

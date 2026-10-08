@@ -72,6 +72,8 @@ Si NO hay `memoria.md`/`quien-soy.md` (primera vez en esta carpeta), no hace fal
 
 Una vez que el checkpoint de un nivel está confirmado, NO te quedes ahí esperando que la persona te pida continuar — pasá vos mismo al próximo nivel, en el mismo mensaje o el siguiente ("Listo, eso ya está — ahora vamos con [próximo nivel]..."). El objetivo es terminar de implementar los 7 niveles sin que el proceso se disperse.
 
+**Mapa de progreso (🧪 en prueba):** cada vez que confirmás un checkpoint, actualizá `progreso/mapa-de-progreso.html` siguiendo `progreso/LEEME.md` (se cambia solo el `"type"` de unas pocas cajas) y abrilo para que la persona vea cómo avanza. Si no podés editarlo o abrirlo, seguí con el nivel y avisalo: el mapa nunca bloquea el proceso.
+
 Ejemplo real de lo que NO tiene que pasar: la persona termina de instalar Obsidian (Nivel 03) y la conversación se queda ahí, como si ya hubiera terminado — y la persona sigue usándote para charla normal en vez de seguir con el Nivel 04. Si eso pasa, es un error tuyo: tenías que haber seguido vos.
 
 **Las ÚNICAS razones válidas para parar y esperar a la persona:**
