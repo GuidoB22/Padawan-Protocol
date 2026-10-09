@@ -160,6 +160,12 @@ g.edge.s-pend .line{stroke-dasharray:3 6}
 .tie-curso{--tie:#fff4cc;filter:drop-shadow(0 0 3px #fbbf24)}
 .card.glosario{grid-column:1/-1}
 .card.glosario ul li:first-child{color:var(--ink);list-style:none;margin-left:-16px;margin-bottom:6px}
+
+/* Mapa vertical: se acota el ancho para que la tipografia se vea grande sin estirar el dibujo */
+.panel{max-width:760px;margin-left:auto;margin-right:auto}
+.cards{max-width:760px;margin-left:auto;margin-right:auto}
+svg#d{display:block;width:100%;height:auto}
+header{max-width:760px;margin-left:auto;margin-right:auto}
 </style>
 </head>
 <body>
@@ -197,28 +203,24 @@ g.edge.s-pend .line{stroke-dasharray:3 6}
 -->
 <script type="application/json" id="spec">
 {
-  "type": "workflow",
+  "type": "dataflow",
   "title": "Mapa del Padawan",
   "subtitle": "Que la Fuerza te acompañe",
   "theme": "dark",
-  "rows": [
-    {"label": "Tu camino"},
-    {"label": "Lo que ya podés usar"}
-  ],
   "nodes": [
     {"id": "n0", "label": "Nivel 00", "sub": "Contexto", "type": "cloud", "row": 0, "col": 0, "start": true, "note": "Tres preguntas para que tu agente sepa quién sos."},
-    {"id": "n1", "label": "Nivel 01", "sub": "Fundamentos", "type": "bus", "row": 0, "col": 1, "note": "Comprobar que tu agente puede leer y escribir en tu carpeta."},
-    {"id": "n2", "label": "Nivel 02", "sub": "Memoria", "type": "bus", "row": 0, "col": 2, "note": "Que tu agente se acuerde de lo que hicieron en sesiones anteriores."},
-    {"id": "n3", "label": "Nivel 03", "sub": "Segundo cerebro", "type": "bus", "row": 0, "col": 3, "note": "Armar tu cuaderno de notas y conectarlo con tu agente."},
-    {"id": "n4", "label": "Nivel 04", "sub": "Vocabulario", "type": "bus", "row": 0, "col": 4, "note": "Ponerle nombre a las cosas para organizar tu trabajo sin perderte."},
-    {"id": "n5", "label": "Nivel 05", "sub": "Persona propia", "type": "bus", "row": 0, "col": 5, "note": "Escribir tus reglas para que tu agente te hable como querés."},
-    {"id": "n6", "label": "Nivel 06", "sub": "Avanzado", "type": "bus", "row": 0, "col": 6.5, "end": true, "note": "Opcional: cosas más avanzadas, para cuando ya tengas todo lo anterior."},
-    {"id": "t0", "label": "quien-soy.md", "sub": "tu contexto", "type": "cloud", "row": 1, "col": 0, "note": "Una hoja donde queda escrito quién sos y para qué querés usar el agente. Así no tenés que explicarlo cada vez."},
-    {"id": "t2", "label": "memoria.md", "sub": "recuerda tus sesiones", "type": "bus", "row": 1, "col": 2, "note": "El cuaderno donde tu agente anota lo que hicieron juntos, para acordarse mañana."},
-    {"id": "t3", "label": "Vault + MCP", "sub": "notas conectadas", "type": "bus", "row": 1, "col": 3, "h": 112, "note": "Tu cuaderno de notas ordenado (el vault) conectado con tu agente. El MCP es el cable que los une, así tu agente puede leerlo y escribir en él."},
-    {"id": "t5", "label": "Tu persona", "sub": "tus reglas escritas", "type": "bus", "row": 1, "col": 5, "note": "Un archivo con tus reglas: cómo querés que te hable tu agente y qué tiene que hacer o no hacer."},
-    {"id": "t6", "label": "Skills", "sub": "tareas con reglas", "type": "bus", "row": 1, "col": 6, "h": 84, "note": "Recetas guardadas: una tarea que repetís, con sus reglas, para que tu agente la haga siempre igual."},
-    {"id": "t7", "label": "Rutinas", "sub": "se repiten solas", "type": "bus", "row": 1, "col": 7, "h": 84, "note": "Tareas que se hacen solas cada cierto tiempo (por ejemplo, un resumen por mes), como un despertador que le avisa a tu agente."}
+    {"id": "n1", "label": "Nivel 01", "sub": "Fundamentos", "type": "bus", "row": 1, "col": 0, "note": "Comprobar que tu agente puede leer y escribir en tu carpeta."},
+    {"id": "n2", "label": "Nivel 02", "sub": "Memoria", "type": "bus", "row": 2, "col": 0, "note": "Que tu agente se acuerde de lo que hicieron en sesiones anteriores."},
+    {"id": "n3", "label": "Nivel 03", "sub": "Segundo cerebro", "type": "bus", "row": 3, "col": 0, "note": "Armar tu cuaderno de notas y conectarlo con tu agente."},
+    {"id": "n4", "label": "Nivel 04", "sub": "Vocabulario", "type": "bus", "row": 4, "col": 0, "note": "Ponerle nombre a las cosas para organizar tu trabajo sin perderte."},
+    {"id": "n5", "label": "Nivel 05", "sub": "Persona propia", "type": "bus", "row": 5, "col": 0, "note": "Escribir tus reglas para que tu agente te hable como querés."},
+    {"id": "n6", "label": "Nivel 06", "sub": "Avanzado", "type": "bus", "row": 6.5, "col": 0, "end": true, "note": "Opcional: cosas más avanzadas, para cuando ya tengas todo lo anterior."},
+    {"id": "t0", "label": "quien-soy.md", "sub": "tu contexto", "type": "cloud", "row": 0, "col": 1, "note": "Una hoja donde queda escrito quién sos y para qué querés usar el agente. Así no tenés que explicarlo cada vez."},
+    {"id": "t2", "label": "memoria.md", "sub": "recuerda tus sesiones", "type": "bus", "row": 2, "col": 1, "note": "El cuaderno donde tu agente anota lo que hicieron juntos, para acordarse mañana."},
+    {"id": "t3", "label": "Vault + MCP", "sub": "notas conectadas", "type": "bus", "row": 3, "col": 1, "h": 112, "note": "Tu cuaderno de notas ordenado (el vault) conectado con tu agente. El MCP es el cable que los une, así tu agente puede leerlo y escribir en él."},
+    {"id": "t5", "label": "Tu persona", "sub": "tus reglas escritas", "type": "bus", "row": 5, "col": 1, "note": "Un archivo con tus reglas: cómo querés que te hable tu agente y qué tiene que hacer o no hacer."},
+    {"id": "t6", "label": "Skills", "sub": "tareas con reglas", "type": "bus", "row": 6, "col": 1, "h": 84, "note": "Recetas guardadas: una tarea que repetís, con sus reglas, para que tu agente la haga siempre igual."},
+    {"id": "t7", "label": "Rutinas", "sub": "se repiten solas", "type": "bus", "row": 7, "col": 1, "h": 84, "note": "Tareas que se hacen solas cada cierto tiempo (por ejemplo, un resumen por mes), como un despertador que le avisa a tu agente."}
   ],
   "edges": [
     {"from": "n0", "to": "n1", "style": "main"},
@@ -236,7 +238,9 @@ g.edge.s-pend .line{stroke-dasharray:3 6}
   ],
   "legend": {"backend": "Habilitado", "cloud": "En curso", "bus": "Pendiente"},
   "edge_legend": {"main": "Tu camino", "default": "Lo que habilita"},
-  "notes": [{"title": "Tu progreso", "type": "backend", "items": ["Se completa solo al abrir el mapa"]}]
+  "notes": [{"title": "Tu progreso", "type": "backend", "items": ["Se completa solo al abrir el mapa"]}],
+  "cols": [{"label": "Tu camino"}, {"label": "Lo que ya podés usar"}],
+  "spacing": 0.45
 }
 </script>
 

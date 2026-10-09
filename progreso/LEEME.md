@@ -23,6 +23,19 @@ El mapa no es solo para ver tu avance: es un **dibujo compartido**. Sirve para q
 
 Abrilo con doble clic en `mapa-de-progreso.html`, o pedile a tu agente que lo abra.
 
+## Opcional: un panel al costado del chat
+
+> [!WARNING]
+> **Esta función está en prueba y depende de tu herramienta.** Hoy la probamos solo en la app de escritorio de Claude (pestaña Code). Si usás otra, tu agente sigue explicando con un esquema en el chat o en un archivo que te abre.
+
+En vez de escribir todo en el chat, algunos agentes pueden abrir un **tablero (dashboard) pegado al costado de la conversación**, con tarjetas una debajo de la otra:
+
+- **Tus agentes:** qué está haciendo cada uno ahora (en marcha, esperando, listo o en pausa) y cuándo corre la próxima vez. Sirve para saber de un vistazo qué pasa sin tener que preguntar.
+- **Tu second brain:** un dibujo de todas tus notas y cómo se enlazan, con contadores (proyectos, rutinas, notas). Sirve para ver el panorama completo de tu vault.
+- **Tu consumo de hoy:** cuánto usaste de tu plan, para saber si te queda margen.
+
+Para probarlo, pedile a tu agente: *"Armame un dashboard en un panel al costado del chat con qué están haciendo mis agentes, un overview de mi second brain y mi consumo de hoy."* Si no sabe o no puede, no pasa nada: pedile un resumen en el chat. Los datos son una foto del momento en que se arma, no se actualizan solos.
+
 ## Para el agente: cómo actualizarlo
 
 Cada vez que **confirmás el checkpoint de un nivel** (Regla #8 de `INSTRUCCIONES-AGENTE.md`):
