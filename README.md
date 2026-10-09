@@ -107,17 +107,19 @@ Tres cosas que conviene saber desde el día uno, para que no te agarren de sorpr
 
 ## 🗺️ Así se va a ver tu avance
 
-<p align="center">
-  <img src="assets/mapa-ejemplo.svg" alt="Mapa del Padawan, ejemplo a mitad de camino: tres niveles en verde, uno en amarillo y el resto en naranja, con mini naves viajando por las flechas hacia lo que ya está habilitado" width="100%">
-</p>
+Esto es un **ejemplo animado** de cómo se va a ir armando tu mapa mientras hacés la guía:
 
-Esto es un **ejemplo**, a mitad de camino. Tu mapa se va armando solo mientras hacés la guía:
-
-- 🟢 **Verde:** lo que ya tenés.
-- 🟡 **Amarillo:** lo que estás armando ahora.
 - 🟠 **Naranja:** lo que viene.
+- 🟡 **Amarillo:** lo que estás armando ahora (la barra se va llenando).
+- 🟢 **Verde:** lo que ya tenés.
 
 Las naves viajan hacia lo que ya está habilitado. Cada vez que terminás un nivel, tu agente lo actualiza y te lo abre. Para verlo grande, abrí `progreso/mapa-de-progreso.html` en tu navegador, y mirá [progreso/LEEME.md](progreso/LEEME.md) para ver qué significa cada cosa.
+
+En el ejemplo, **Tu persona** queda en amarillo hasta el final: a veces un paso lleva más tiempo que el nivel que lo trae, y está bien. Cuando todo termina, la animación espera unos segundos y vuelve a empezar.
+
+<p align="center">
+  <img src="assets/mapa-animado.svg" alt="Animación del Mapa del Padawan: cada nivel y cada herramienta pasa de naranja a amarillo mientras carga, y luego a verde, con mini naves viajando por las flechas. Tu persona queda en amarillo. Al terminar hay una pausa y vuelve a empezar." width="700">
+</p>
 
 ## 🧰 ¿Querés aplicarlo ya a tu trabajo?
 
