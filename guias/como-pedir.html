@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo pedir — Padawan Protocol</title>
+<style>html,body{margin:0}*{box-sizing:border-box}[hidden]{display:none!important}</style>
+</head>
+<body>
+<style>
+/* Layout: one column. 1) interactive ficha (3 fields + live status), 2) path of a request as a diagram with 4 scenario buttons, 3) sample dialogue for the selected scenario. */
+:root{
+  --bg:#ece9e0;--card:#f8f6f0;--row:#efebe0;--line:#ddd7c7;--fg:#1f1d1a;--muted:#6f6a5f;
+  --accent:#c8553d;--accent-soft:#f3d9d0;--ok:#4d7a5a;--ok-soft:#dbe8de;--warn:#b7791f;
+  --font-display:"Newsreader",Georgia,"Times New Roman",serif;--font-ui:"DM Sans",system-ui,"Segoe UI",Arial,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#171513;--card:#23201d;--row:#2c2824;--line:#3a352f;--fg:#f1ede4;--muted:#a39d90;
+  --accent:#e47b5f;--accent-soft:#4a2c24;--ok:#7fb48c;--ok-soft:#27382c;--warn:#e0b04a;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#171513;--card:#23201d;--row:#2c2824;--line:#3a352f;--fg:#f1ede4;--muted:#a39d90;
+  --accent:#e47b5f;--accent-soft:#4a2c24;--ok:#7fb48c;--ok-soft:#27382c;--warn:#e0b04a;color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font-family:var(--font-ui);font-size:15px;line-height:1.45;padding-inline:16px;padding-block:20px}
+.wrap{max-width:640px;margin-inline:auto;display:flex;flex-direction:column;gap:16px}
+h1{margin:0;font:500 40px/1 var(--font-display);letter-spacing:-.01em}
+.lead{color:var(--muted);margin:6px 0 0;max-width:52ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card h2{margin:0;font:600 17px/1.15 var(--font-ui)}
+.cap{color:var(--muted);font-size:13px;margin-top:3px}
+
+/* ficha */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 12px var(--font-ui);color:var(--fg);background:var(--row);border:1px solid var(--line);border-radius:99px;padding:5px 12px;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.chip:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.field{display:grid;grid-template-columns:92px minmax(0,1fr);gap:4px 12px;align-items:start}
+.field label{font:500 12px var(--font-mono);color:var(--muted);padding-top:9px}
+.field input,.field textarea{font:400 14px var(--font-ui);color:var(--fg);background:var(--row);border:1px solid var(--line);border-radius:10px;padding:8px 10px;width:100%;box-sizing:border-box;resize:vertical}
+.field textarea{min-height:58px}
+.field .ask{grid-column:2;font-size:12px;color:var(--warn);min-height:0}
+.field .ask:empty{display:none}
+.field.ok label{color:var(--ok)}
+.status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px}
+.pill{font:600 11px var(--font-ui);letter-spacing:.04em;border:1px solid currentColor;border-radius:99px;padding:3px 10px}
+.pill.ok{color:var(--ok);background:var(--ok-soft)}
+.pill.wait{color:var(--warn)}
+@media (max-width:420px){.field{grid-template-columns:minmax(0,1fr)}.field label{padding-top:0}.field .ask{grid-column:1}}
+
+/* diagrama */
+.flow{width:100%;height:auto;display:block}
+.nd rect{fill:var(--row);stroke:var(--line);stroke-width:1.5;transition:fill .25s,stroke .25s}
+.nd text{fill:var(--fg);font:500 12.5px var(--font-ui);text-anchor:middle;pointer-events:none}
+.nd text.s{fill:var(--muted);font-weight:400;font-size:11px}
+.nd.hit rect{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.2}
+.nd.end rect{fill:var(--ok-soft);stroke:var(--ok)}
+.nd.side rect{stroke-dasharray:5 4}
+.ed{stroke:var(--line);stroke-width:2;fill:none;transition:stroke .25s}
+.ed.hit{stroke:var(--accent)}
+.hd{fill:var(--line)}
+.hd.hit{fill:var(--accent)}
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.btn{font:500 13px var(--font-ui);color:var(--fg);background:var(--row);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
+.btn small{color:var(--muted);font-weight:400;font-size:11.5px}
+.btn:hover{border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+
+/* dialogo */
+.dlg{display:flex;flex-direction:column;gap:8px}
+.msg{max-width:92%;padding:9px 12px;border-radius:14px;font-size:14px;white-space:pre-line}
+.msg b{display:block;font:600 11px var(--font-ui);letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px;opacity:.75}
+.me{align-self:flex-end;background:var(--accent-soft);border-bottom-right-radius:4px}
+.ag{align-self:flex-start;background:var(--row);border:1px solid var(--line);border-bottom-left-radius:4px}
+.rule{color:var(--muted);font-size:13px}
+.final{border-left:3px solid var(--ok);padding-left:12px;color:var(--fg);font-size:14px}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Cómo pedir</h1>
+    <p class="lead">Un pedido, una sola cosa, en tres líneas. Si no sabés qué querés, tu agente te guía.</p>
+  </header>
+
+  <section class="card" aria-labelledby="h-f">
+    <div><h2 id="h-f">1. Tu ficha</h2><div class="cap">Elegí un ejemplo o escribí el tuyo. Mirá qué te preguntaría tu agente si falta algo.</div></div>
+    <div class="tabs" id="ex" role="group" aria-label="Tipo de pedido">
+      <button class="btn" type="button" data-i="0" aria-pressed="false">Hacer un análisis<small>entender algo con datos</small></button>
+      <button class="btn" type="button" data-i="1" aria-pressed="false">Hacer una corrección<small>revisar y mejorar un texto</small></button>
+      <button class="btn" type="button" data-i="2" aria-pressed="false">Hacer un script<small>automatizar una tarea</small></button>
+      <button class="btn" type="button" data-i="3" aria-pressed="false">Otro<small>escribilo con tus palabras</small></button>
+    </div>
+    <div class="field" id="free" hidden><label for="fr">Tu texto</label><textarea id="fr" placeholder="Contá con tus palabras qué querés. No hace falta ordenarlo, de eso se ocupa la ficha."></textarea></div>
+    <div class="chips"><button class="chip" type="button" id="clr" aria-pressed="false">Vaciar la ficha</button></div>
+    <div class="field" id="f-rol"><label for="rol">Rol</label><input id="rol" type="text" placeholder="Qué papel querés que cumpla" autocomplete="off"><div class="ask" id="a-rol"></div></div>
+    <div class="field" id="f-obj"><label for="obj">Objetivo</label><input id="obj" type="text" placeholder="Qué querés lograr, en una línea" autocomplete="off"><div class="ask" id="a-obj"></div></div>
+    <div class="field" id="f-det"><label for="det">Detalle</label><textarea id="det" placeholder="Lo mínimo que tiene que hacer, 1 a 3 líneas"></textarea><div class="ask" id="a-det"></div></div>
+    <div class="status" aria-live="polite"><span class="pill wait" id="pill">Falta completar</span><span id="stx" class="cap" style="margin:0"></span></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-d">
+    <div><h2 id="h-d">2. El camino de un pedido</h2><div class="cap">Tocá una situación y mirá qué hace tu agente.</div></div>
+    <svg class="flow" viewBox="0 0 560 384" role="img" aria-label="Camino de un pedido: ficha completa, una sola cosa, texto corto, hacer, entregar y validar, pedir feedback y guardar lo aprendido. Ramas: falta un campo, varias cosas, texto largo, no sé qué quiero.">
+      <defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="hd"/></marker><marker id="ahh" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="hd hit" style="fill:var(--accent)"/></marker></defs>
+      <!-- camino principal -->
+      <path class="ed" d="M130 46 V70" marker-end="url(#ah)"/>
+      <path class="ed" d="M130 112 V136" marker-end="url(#ah)"/>
+      <path class="ed" d="M130 178 V202" marker-end="url(#ah)"/>
+      <path class="ed" d="M130 244 V268" marker-end="url(#ah)"/>
+      <g class="nd" data-n="start"><rect x="30" y="4" width="200" height="42" rx="21"/><text x="130" y="30">Escribís tu pedido</text></g>
+      <g class="nd" data-n="ficha"><rect x="30" y="70" width="200" height="42" rx="12"/><text x="130" y="88">¿La ficha está completa?</text><text class="s" x="130" y="104">Rol, Objetivo, Detalle</text></g>
+      <g class="nd" data-n="una"><rect x="30" y="136" width="200" height="42" rx="12"/><text x="130" y="154">¿Es una sola cosa?</text><text class="s" x="130" y="170">un objetivo por pedido</text></g>
+      <g class="nd" data-n="largo"><rect x="30" y="202" width="200" height="42" rx="12"/><text x="130" y="220">¿Tiene mucho texto?</text><text class="s" x="130" y="236">más de unas pocas líneas</text></g>
+      <g class="nd" data-n="hacer"><rect x="30" y="268" width="200" height="42" rx="12"/><text x="130" y="286">El agente lo hace</text><text class="s" x="130" y="302">uno por vez</text></g>
+      <path class="ed" d="M230 289 H290" marker-end="url(#ah)"/>
+      <g class="nd end" data-n="fin"><rect x="290" y="268" width="250" height="42" rx="12"/><text x="415" y="286">Entrega y validación</text><text class="s" x="415" y="302">"¿Esto es lo que pediste?"</text></g>
+      <!-- ramas -->
+      <path class="ed" id="e-ficha" d="M230 91 H300" marker-end="url(#ah)"/>
+      <path class="ed" id="e-una" d="M230 157 H300" marker-end="url(#ah)"/>
+      <path class="ed" id="e-largo" d="M230 223 H300" marker-end="url(#ah)"/>
+      <g class="nd side" data-n="b-ficha"><rect x="300" y="70" width="240" height="42" rx="12"/><text x="420" y="88">Te pregunta solo el campo</text><text class="s" x="420" y="104">que falta, de a una pregunta</text></g>
+      <g class="nd side" data-n="b-una"><rect x="300" y="136" width="240" height="42" rx="12"/><text x="420" y="154">Lista y ordena las cosas</text><text class="s" x="420" y="170">y pregunta por cuál empezar</text></g>
+      <g class="nd side" data-n="b-largo"><rect x="300" y="202" width="240" height="42" rx="12"/><text x="420" y="220">Guardalo como .txt en entrada/</text><text class="s" x="420" y="236">y pasale solo el nombre</text></g>
+      <g class="nd side" data-n="b-guia"><rect x="300" y="4" width="240" height="42" rx="21"/><text x="420" y="22">"No sé qué quiero" → modo guiado</text><text class="s" x="420" y="38">hasta 3 preguntas y tu hoja de ruta</text></g>
+      <path class="ed" id="e-guia2" d="M230 25 H300" marker-end="url(#ah)"/>
+      <path class="ed" d="M415 310 V332" marker-end="url(#ah)"/>
+      <g class="nd end" data-n="guarda"><rect x="290" y="332" width="250" height="42" rx="12"/><text x="415" y="350">Feedback, memoria y vault</text><text class="s" x="415" y="366">y si sirve de nuevo: ¿lo hacemos skill?</text></g>
+    </svg>
+    <div class="tabs" id="tabs" role="group" aria-label="Situaciones">
+      <button class="btn" type="button" data-s="ficha" aria-pressed="false">Me falta un campo<small>pedido incompleto</small></button>
+      <button class="btn" type="button" data-s="una" aria-pressed="false">Pedí varias cosas<small>todo junto</small></button>
+      <button class="btn" type="button" data-s="largo" aria-pressed="false">Tengo mucho texto<small>mails, notas</small></button>
+      <button class="btn" type="button" data-s="guia" aria-pressed="false">No sé qué quiero<small>modo guiado</small></button>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="h-s" aria-live="polite">
+    <div><h2 id="h-s">3. Qué pasa</h2></div>
+    <div class="dlg" id="dlg"></div>
+    <p class="rule" id="rule"></p>
+    <p class="final">Siempre termina igual: tu agente te entrega el resultado, lo compara con tu Objetivo y te pregunta <b>"¿Esto es lo que pediste?"</b>. Si decís que no, se ajusta ese punto sin empezar de cero. Si decís que sí, te pide tu opinión (<b>"¿Qué funcionó y qué cambiarías?"</b>), guarda lo aprendido en tu memoria y en tu vault, y si puede servirte de nuevo te propone convertirlo en un skill. Vos decidís.</p>
+  </section>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var EX=[
+    {rol:"Analista de datos",obj:"Analizar mis gastos del trimestre",det:"Decime qué categoría creció más y por qué. Los datos están en entrada/gastos.txt."},
+    {rol:"Revisor de textos",obj:"Corregir el informe para mi jefe",det:"Marcá los errores y proponé la versión corregida. No cambies los números."},
+    {rol:"Programador",obj:"Hacer un script que renombre mis archivos por fecha",det:"En Python, sobre la carpeta entrada/. Probalo antes de dármelo y explicame cómo ejecutarlo."}
+  ];
+  var ASK={rol:"Falta el Rol. ¿Qué papel querés que cumpla: revisor, redactor, tester, profe, organizador?",
+           obj:"Falta el Objetivo. ¿Qué querés lograr, en una línea?",
+           det:"Falta el Detalle. ¿Qué es lo mínimo que tiene que hacer o cuidar?"};
+  var ch=document.querySelectorAll("#ex .btn");
+  function check(){
+    var ok=0,first=null;
+    ["rol","obj","det"].forEach(function(k){
+      var v=$(k).value.trim(),f=$("f-"+k);
+      if(v){ok++;f.className="field ok";$("a-"+k).textContent=""}
+      else{f.className="field";if(!first)first=k;$("a-"+k).textContent=""}
+    });
+    var pill=$("pill"),st=$("stx");
+    if(ok===3){pill.className="pill ok";pill.textContent="Ficha completa";st.textContent="Tu agente la hace tal cual."}
+    else{
+      pill.className="pill wait";pill.textContent="Falta completar";
+      $("a-"+first).textContent="Tu agente te preguntaría: "+ASK[first];
+      st.textContent="Te pregunta de a un campo.";
+    }
+  }
+  function fill(i){
+    ch.forEach(function(c,k){c.setAttribute("aria-pressed",String(k===i))});
+    var other=i===3;
+    $("free").hidden=!other;
+    var e=(i<0||other)?{rol:"",obj:"",det:""}:EX[i];
+    $("rol").value=e.rol;$("obj").value=e.obj;$("det").value=e.det;$("fr").value="";check();
+    if(other)$("fr").focus();
+  }
+  ch.forEach(function(c){c.onclick=function(){fill(+c.dataset.i)}});
+  $("clr").onclick=function(){fill(-1)};
+  /* "Otro": lo que escribís libre pasa al Objetivo, y tu agente te preguntaría lo que falte */
+  $("fr").addEventListener("input",function(){$("obj").value=$("fr").value.trim().split("\n")[0].slice(0,120);check()});
+  ["rol","obj","det"].forEach(function(k){$(k).addEventListener("input",function(){ch.forEach(function(c){c.setAttribute("aria-pressed","false")});check()})});
+
+  var SC={
+    ficha:{hit:["ficha","b-ficha"],edges:["e-ficha"],dlg:[["me","Objetivo: Corregir el mail para el cliente\nDetalle: Que suene cordial."],["ag","Falta el Rol. ¿Qué papel querés que cumpla: revisor, redactor o tester?"]],rule:"Pregunta solo lo que falta, una pregunta por vez. No te hace llenar un formulario."},
+    una:{hit:["una","b-una"],edges:["e-una"],dlg:[["me","Quiero ordenar mis gastos, armar el reporte y mandárselo a mi jefe."],["ag","Son 3 cosas. Las pondría en este orden:\n1) Ordenar los gastos  2) Armar el reporte  3) Mandarlo.\n¿Empezamos por la 1?"]],rule:"No mezcla los pedidos: hace uno, lo cierra con tu sí y pasa al siguiente."},
+    largo:{hit:["largo","b-largo"],edges:["e-largo"],dlg:[["me","Tengo 40 mails del proyecto, te los pego acá."],["ag","No los pegues. Guardalos como .txt en entrada/proyecto/ y en el Detalle de la ficha escribime solo el nombre del archivo."]],rule:"Leer un archivo no es gratis, porque el contenido igual entra en la conversación. El ahorro viene de leer solo lo necesario y de guardar un resumen para no releerlo."},
+    guia:{hit:["start","b-guia"],edges:["e-guia2"],dlg:[["me","No sé bien qué quiero. Guiame."],["ag","Pregunta 1 de 3: ¿qué te gustaría que quede resuelto?"],["me","Que mis gastos dejen de ser un desorden."],["ag","Pregunta 2 de 3: ¿para qué lo necesitás?"]],rule:"Son hasta 3 preguntas, de a una. Con tus respuestas arma tu hoja de ruta: pasos chicos, cada uno con su ficha."}
+  };
+  var tabs=document.querySelectorAll("#tabs .btn");
+  function show(key){
+    tabs.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.s===key))});
+    document.querySelectorAll(".nd").forEach(function(g){g.classList.remove("hit")});
+    document.querySelectorAll(".ed").forEach(function(g){g.classList.remove("hit");g.setAttribute("marker-end","url(#ah)")});
+    var s=SC[key];
+    s.hit.forEach(function(n){var g=document.querySelector('.nd[data-n="'+n+'"]');if(g)g.classList.add("hit")});
+    s.edges.forEach(function(id){var e=$(id);if(e){e.classList.add("hit");e.setAttribute("marker-end","url(#ahh)")}});
+    var d=$("dlg");d.textContent="";
+    s.dlg.forEach(function(m){
+      var el=document.createElement("div");el.className="msg "+(m[0]==="me"?"me":"ag");
+      var b=document.createElement("b");b.textContent=m[0]==="me"?"Vos":"Tu agente";
+      el.appendChild(b);el.appendChild(document.createTextNode(m[1]));d.appendChild(el);
+    });
+    $("rule").textContent=s.rule;
+  }
+  tabs.forEach(function(b){b.onclick=function(){show(b.dataset.s)}});
+  fill(0);show("ficha");
+})();
+</script>
+</body>
+</html>
