@@ -34,6 +34,8 @@ En vez de escribir todo en el chat, algunos agentes pueden abrir un **tablero (d
 - **Tu second brain:** un dibujo de todas tus notas y cómo se enlazan, con contadores (proyectos, rutinas, notas). Sirve para ver el panorama completo de tu vault.
 - **Tu consumo de hoy:** cuánto usaste de tu plan, para saber si te queda margen.
 
+Si usás **Claude Code en la terminal**, no tenés ese panel, pero sí podés tener un mini dashboard en la barra de abajo: mirá [guias/dashboard-en-terminal.md](../guias/dashboard-en-terminal.md).
+
 Para probarlo, pedile a tu agente: *"Armame un dashboard en un panel al costado del chat con qué están haciendo mis agentes, un overview de mi second brain y mi consumo de hoy."* Si no sabe o no puede, no pasa nada: pedile un resumen en el chat. Los datos son una foto del momento en que se arma, no se actualizan solos.
 
 ## Para el agente: cómo actualizarlo
