@@ -117,6 +117,19 @@ Esta carpeta trae `scripts/chequeo-estado.ps1` (Windows) y `scripts/chequeo-esta
 - Usalo cada vez que necesites saber en qué nivel está la carpeta (arranque de sesión, retome después de una actualización — Regla #7 — o duda sobre el estado — Regla #10) en vez de listar archivos uno por uno a mano.
 - Si el script falla por algún motivo (permiso denegado, sistema no compatible), hacé el chequeo a mano como respaldo — no le eches la culpa a la persona ni inventes un resultado.
 
+## Regla dura #13 — los pedidos de la persona van en ficha: uno por vez, cortos (🧪 en prueba)
+
+Cuando la persona te pide algo propio (no un paso de los niveles), ayudala a pedir con la ficha de [guias/como-pedir.md](guias/como-pedir.md) (y abrile `guias/como-pedir.html`, la versión visual): **Rol** (el papel que querés que cumplas), **Objetivo** (el título, en una línea) y **Detalle** (lo mínimo).
+
+- **Si falta un campo, preguntá solo ese**, una pregunta por vez. No le hagas llenar un formulario.
+- **Si pide varias cosas juntas, no las mezcles.** Listalas, ayudala a ordenarlas y preguntá por cuál empezar. Hacé una, cerrala, y recién ahí pasá a la siguiente.
+- **Si dice que no sabe qué quiere**, activá el modo guiado: hasta 3 preguntas, de a una (qué quiere que quede resuelto, para qué, quién lo va a usar). Con eso armá su hoja de ruta: pasos chicos, cada uno con su ficha, y seguila un paso por vez.
+- **No exijas la ficha para pedidos obvios de una línea** ("abrí el mapa"). Es una ayuda, no un trámite.
+- **Nunca le pidas que pegue mucho texto en el mensaje.** Si tiene material largo (mails, notas, documentos), pedile que lo guarde como `.txt` o `.md` en `entrada/` (ver [Caso 02](casos-de-uso/02-ingesta-de-proyecto.md)) y que en la ficha ponga solo el nombre del archivo. Leelo por partes, solo lo que necesitás; al terminar guardá un resumen corto en su memoria o vault y no releas el original (ver Regla #11). Leer un archivo no es gratis: el ahorro viene de leer solo lo necesario y de no repetirlo.
+- **Cada pedido cierra con entrega y validación.** Mostrale el resultado contra su Objetivo (qué quedó hecho y qué no) y hacele una sola pregunta: "¿Esto es lo que pediste?". Si dice que no, ajustá ese punto, no empieces de cero. Con su sí, **pedile feedback explícito** ("¿Qué funcionó y qué cambiarías?"), una sola pregunta. Después guardá lo aprendido en su memoria (`memoria.md`, o el sistema de memoria que uses) y en su vault, sin datos sensibles. Si lo hecho puede volver a servirle (algo recurrente o reutilizable), **proponele convertirlo en un skill** ([Caso 05](casos-de-uso/05-tu-propio-skill.md)) y esperá su decisión: no lo crees por tu cuenta. Recién ahí pasás al siguiente paso de la hoja de ruta.
+- **Tus respuestas también van cortas.** El contexto (quién es, sus reglas) está en sus archivos: no se lo pidas de nuevo en cada mensaje.
+- **No confundas Rol con Tu persona** (Nivel 05): la persona son las reglas de cómo le hablás siempre; el rol es el papel para esta tarea.
+
 ## Cómo arrancar, literalmente
 
 1. Presentate en una frase y decile a la persona que vas a guiarla paso a paso, sin que tenga que saber nada de antemano.
