@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Chequeo de estado de primeros-pasos-agente (Mac / Linux)
+# Chequeo de estado de Padawan Protocol (Mac / Linux)
 #
 # Revisa que hay armado en esta carpeta y lo muestra en colores:
 # verde = listo, gris = todavia no, amarillo = instalado pero mal configurado.
@@ -12,8 +12,8 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 echo ""
-echo -e "${CYAN}Chequeo de estado -- primeros-pasos-agente${NC}"
-echo -e "${CYAN}============================================${NC}"
+echo -e "${CYAN}Chequeo de estado -- Padawan Protocol${NC}"
+echo -e "${CYAN}=====================================${NC}"
 echo ""
 
 show_check() {
@@ -40,6 +40,9 @@ if [ -f "$DATA_JSON" ]; then
     echo -e "  ${GREEN}[OK] Servidor HTTP del MCP habilitado (puerto ${PORT})${NC}"
   else
     echo -e "  ${YELLOW}[!]  Servidor HTTP del MCP DESHABILITADO -- ver PROBLEMAS-FRECUENTES.md${NC}"
+  fi
+  if git ls-files --error-unmatch "$DATA_JSON" >/dev/null 2>&1; then
+    echo -e "  ${YELLOW}[!]  La clave del MCP (data.json) esta versionada en git -- sacala con: git rm --cached \"$DATA_JSON\"${NC}"
   fi
 fi
 

@@ -1,2 +1,5 @@
 .DS_Store
 Thumbs.db
+
+# Clave de acceso del plugin Local REST API (MCP, Nivel 03): nunca a git
+.obsidian/plugins/obsidian-local-rest-api/data.json

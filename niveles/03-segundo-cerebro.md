@@ -87,6 +87,11 @@ el mínimo de clicks, escribí ya el archivo
 {"enableInsecureServer": true} ANTES de que yo abra Obsidian por
 primera vez — así el plugin arranca con el servidor simple ya
 prendido, sin que yo tenga que tocar ningún toggle en sus ajustes.
+
+Ese data.json va a guardar la clave de acceso del plugin en texto
+plano. Antes de cualquier commit, confirmá que está en el .gitignore
+de esta carpeta (agregalo si no está) y que git no lo tiene
+versionado — así la clave nunca termina en un repositorio.
 ```
 
 **2. Después de tus 2 clicks de siempre (abrir como vault + confirmar que confiás), decile esto a tu agente:**

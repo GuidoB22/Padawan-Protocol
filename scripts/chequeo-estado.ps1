@@ -1,12 +1,12 @@
-# Chequeo de estado de primeros-pasos-agente (Windows / PowerShell)
+# Chequeo de estado de Padawan Protocol (Windows / PowerShell)
 #
 # Revisa que hay armado en esta carpeta y lo muestra en colores:
 # verde = listo, gris = todavia no, amarillo = instalado pero mal configurado.
 # No modifica nada — es de solo lectura.
 
 Write-Host ""
-Write-Host "Chequeo de estado -- primeros-pasos-agente" -ForegroundColor Cyan
-Write-Host "============================================" -ForegroundColor Cyan
+Write-Host "Chequeo de estado -- Padawan Protocol" -ForegroundColor Cyan
+Write-Host "=====================================" -ForegroundColor Cyan
 Write-Host ""
 
 function Show-Check {
@@ -36,6 +36,9 @@ if (Test-Path $dataJsonPath) {
         }
     } catch {
         Write-Host "  [!]  No se pudo leer data.json del plugin MCP" -ForegroundColor Yellow
+    }
+    if (git ls-files $dataJsonPath 2>$null) {
+        Write-Host "  [!]  La clave del MCP (data.json) esta versionada en git -- sacala con: git rm --cached `"$dataJsonPath`"" -ForegroundColor Yellow
     }
 }
 
