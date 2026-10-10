@@ -1,0 +1,33 @@
+{
+  "caja_izq": "Explicación",
+  "caja_der": "Mirá esto",
+  "bloques": [
+    {
+      "titulo": "Lorem ipsum",
+      "texto": ["Dolor sit amet: arrancá desde la plantilla. Solo completás 3 campos."]
+    },
+    {
+      "titulo": "Tres pasos",
+      "texto": [
+        "1. Elegí una plantilla.",
+        "2. Llenala sin salir de ella.",
+        "3. Cerrá, y después cambiás de tema."
+      ]
+    },
+    {
+      "titulo": "Si aparece otra idea",
+      "texto": ["Es normal que aparezca."],
+      "consejo": ["Anotala en \"después\" y volvé acá."]
+    }
+  ],
+  "proximo": "Elegí una plantilla.",
+  "flujo": { "titulo": "Tu camino", "pasos": ["Elegir", "Llenar", "Cerrar"], "actual": 2 },
+  "reparto": {
+    "titulo": "Cómo se reparte un buen rato",
+    "items": [
+      { "etiqueta": "Llenar la plantilla", "valor": 70 },
+      { "etiqueta": "Revisar y ajustar", "valor": 20 },
+      { "etiqueta": "Pasar a otro tema", "valor": 10 }
+    ]
+  }
+}
