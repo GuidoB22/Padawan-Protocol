@@ -155,6 +155,9 @@ if ($d.reparto) {
 $tI = if ($d.caja_izq) { $d.caja_izq } else { 'Explicación' }
 $tD = if ($d.caja_der) { $d.caja_der } else { 'Mirá esto' }
 # Ojo: PowerShell no distingue mayusculas, por eso $cajaI/$cajaD y no $A/$B + $a/$b.
+# La caja derecha se estira hasta el final del texto de la izquierda.
+if (-not $CajaIzquierda) { while ($der.Count -lt $izq.Count) { Agregar $der '' } }
+
 if ($CajaIzquierda) {
     $cajaI = @(Caja $tI $izq $LI); $anchoI = $LI + 2; $hueco = ' '
 } else {

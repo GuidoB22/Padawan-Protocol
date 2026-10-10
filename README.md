@@ -129,6 +129,10 @@ Después del Nivel 03 podés hacer los **casos de uso**: recetas de trabajo real
 
 Funciona igual. Ver [guias/linux-mint.md](guias/linux-mint.md): cómo conseguir Linux Mint de la página oficial, probarlo en una máquina virtual sin riesgo o instalarlo con un pendrive y Rufus, y arrancar la guía ahí con tu agente.
 
+## 💻 ¿Te gusta trabajar en la consola?
+
+Si usás tu agente desde PowerShell o la terminal, tu agente puede explicarte con dibujos hechos de texto (flujos, cajas, barras de porcentaje) directo en la conversación. Ver [guias/disenar-para-terminal.md](guias/disenar-para-terminal.md).
+
 ## 🎓 ¿Ya terminaste los 7 niveles?
 
 Hay un paso más, opcional, para cuando quieras entender el **por qué** de lo que ya armaste — con evidencia real citada, ejemplos y una rutina que lo mantiene al día solo. Ver [maestria/00-bienvenida-maestria.md](maestria/00-bienvenida-maestria.md). No es necesario para usar tu agente bien — es para quien quiere ir más profundo.

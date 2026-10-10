@@ -22,6 +22,14 @@ Cuando tu agente te explica algo en la terminal, lo hace con un dibujo corto y s
 5. **El color nunca va solo.** Siempre hay un símbolo (`✓ ● ○`) o un relleno distinto (`█ ▓ ▒ ░`), así se entiende también sin color.
 6. **Sin rojo ni alarmas.** Si algo falla, se dice con calma y se ofrece el siguiente paso.
 
+## Si trabajás con tu agente en la consola
+
+Es una forma de usarlo pensada para quien prefiere PowerShell o la terminal. No tenés que correr nada: pedile "explicámelo con un dibujo" y tu agente arma el contenido, ejecuta el script y te pega el resultado en la conversación.
+
+- En la conversación se ve la tarjeta completa, con cajas y símbolos pero sin color. Funciona porque el diseño no depende del color.
+- El color y la negrita aparecen cuando el script corre en tu propia terminal.
+- Pedí uno por vez y corto, con la ficha de siempre (Rol, Objetivo, Detalle).
+
 ## Las herramientas
 
 | Script | Qué dibuja |
