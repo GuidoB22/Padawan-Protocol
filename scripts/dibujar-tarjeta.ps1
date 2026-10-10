@@ -99,15 +99,17 @@ if ($d.flujo) {
         $r3 = New-Object System.Collections.Generic.List[object]
         $r4 = New-Object System.Collections.Generic.List[object]
         for ($i = 0; $i -lt $pasos.Count; $i++) {
-            $c = if (($i + 1) -eq $act) { 'actual' } else { 'estructura' }
+            $c = 'estructura'   # todas las cajas en blanco; solo el "aca" de abajo va en amarillo
             $izqPad = [int][Math]::Floor(($w - $pasos[$i].Length) / 2)
             $txt = ((' ' * $izqPad) + $pasos[$i]).PadRight($w)
             $r1.Add((Seg ($s.tl + ($s.h * $w) + $s.tr) $c))
             # borde con el color de la caja; la letra de adentro con el color normal
             $r2.Add((Seg $s.v $c)); $r2.Add((Seg $txt)); $r2.Add((Seg $s.v $c))
             $r3.Add((Seg ($s.bl + ($s.h * $w) + $s.br) $c))
-            $marca = if (($i + 1) -eq $act) { "$($s.ahora) $($s.aca)" } else { '' }
-            $r4.Add((Seg $marca.PadRight($w + 2) 'actual'))
+            # cada caja lleva su simbolo debajo: el estado no depende del color
+            $e = if (($i + 1) -lt $act) { 'hecho' } elseif (($i + 1) -eq $act) { 'actual' } else { 'pendiente' }
+            $marca = switch ($e) { 'hecho' { $s.ok } 'actual' { "$($s.ahora) $($s.aca)" } default { $s.luego } }
+            $r4.Add((Seg $marca.PadRight($w + 2) $e))
             if ($i -lt $pasos.Count - 1) {
                 $r1.Add((Seg '    ')); $r3.Add((Seg '    ')); $r4.Add((Seg '    '))
                 $r2.Add((Seg ' ')); $r2.Add((Seg $s.flecha 'estructura')); $r2.Add((Seg ' '))
@@ -132,7 +134,7 @@ if ($d.reparto) {
     $titRep = if ($d.reparto.titulo) { $d.reparto.titulo } else { 'Cómo se reparte' }
     Agregar $der $titRep 'subtitulo'
     Agregar $der ''
-    $ancho = $RI - 1
+    $ancho = $RI - 2   # deja un espacio antes del borde, como el resto de las lineas
     $barra = New-Object System.Collections.Generic.List[object]
     $acum = 0; $prev = 0
     for ($i = 0; $i -lt $items.Count; $i++) {
