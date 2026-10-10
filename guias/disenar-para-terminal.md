@@ -27,7 +27,7 @@ Cuando tu agente te explica algo en la terminal, lo hace con un dibujo corto y s
 | Script | Qué dibuja |
 |---|---|
 | `scripts/dibujar-flujo.ps1` | Un flujo de pasos, con el actual marcado |
-| `scripts/dibujar-tarjeta.ps1` | Dos cajas: texto a la izquierda; flujo y reparto en % a la derecha |
+| `scripts/dibujar-tarjeta.ps1` | Texto libre a la izquierda y una caja a la derecha con flujo y reparto en % (`-CajaIzquierda` dibuja también la caja de la izquierda) |
 
 La tarjeta lee su contenido de un archivo `.json`. Hay un ejemplo en `scripts/ejemplos/tarjeta-lorem.json`: copialo y cambiá los textos.
 

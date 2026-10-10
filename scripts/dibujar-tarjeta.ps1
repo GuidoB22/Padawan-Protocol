@@ -15,6 +15,7 @@
 param(
     [Parameter(Mandatory = $true)][string]$Datos,  # ruta al .json con el contenido
     [switch]$SinColor,                             # solo simbolos y estilos, sin ANSI
+    [switch]$CajaIzquierda,                        # dibuja tambien la caja izquierda (por defecto va sin caja)
     [switch]$Ascii                                 # solo caracteres ASCII (consolas viejas)
 )
 
@@ -154,16 +155,27 @@ if ($d.reparto) {
 $tI = if ($d.caja_izq) { $d.caja_izq } else { 'Explicación' }
 $tD = if ($d.caja_der) { $d.caja_der } else { 'Mirá esto' }
 # Ojo: PowerShell no distingue mayusculas, por eso $cajaI/$cajaD y no $A/$B + $a/$b.
-$cajaI = @(Caja $tI $izq $LI)
+if ($CajaIzquierda) {
+    $cajaI = @(Caja $tI $izq $LI); $anchoI = $LI + 2; $hueco = ' '
+} else {
+    # texto libre: titulo, linea en blanco y el contenido; sin bordes
+    $libre = New-Object System.Collections.Generic.List[object]
+    Agregar $libre $tI 'titulo'; Agregar $libre ''
+    foreach ($l in $izq) { $libre.Add($l) }
+    $cajaI = $libre.ToArray(); $anchoI = $LI; $hueco = '   '
+}
 $cajaD = @(Caja $tD $der $RI)
 
 Write-Host ""
 if ((AnchoTerminal) -ge ($LI + $RI + 5)) {
     $n = [Math]::Max($cajaI.Count, $cajaD.Count)
     for ($i = 0; $i -lt $n; $i++) {
-        $textoI = if ($i -lt $cajaI.Count) { Dibujar $cajaI[$i] } else { ' ' * ($LI + 2) }
+        $textoI = ' ' * $anchoI
+        if ($i -lt $cajaI.Count) {
+            $textoI = (Dibujar $cajaI[$i]) + (' ' * [Math]::Max(0, $anchoI - (Largo $cajaI[$i])))
+        }
         $textoD = if ($i -lt $cajaD.Count) { Dibujar $cajaD[$i] } else { '' }
-        Write-Host ($textoI + ' ' + $textoD).TrimEnd()
+        Write-Host ($textoI + $hueco + $textoD).TrimEnd()
     }
 } else {
     foreach ($l in $cajaI) { Write-Host (Dibujar $l) }
