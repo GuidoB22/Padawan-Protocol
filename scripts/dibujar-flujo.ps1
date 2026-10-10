@@ -44,10 +44,11 @@ if ($vertical) {
     $l1 = ""; $l2 = ""; $l3 = ""; $l4 = ""
     for ($i = 0; $i -lt $lista.Count; $i++) {
         $e = Estado ($i + 1)
-        $marca = if ($e -eq 'actual') { $s.ahora + ' ' + $s.aca } else { '' }
-        $l4 += $marca.PadRight($ancho + 2)
+        # cada caja lleva su simbolo debajo: el estado no depende del color
+        $marca = if ($e -eq 'actual') { $s.ahora + ' ' + $s.aca } else { Simbolo $e }
+        $l4 += Pintar $marca.PadRight($ancho + 2) $e
         if ($i -lt $lista.Count - 1) { $l4 += "    " }
-        $c = if ($e -eq 'actual') { 'actual' } else { 'estructura' }
+        $c = 'estructura'   # todas las cajas en blanco; solo el "aca" de abajo va en amarillo
         $t = $lista[$i].PadRight($ancho - 2)
         $l1 += Pintar ($s.tl + ($s.h * $ancho) + $s.tr) $c
         $l2 += (Pintar $s.v $c) + " $t " + (Pintar $s.v $c)   # letra en color normal
@@ -59,6 +60,6 @@ if ($vertical) {
     Write-Host $l1
     Write-Host $l2
     Write-Host $l3
-    Write-Host (Pintar $l4.TrimEnd() 'actual')
+    Write-Host $l4.TrimEnd()
 }
 Write-Host ""

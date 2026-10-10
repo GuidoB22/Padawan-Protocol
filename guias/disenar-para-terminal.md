@@ -19,7 +19,7 @@ Cuando tu agente te explica algo en la terminal, lo hace con un dibujo corto y s
    | Cursiva | Un consejo |
    | Negrita + subrayado | El próximo paso |
 
-5. **El color nunca va solo.** Siempre hay un símbolo (`✓ ● ○`) o un relleno distinto (`█ ▓ ▒ ░`), así se entiende también sin color.
+5. **El color nunca va solo.** Siempre hay un símbolo (`✓ ● ○`) o un relleno distinto (`█ ▓ ▒ ░`), así se entiende también sin color. En un flujo de cajas, cada caja lleva su símbolo debajo: `✓` hecho, `● acá` el paso actual, `○` pendiente. Todas las cajas y flechas quedan en blanco, incluida la del paso actual: solo el `● acá` va en amarillo.
 6. **Sin rojo ni alarmas.** Si algo falla, se dice con calma y se ofrece el siguiente paso.
 
 ## Si trabajás con tu agente en la consola
