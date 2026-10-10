@@ -50,7 +50,7 @@ if ($vertical) {
         $c = if ($e -eq 'actual') { 'actual' } else { 'estructura' }
         $t = $lista[$i].PadRight($ancho - 2)
         $l1 += Pintar ($s.tl + ($s.h * $ancho) + $s.tr) $c
-        $l2 += Pintar ($s.v + " $t " + $s.v) $c
+        $l2 += (Pintar $s.v $c) + " $t " + (Pintar $s.v $c)   # letra en color normal
         $l3 += Pintar ($s.bl + ($s.h * $ancho) + $s.br) $c
         if ($i -lt $lista.Count - 1) {
             $l1 += "    "; $l2 += " " + (Pintar $s.flecha 'estructura') + " "; $l3 += "    "

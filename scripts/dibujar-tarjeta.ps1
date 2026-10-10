@@ -72,7 +72,7 @@ function Caja([string]$titulo, $lineas, [int]$inner) {
 $izq = New-Object System.Collections.Generic.List[object]
 foreach ($b in @($d.bloques)) {
     if ($izq.Count -gt 0) { Agregar $izq '' }
-    Agregar $izq $b.titulo 'titulo'
+    Agregar $izq $b.titulo 'subtitulo'
     foreach ($t in @($b.texto)) { foreach ($l in @(Envolver $t ($LI - 1))) { Agregar $izq $l } }
     foreach ($t in @($b.consejo)) { if ($t) { foreach ($l in @(Envolver $t ($LI - 1))) { Agregar $izq $l 'consejo' } } }
 }
@@ -88,7 +88,7 @@ $der = New-Object System.Collections.Generic.List[object]
 if ($d.flujo) {
     $pasos = @($d.flujo.pasos); $act = [int]$d.flujo.actual
     $titFlujo = if ($d.flujo.titulo) { $d.flujo.titulo } else { 'Tu camino' }
-    Agregar $der $titFlujo 'titulo'
+    Agregar $der $titFlujo 'subtitulo'
     Agregar $der ''
     $w = [Math]::Max(6, ($pasos | Measure-Object -Property Length -Maximum).Maximum)
     $total = $pasos.Count * ($w + 2) + ($pasos.Count - 1) * 4
@@ -102,7 +102,8 @@ if ($d.flujo) {
             $izqPad = [int][Math]::Floor(($w - $pasos[$i].Length) / 2)
             $txt = ((' ' * $izqPad) + $pasos[$i]).PadRight($w)
             $r1.Add((Seg ($s.tl + ($s.h * $w) + $s.tr) $c))
-            $r2.Add((Seg ($s.v + $txt + $s.v) $c))
+            # borde con el color de la caja; la letra de adentro con el color normal
+            $r2.Add((Seg $s.v $c)); $r2.Add((Seg $txt)); $r2.Add((Seg $s.v $c))
             $r3.Add((Seg ($s.bl + ($s.h * $w) + $s.br) $c))
             $marca = if (($i + 1) -eq $act) { "$($s.ahora) $($s.aca)" } else { '' }
             $r4.Add((Seg $marca.PadRight($w + 2) 'actual'))
@@ -128,7 +129,7 @@ if ($d.reparto) {
     $suma = ($items | Measure-Object -Property valor -Sum).Sum
     if ($der.Count -gt 0) { Agregar $der '' }
     $titRep = if ($d.reparto.titulo) { $d.reparto.titulo } else { 'Cómo se reparte' }
-    Agregar $der $titRep 'titulo'
+    Agregar $der $titRep 'subtitulo'
     Agregar $der ''
     $ancho = $RI - 1
     $barra = New-Object System.Collections.Generic.List[object]
