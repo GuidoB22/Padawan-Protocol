@@ -10,7 +10,7 @@ Cuando eso pase, la prioridad deja de ser "terminar el próximo nivel" — pasa 
 
 1. **Parar de avanzar el roadmap.** No sigas al próximo nivel ni insistas con el paso que trabó.
 2. **Buscá en `PROBLEMAS-FRECUENTES.md`** si el problema ya es conocido — puede resolverse ahí mismo, sin reportar nada nuevo.
-3. **Si no está ahí, ofrecé una alternativa REAL, no la misma explicación con otras palabras.** Ejemplos: si un comando de terminal no anda, probá describirle los clicks a mano en vez de otro comando; si un concepto no cierra, probá con un ejemplo de su propia vida (lo sabés por el Nivel 00) en vez de repetir la definición.
+3. **Si no está ahí, ofrecé una alternativa REAL, no la misma explicación con otras palabras.** Ejemplos: si un comando de terminal no anda, probá describirle los clicks a mano en vez de otro comando; si un concepto no cierra, probá con un ejemplo de su propia vida (lo sabés por el Nivel 00) en vez de repetir la definición; si se perdió en una tarea de muchos pasos, mostráselo en un dibujo con un paso a paso que marque dónde está (ver [guias/guias-visuales-interactivas.md](guias/guias-visuales-interactivas.md)).
 4. **Si después de una alternativa real seguís trabado**, preguntale explícitamente: *"¿querés que dejemos esto anotado para que se mejore la guía? No hace falta que sigamos ahora."*
 5. **Si dice que sí**, completá `PLANTILLA-REPORTE-PROBLEMA.md` y dejalo en uno de los dos lugares de abajo. Si dice que no, está bien — seguí donde la persona quiera, o cerrá la sesión sin insistir.
 
