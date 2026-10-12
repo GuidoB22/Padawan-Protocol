@@ -133,6 +133,10 @@ Funciona igual. Ver [guias/linux-mint.md](guias/linux-mint.md): cómo conseguir 
 
 Si usás tu agente desde PowerShell o la terminal, tu agente puede explicarte con dibujos hechos de texto (flujos, cajas, barras de porcentaje) directo en la conversación. Ver [guias/disenar-para-terminal.md](guias/disenar-para-terminal.md).
 
+## 🗺️ ¿Te perdés en una tarea larga?
+
+Tu agente puede armarte una **guía visual**: un dibujo de todo, una vista 3D si la tarea es física, y un paso a paso que te marca dónde estás. Pedile "mostrámelo en un diagrama" o "armame el paso a paso". Ver [guias/guias-visuales-interactivas.md](guias/guias-visuales-interactivas.md) (🧪 en prueba).
+
 ## 🎓 ¿Ya terminaste los 7 niveles?
 
 Hay un paso más, opcional, para cuando quieras entender el **por qué** de lo que ya armaste — con evidencia real citada, ejemplos y una rutina que lo mantiene al día solo. Ver [maestria/00-bienvenida-maestria.md](maestria/00-bienvenida-maestria.md). No es necesario para usar tu agente bien — es para quien quiere ir más profundo.
