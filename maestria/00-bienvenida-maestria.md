@@ -27,8 +27,8 @@ Una rutina semanal (ver `~/.claude/scheduled-tasks/padawan-maestria-vigencia-sem
 | Tema | Profundiza |
 |---|---|
 | [02 — Memoria persistente](02-memoria-persistente-maestria.md) | Por qué memoria.md funciona, y qué dice la investigación real sobre memoria de largo plazo en agentes |
-| 03 — Segundo cerebro | 🟡 PR #23 abierto, sin mergear |
-| 04 — Vocabulario y patrones | 🔴 pendiente de escribir |
+| [03 — Segundo cerebro](03-segundo-cerebro-maestria.md) | Por qué una idea por nota con links y pocas etiquetas fijas, con evidencia de A-Mem y Golder & Huberman |
+| 04 — Vocabulario y patrones | 🟡 PR #38 abierto, sin mergear |
 | 05 — Persona propia | 🔴 pendiente de escribir |
 | 06 — Avanzado | 🔴 pendiente de escribir |
 
