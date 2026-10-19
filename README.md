@@ -54,6 +54,8 @@ Eso alcanza — el resto lo va guiando el agente solo, un paso por vez. Todo lo 
 
 Esto **no funciona con un chat común** (ChatGPT en chatgpt.com, Claude en claude.ai, Gemini, etc.). Esos chats pueden hablar con vos, pero no pueden tocar archivos en tu computadora — y esta guía es, literalmente, crear y editar archivos junto a tu agente. Si intentás hacer esto en un chat común, el agente no va a poder ejecutar nada real: como mucho te va a *describir* qué archivo crearía, y ahí es donde la cosa empieza a andar en círculos (inventa una alternativa a mano, te promete algo que no puede cumplir, etc.).
 
+**¿Solo usás un chat (Gemini, ChatGPT, Meta AI en WhatsApp)?** Hay una versión simplificada para vos, sin instalar nada: [Padawan para chat](chat/README.md) (🧪 en prueba). Te ayuda con cosas como invitaciones, textos que suenen a vos y elegir la letra de un documento.
+
 Necesitás un **agente de código** — un programa que corre en tu computadora, que podés abrir apuntando a una carpeta, y que tiene permiso real para leer, crear y escribir archivos (y en niveles más avanzados, ejecutar comandos). Ejemplos:
 
 - **Si usás Claude**: [Claude Code](https://claude.com/claude-code) (CLI o la app de escritorio). Es la opción con la que se armó y probó esta guía.
