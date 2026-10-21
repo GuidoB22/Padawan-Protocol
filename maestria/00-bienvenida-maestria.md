@@ -28,8 +28,8 @@ Una rutina semanal (ver `~/.claude/scheduled-tasks/padawan-maestria-vigencia-sem
 |---|---|
 | [02 — Memoria persistente](02-memoria-persistente-maestria.md) | Por qué memoria.md funciona, y qué dice la investigación real sobre memoria de largo plazo en agentes |
 | [03 — Segundo cerebro](03-segundo-cerebro-maestria.md) | Por qué una idea por nota con links y pocas etiquetas fijas, con evidencia de A-Mem y Golder & Huberman |
-| 04 — Vocabulario y patrones | 🟡 PR #38 abierto, sin mergear |
-| 05 — Persona propia | 🔴 pendiente de escribir |
+| [04 — Vocabulario y patrones](04-vocabulario-y-patrones-maestria.md) | Por qué WIP = 1, el freno de mano y el día de análisis, con evidencia de Rubinstein, Meyer & Evans, Mitchell et al. y Park et al. |
+| 05 — Persona propia | 🟡 PR #40 abierto, sin mergear |
 | 06 — Avanzado | 🔴 pendiente de escribir |
 
 > Arranca con Memoria como ejemplo del formato — el resto se escribe después de confirmar que la profundidad/estilo es el que Guido quiere.
