@@ -23,7 +23,9 @@ Más adelante vas a poder cambiar este archivo simple por un sistema de memoria 
 
 ## Acción
 
-Mirá `plantillas/memoria/memoria.md` — es el punto de partida, una plantilla vacía lista para usar. Copiala a la carpeta principal de tu propio proyecto (no tiene por qué quedarse acá, en la carpeta de esta guía) y decile a tu agente la regla de abajo.
+Mirá `plantillas/memoria/memoria.md` — es el punto de partida, una plantilla vacía lista para usar. Copiala a la carpeta principal de esta guía, la misma que abriste con tu agente (al lado de `hola.md`, no adentro de `plantillas/`), y decile a tu agente la regla de abajo.
+
+Es como dejar el cuaderno de notas siempre en el mismo cajón: si cada vez lo guardás en un lugar distinto, el agente no lo encuentra. Más adelante, cuando trabajes en un proyecto tuyo en otra carpeta, vas a hacer lo mismo ahí: cada carpeta con su propia `memoria.md`.
 
 ## Checkpoint
 
