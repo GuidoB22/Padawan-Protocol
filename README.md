@@ -72,7 +72,7 @@ Todo lo demás (memoria, base de conocimiento, vocabulario, tu propia forma de t
 
 Tres cosas que conviene saber desde el día uno, para que no te agarren de sorpresa:
 
-1. **Vas a tener que dar muchos permisos.** Al comienzo, cada tipo de acción nueva (crear un archivo, ejecutar un comando) hace aparecer una ventana pidiendo permiso. Es normal y es una protección: leé cada una, aprobá lo que entiendas y preguntale a tu agente lo que no. No elijas "permitir todo" para ahorrarte clics. Con el tiempo van apareciendo menos.
+1. **Vas a dar algunos permisos, pero anunciados todos juntos.** Antes de hacer nada, tu agente te muestra una sola lista corta con los permisos que va a necesitar al principio (por ejemplo, crear tus archivos en esta carpeta o revisar en qué paso estás) y te pide un solo "ok". Si usás Claude Code, puede aparecer una ventana que pregunta si confiás en esta carpeta: para la carpeta de esta guía está bien aceptarla (🧪 en prueba). Lo que usa internet, instala programas o toca algo fuera de esta carpeta te lo sigue preguntando aparte. Los permisos son una protección: aprobá lo que entiendas y preguntale a tu agente lo que no. No elijas "permitir todo" para ahorrarte clics.
 2. **Al principio nada se automatiza.** Las primeras veces hacés cada tarea paso a paso, con tu agente, a mano. Recién cuando salió bien varias veces tiene sentido repetirla sola. Ir despacio acá no es perder tiempo: es lo que hace que después funcione.
 3. **Siempre validá lo que termina de hacer.** Tu agente puede equivocarse o decir "listo" sin que lo esté. Abrí el archivo, probá el resultado, pedile que te muestre cómo lo comprobó. Revisar no es desconfiar: es parte del método.
 
@@ -81,8 +81,9 @@ Tres cosas que conviene saber desde el día uno, para que no te agarren de sorpr
 >
 > ```
 > Cada vez que termines una tarea, decime qué hiciste, dónde quedó
-> y cómo puedo comprobarlo yo. Y avisame antes de pedirme un permiso
-> nuevo, explicándome para qué es.
+> y cómo puedo comprobarlo yo. Antes de pedirme permisos, mostrame
+> juntos los que vas a necesitar y para qué es cada uno, así te digo
+> un solo ok. Si después aparece uno nuevo, explicámelo antes.
 > ```
 
 ## Cómo usar esto
@@ -167,3 +168,7 @@ Cada bloque de acción ("Decile esto a tu agente") usa siempre el mismo formato 
 🧭 (brújula) es la marca recurrente de la guía — va en el título de cada nivel (`# 🧭 Nivel 0X — ...`) y en cada bloque de acción. Si agregás un nivel o un bloque nuevo, seguí el mismo patrón en vez de uno propio.
 
 🧪 **"en prueba"** marca un caso que se armó con la documentación oficial pero todavía nadie lo siguió de punta a punta. Va en el índice y con un `> [!WARNING]` al inicio del archivo. Se saca recién cuando alguien lo completa y lo confirma.
+
+## Licencia
+
+Esta guía es libre: [CC BY 4.0](LICENSE). Podés usarla, copiarla, adaptarla y compartirla, incluso con fines comerciales, siempre que digas de dónde salió (con un link a este repositorio alcanza).

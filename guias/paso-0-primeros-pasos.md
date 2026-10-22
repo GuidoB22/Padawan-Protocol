@@ -89,7 +89,7 @@ Todos los agentes tienen alguna forma de abrir una carpeta: un menú (por ejempl
 
 **Con Claude Code, terminal:** andá a la carpeta del Paso 2 y escribí `claude` ahí. Si no sabés cómo "ir" a una carpeta, mirá la [guía de terminal](https://code.claude.com/docs/en/terminal-guide).
 
-**Un consejo para el principio:** buscá en tu agente la opción de que **te pida confirmación antes de editar archivos o ejecutar comandos**, así ves qué va a cambiar. En la app de escritorio de Claude está en el selector del *modo de permisos*, al lado del botón de enviar: elegí **Manual**. Es lo que conviene mientras estás aprendiendo.
+**Un consejo para el principio:** buscá en tu agente la opción de que **te pida confirmación antes de editar archivos o ejecutar comandos**, así ves qué va a cambiar. En la app de escritorio de Claude está en el selector del *modo de permisos*, al lado del botón de enviar: elegí **Manual**. Es lo que conviene mientras estás aprendiendo. Igual no vas a tener que aprobar todo por separado: tu agente primero te muestra una sola lista con los permisos del arranque, y con Claude Code puede aparecer una ventana que pregunta si confiás en esta carpeta, con las acciones inofensivas de esta guía ya aprobadas. Para esta carpeta está bien aceptarla (🧪 en prueba).
 
 ## Paso 5 — Tu primer mensaje
 
@@ -103,7 +103,7 @@ Escribí esto en el agente, tal cual:
 > exactamente lo que dice, empezando por el Nivel 00.
 > ```
 
-Desde acá el agente te guía. Van a aparecer **pedidos de permiso**: es normal, leelos de a uno. En el [README](../README.md) está la sección "Qué esperar al principio".
+Desde acá el agente te guía. Primero te muestra **una sola lista con los permisos** que va a necesitar y te pide un "ok". Si aparece la ventana de *¿confiás en esta carpeta?*, para esta carpeta está bien aceptarla. Lo que usa internet o instala programas te lo sigue preguntando aparte, y está bien: leelo antes de aprobar. En el [README](../README.md) está la sección "Qué esperar al principio".
 
 ## Si algo falla
 

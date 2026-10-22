@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Edit(/quien-soy.md)",
+      "Edit(/hola.md)",
+      "Edit(/memoria.md)",
+      "Edit(/progreso/mapa-de-progreso.html)",
+      "Bash(bash scripts/chequeo-estado.sh)",
+      "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File scripts/chequeo-estado.ps1)",
+      "PowerShell(powershell -NoProfile -ExecutionPolicy Bypass -File scripts/chequeo-estado.ps1)",
+      "Bash(git --version)",
+      "Bash(git status)",
+      "Bash(git log *)",
+      "PowerShell(git --version)",
+      "PowerShell(git status)",
+      "PowerShell(git log *)",
+      "Bash(start \"\" \"progreso\\mapa-de-progreso.html\")",
+      "Bash(open progreso/mapa-de-progreso.html)",
+      "Bash(xdg-open progreso/mapa-de-progreso.html)"
+    ]
+  }
+}

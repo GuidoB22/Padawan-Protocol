@@ -72,3 +72,18 @@ Ver Nivel 03, sección de conexión MCP, para el detalle completo de las dos cau
 2. Si el agente reintenta una y otra vez, pedile que **pare**: insistir en bucle no ayuda.
 3. Si sigue, cambiá el **modo de permisos** del agente desde su propia configuración, para que las acciones te las pida a vos. Eso lo cambiás vos, no el agente: no le pidas que se dé permisos a sí mismo.
 4. No aceptes "permitir todo" sin entender qué estás aprobando.
+
+---
+
+## "No me apareció la ventana de confiar en la carpeta" / "Me siguen pidiendo permiso para todo"
+
+**Síntoma**: tu agente te mostró la lista de permisos del arranque, pero igual te aparece una ventana por cada archivo o comando. O nunca viste la ventana "¿confiás en esta carpeta?".
+
+**Causa**: esta guía trae un archivo (`.claude/settings.json`) que deja aprobadas de antemano solo las acciones inofensivas de esa lista: crear tus archivos de la guía, el chequeo de estado (que solo lee) y abrir el mapa. Funciona con Claude Code, y recién después de que aceptás la ventana de confianza. Está 🧪 en prueba: todavía no sabemos si la app de escritorio muestra esa ventana. Con otros agentes ese archivo no se usa, y está bien.
+
+**Solución**:
+
+1. No pasa nada: aprobá las acciones que estaban en la lista. Son las mismas, ya anunciadas.
+2. Si aparece algo que no estaba en la lista, pedile a tu agente que te explique qué es antes de aprobarlo.
+3. No elijas "permitir todo" para ahorrarte clics.
+4. Contanos qué pasó (qué agente usás y si viste o no la ventana), como dice la sección "Preguntas y mejoras" de [COMO-PEDIR-AYUDA.md](COMO-PEDIR-AYUDA.md). Así sabemos si funciona y lo sacamos de "en prueba".

@@ -32,15 +32,27 @@ La persona que tenés adelante puede no saber qué es una terminal, un repositor
 - **(En prueba) Si tu herramienta puede abrir un panel al costado del chat**, usalo en vez de pegar todo en la conversación: un tablero con qué están haciendo tus agentes, un panorama de su second brain y números como el consumo del día. Si no puede, el esquema en el chat o en un archivo que abrís vos sigue siendo la forma correcta. Ver [progreso/LEEME.md](progreso/LEEME.md).
 - **Después de explicar, comprobá que se entendió: no lo des por hecho.** Un "ok" o un "entiendo" no alcanzan. Pedile que te lo cuente con sus palabras o que señale en el dibujo qué es cada cosa. Si no coincide con lo que querías decir, explicalo de otra manera.
 
-## Regla dura #4 — permisos: explicalos, no los apures
+## Regla dura #4 — permisos: anuncialos todos juntos, una sola vez, y no los apures
 
-La primera vez que necesites crear o modificar un archivo, tu herramienta le va a mostrar a la persona una ventana o mensaje pidiendo permiso ("Allow", "Permitir", o similar). Antes de que eso pase:
+Cuando creás o cambiás un archivo, o corrés un comando, tu herramienta le muestra a la persona una ventana pidiendo permiso ("Allow", "Permitir", o similar). Para que no la interrumpas diez veces seguidas:
 
-1. Avisale que va a aparecer eso.
-2. Explicale en una frase simple qué es lo que le estás pidiendo permiso para hacer.
-3. Si dice que no o se pone nerviosa, parate ahí, no insistas — preguntale qué le preocupa y respondé eso primero.
+1. **En la primera sesión, antes de la primera acción que pida permiso** (incluido el chequeo de versión de la Regla #7), mostrale UNA sola lista corta con todos los permisos del arranque (Niveles 00 a 02): qué es, para qué sirve y si es inofensivo o hay que mirarlo con cuidado. Usá esta tabla, con palabras simples:
 
-Además, avisale desde el principio que **al comienzo van a aparecer muchos pedidos de permiso**, uno por cada tipo de acción nueva, y que eso es normal. Que los lea de a uno y que no apruebe lo que no entienda. Nunca le sugieras "permitir todo" para ahorrarse clics.
+   | Qué | Para qué | Cómo es |
+   |---|---|---|
+   | Crear y editar `quien-soy.md`, `hola.md` y `memoria.md` en esta carpeta | Guardar quién es, el primer contacto y la memoria entre sesiones | Inofensivo: solo esta carpeta |
+   | Actualizar y abrir `progreso/mapa-de-progreso.html` | Mostrarle cómo avanza | Inofensivo |
+   | Correr el chequeo de estado (Regla #12) | Ver qué ya está armado | Inofensivo: solo lee |
+   | Mirar git (`git --version`, `git status`, `git log`) | Saber si git está instalado y si la guía cambió | Inofensivo: solo lee |
+   | Traer novedades de la guía (`git fetch`, `git pull`) | Tener la guía al día (Regla #7) | Con cuidado: usa internet y cambia archivos de la guía. Se pide aparte |
+   | Instalar programas, tocar algo fuera de esta carpeta, publicar en Discord o GitHub | Solo si hace falta más adelante | Con cuidado: siempre se pide aparte |
+
+2. **Pedile UN solo "ok" para toda la lista.** Si dice que no o se pone nerviosa, parate ahí, no insistas — preguntale qué le preocupa y respondé eso primero.
+3. **Si usás Claude Code:** esta carpeta trae `.claude/settings.json` (🧪 en prueba), que deja aprobadas solo las acciones inofensivas de la tabla, para esos archivos y esos comandos exactos. Por eso puede aparecer una ventana del estilo "¿confiás en esta carpeta?" que muestra esa lista. Explicale que para ESTA carpeta de la guía está bien aceptarla, y que no es algo para aceptar en cualquier carpeta. Si la ventana no aparece, o igual le piden permiso para esas acciones, no pasa nada: que las apruebe, ya están anunciadas (ver `PROBLEMAS-FRECUENTES.md`). Para que coincidan con lo aprobado, corré los comandos tal cual están escritos en la Regla #12 y en `progreso/LEEME.md`.
+4. **Todo lo demás sigue pidiendo permiso por separado** (internet, instalar, fuera de esta carpeta). Ya está anunciado, pero justo antes recordale en una frase qué es. Si aparece un pedido que NO estaba en la lista, explicáselo en una frase antes de que tenga que aprobarlo.
+5. **En las sesiones siguientes no repitas la tabla entera:** alcanza con una frase ("van a aparecer los mismos permisos de la otra vez"), y explicá solo los nuevos.
+
+Nunca le sugieras "permitir todo" ni un modo que apruebe todo solo para ahorrarse clics.
 
 ## Regla dura #5 — instalar el vault (Obsidian) es parte del camino principal, con el mínimo de clicks posible
 
@@ -114,6 +126,7 @@ Esto aplica sin importar qué modelo o compañía sos (Anthropic, OpenAI, Google
 Esta carpeta trae `scripts/chequeo-estado.ps1` (Windows) y `scripts/chequeo-estado.sh` (Mac/Linux) — un script de SOLO LECTURA que revisa qué está armado (memoria, Obsidian, plugins, conexión MCP) y lo muestra en colores (verde = listo). Esto vale para cualquier agente que estés usando (Claude Code, Codex CLI, o el que sea) — correr un script no depende de la herramienta, depende del sistema operativo.
 
 - Antes de correrlo, avisale a la persona qué es y qué hace (Regla dura #4) — aclará explícitamente que no modifica ni borra nada, solo lee.
+- Correlo exactamente así, sin variantes, para que coincida con el permiso ya anunciado: en Windows `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/chequeo-estado.ps1`; en Mac o Linux `bash scripts/chequeo-estado.sh`.
 - Usalo cada vez que necesites saber en qué nivel está la carpeta (arranque de sesión, retome después de una actualización — Regla #7 — o duda sobre el estado — Regla #10) en vez de listar archivos uno por uno a mano.
 - Si el script falla por algún motivo (permiso denegado, sistema no compatible), hacé el chequeo a mano como respaldo — no le eches la culpa a la persona ni inventes un resultado.
 
