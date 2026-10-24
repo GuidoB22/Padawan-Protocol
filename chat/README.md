@@ -12,6 +12,7 @@ Sirve para cosas de todos los días, por ejemplo:
 - Armar o corregir una **invitación**.
 - Escribir un texto que **suene a vos**, no a una computadora.
 - Elegir **qué letra** (tipografía) usar y cómo ponerla en tu documento.
+- Revisar **un documento de tu trabajo**: un contrato, una planilla o una nota para alguien a quien ayudás.
 
 La idea es simple: le das a tu chat unas reglas al empezar, y con eso te habla fácil, te pide ejemplos, te muestra borradores y va paso a paso con vos. Es como darle a alguien nuevo una hojita con "así me gusta que me ayuden" antes de arrancar.
 
@@ -45,6 +46,28 @@ Es como dejarle una nota en la heladera a quien te ayuda: la próxima vez la lee
 
 Un **molde para rellenar** que guardás y volvés a usar. Por ejemplo: "Invitación de [ocasión] para [nombre], el [día] a las [hora], en [lugar]". La próxima vez pegás la chuleta, cambiás lo que está entre corchetes, y listo. Tu chat te va a ofrecer armar una cada vez que terminen algo.
 
+## 💼 Si es para tu trabajo
+
+La guía tiene una parte que se llama **SI ES PARA MI TRABAJO**. Se activa cuando le decís a tu chat que es para tu trabajo o le pasás un documento de tu trabajo. Ahí deja de ir de a un pasito: avanza con lo que hay, te dice qué supuso, separa los riesgos de las propuestas y te avisa si una parte de la foto no se lee.
+
+Es como pasarle una carpeta a un compañero de trabajo: le decís qué necesitás, para quién es y qué tiene que mirar con cuidado.
+
+> [!TIP]
+> 🧭 **Chuleta de pedido de trabajo** (cambiá lo que está entre corchetes):
+>
+> ```
+> Soy [tu trabajo] en [país]. Necesito revisar este documento
+> para [a quién ayudo]. Es de [lugar]. Revisalo parte por parte,
+> separá riesgos de propuestas y fijate las normas en fuentes
+> oficiales. Marcá lo que no se lea. Al terminar, armá [lo que
+> necesito: un resumen simple para X / una versión con cambios
+> para revisar yo].
+> ```
+
+Por ejemplo, una abogada en CABA: "Soy abogada en Argentina. Necesito revisar esta autorización de venta para una clienta. Es de la Ciudad de Buenos Aires…".
+
+Lo que te devuelva es un punto de partida. Lo importante lo revisás siempre vos.
+
 ## 🔗 Otra forma: pasale el link (probalo)
 
 En vez de copiar y pegar, podés probar mandarle a tu chat este mensaje:
@@ -61,7 +84,8 @@ En vez de copiar y pegar, podés probar mandarle a tu chat este mensaje:
 
 ## 🚫 Qué NO hace esta versión
 
-- **No crea archivos en tu computadora.** Te da el texto; vos lo copiás donde lo necesites.
+- **No crea archivos en tu computadora.** Te da el texto; vos lo copiás donde lo necesites. Si es para mandar o imprimir, te sugiere guardarlo con fecha, asunto y versión, por ejemplo `2026-11-08-cumple-sofi-v1`.
+- **No necesita los datos de otras personas.** Si pegás algo con nombres, documentos o teléfonos de alguien, podés taparlos antes. Tu chat te lo va a recordar.
 - **No se acuerda sola de vos entre chats**, salvo que le pegues tu resumen.
 - **No cambia la letra por vos.** Te recomienda cuál usar y te guía clic por clic para cambiarla en tu programa.
 - **No manda, imprime, publica ni compra nada.** Eso lo hacés siempre vos.
