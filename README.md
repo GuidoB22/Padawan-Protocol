@@ -4,6 +4,17 @@
 
 # 🧭 Padawan Protocol
 
+## 🛣️ ¿Cuál es tu camino?
+
+Hay dos caminos. Elegí según qué usás hoy:
+
+- 💬 **Uso un chat** (Gemini, ChatGPT o Meta AI en WhatsApp) y no quiero instalar nada → **[Padawan para chat](chat/README.md)** (🧪 en prueba). No hace falta leer nada más de esta página.
+- 🤖 **Tengo un agente de código** (Claude Code, Codex CLI, Cursor) **o quiero instalar uno** → seguí leyendo acá abajo.
+
+¿No sabés cuál es el tuyo? Si nunca instalaste nada y solo chateás, es el de chat. Siempre podés pasar al otro más adelante.
+
+---
+
 Esta guía no se lee sola. Se hace **hablando con tu agente**, en el orden que sigue. Cada nivel termina con un bloque de texto que le decís literalmente a tu agente para que haga el paso con vos.
 
 **Pensada para cualquiera, sin importar cuánto sepas de computadoras.** Si nunca usaste algo así, tranquilo/a — está armada para que tu agente te vaya llevando de la mano, un paso genuinamente chico a la vez.
