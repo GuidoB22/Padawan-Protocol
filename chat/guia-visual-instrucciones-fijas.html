@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reglas fijas paso a paso — Padawan Protocol</title>
+<style>html,body{margin:0}*{box-sizing:border-box}[hidden]{display:none!important}</style>
+</head>
+<body>
+<style>
+/* Layout: one column. 1) app chooser ("Elegí tu nave"), 2) slideshow guide: screenshot area, title, 4 parts, prev/next. Step data lives in the JSON block #steps.
+   Theme: Padawan Protocol cockpit. Dark-only on purpose (deep space + holographic panels); every text pair is kept at WCAG AA or better.
+   Decoration is CSS-only (no images, no fonts, no network). Motion is limited to two glows and is disabled under prefers-reduced-motion. */
+:root{
+  --space:#050916;--space2:#0a1330;
+  --panel:#0b1830;--panel2:#0f2040;--row:#0d1d38;--inset:#060e1e;
+  --line:#1d3557;--fg:#eaf3ff;--muted:#a9bdd6;
+  --cyan:#5fdcff;--cyan-soft:#9fe9ff;--cyan-dim:rgba(95,220,255,.38);
+  --green:#3dff8f;--green-text:#c9ffe0;--green-dim:rgba(61,255,143,.38);--green-ink:#03140a;
+  --yellow:#ffd33d;--yellow-soft:#2b2307;
+  --celeste:#74acdf;--sol:#f6b40e;
+  --font-ui:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  color-scheme:dark;
+}
+
+/* starfield: small repeating star tiles + two faint nebula glows, all gradients */
+body{
+  color:var(--fg);font-family:var(--font-ui);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:20px;
+  background-color:var(--space);
+  background-image:
+    radial-gradient(1.3px 1.3px at 23px 41px,rgba(255,255,255,.9) 50%,transparent 51%),
+    radial-gradient(1px 1px at 141px 97px,rgba(255,255,255,.65) 50%,transparent 51%),
+    radial-gradient(1.6px 1.6px at 77px 160px,rgba(160,225,255,.85) 50%,transparent 51%),
+    radial-gradient(1px 1px at 190px 12px,rgba(255,255,255,.55) 50%,transparent 51%),
+    radial-gradient(1.2px 1.2px at 52px 118px,rgba(255,236,170,.7) 50%,transparent 51%),
+    radial-gradient(ellipse at 12% -8%,rgba(61,255,143,.10),transparent 55%),
+    radial-gradient(ellipse at 100% 4%,rgba(95,220,255,.13),transparent 50%),
+    linear-gradient(180deg,var(--space) 0%,var(--space2) 100%);
+  background-size:211px 211px,173px 173px,257px 257px,199px 199px,233px 233px,100% 100%,100% 100%,100% 100%;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat,no-repeat,no-repeat;
+  min-height:100vh;
+}
+.wrap{max-width:660px;margin-inline:auto;display:flex;flex-direction:column;gap:18px}
+a{color:var(--cyan)}
+button{font-family:inherit}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+
+/* header: celeste-white stripe, emblem, kicker */
+.flag{height:5px;border-radius:3px;background:linear-gradient(180deg,var(--celeste) 0 33%,#fff 33% 67%,var(--celeste) 67% 100%);opacity:.9}
+.brand{display:flex;align-items:center;gap:14px;margin-top:14px}
+.emblem{flex:0 0 auto;width:64px;height:64px;filter:drop-shadow(0 0 8px rgba(61,255,143,.35))}
+.kicker{margin:0 0 4px;font:700 12px/1.3 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
+h1{margin:0;font:800 30px/1.1 var(--font-ui);letter-spacing:-.01em;color:#fff;text-shadow:0 0 14px rgba(95,220,255,.35)}
+.lead{color:var(--muted);margin:12px 0 0;max-width:54ch}
+.note{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin-top:10px;font-size:14px}
+.pill{font:700 12px var(--font-ui);letter-spacing:.03em;border:1px solid var(--yellow);border-radius:99px;padding:3px 10px;color:var(--yellow);background:var(--yellow-soft)}
+
+/* holo-console panel: gradient + faint static scanlines behind the text, neon top edge */
+.card{
+  position:relative;border:1px solid var(--cyan-dim);border-radius:16px;padding:18px 16px;display:flex;flex-direction:column;gap:14px;min-width:0;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px),linear-gradient(180deg,var(--panel2),var(--panel));
+  box-shadow:inset 0 0 0 1px rgba(61,255,143,.07),0 0 26px rgba(95,220,255,.12);
+}
+.card::before{content:"";position:absolute;left:18px;right:18px;top:-1px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--green),var(--cyan),transparent);pointer-events:none}
+.card h2{margin:0;font:800 22px/1.2 var(--font-ui);color:#fff}
+.cap{color:var(--muted);font-size:15px;margin:6px 0 0}
+.cap b{color:var(--fg)}
+
+/* chooser: app tiles as hologram ships */
+.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.app{
+  position:relative;min-height:68px;font:700 18px var(--font-ui);color:var(--fg);text-align:left;cursor:pointer;
+  background:linear-gradient(160deg,#12284d,#0b1830);border:1px solid var(--cyan-dim);border-left:4px solid var(--green);border-radius:14px;
+  padding:12px 14px 12px 16px;display:flex;flex-direction:column;justify-content:center;gap:3px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.app small{color:var(--muted);font-weight:500;font-size:14px}
+.app:hover{border-color:var(--green);box-shadow:0 0 16px rgba(61,255,143,.28)}
+
+/* guide header */
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.link{min-height:44px;background:none;border:0;padding:0 4px;color:var(--cyan);font:600 15px var(--font-ui);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.appname{font:700 13px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--green);border:1px solid var(--green-dim);border-radius:99px;padding:4px 10px}
+.count{font:600 15px var(--font-ui);color:var(--cyan-soft);margin:0}
+
+/* progress pips: short sabers / hyperspace streaks */
+.dots{display:flex;flex-wrap:wrap;gap:6px}
+.dot{width:24px;height:6px;border-radius:3px;background:var(--line)}
+.dot.done{background:var(--green);box-shadow:0 0 6px rgba(61,255,143,.6)}
+.dot.now{width:34px;background:var(--yellow);box-shadow:0 0 8px rgba(255,211,61,.75);animation:hum 1.8s ease-in-out infinite}
+@keyframes hum{0%,100%{box-shadow:0 0 8px rgba(255,211,61,.75)}50%{box-shadow:0 0 2px rgba(255,211,61,.35)}}
+
+/* screenshot area as a hologram projector */
+.shot{text-align:center;min-width:0}
+.frame{position:relative;display:inline-block;max-width:100%}
+.frame img{display:block;max-width:100%;max-height:60vh;height:auto;border-radius:12px;border:1px solid var(--cyan-dim);box-shadow:0 0 18px rgba(95,220,255,.15)}
+.ring{position:absolute;border:3px solid var(--yellow);border-radius:10px;box-shadow:0 0 0 4px rgba(255,211,61,.25),0 0 14px rgba(255,211,61,.6);animation:pulse 1.6s ease-in-out infinite;pointer-events:none}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.06)}}
+.ph{
+  position:relative;border:2px dashed var(--cyan-dim);border-radius:12px;padding:20px 14px 26px;min-height:170px;
+  display:flex;flex-direction:column;justify-content:center;gap:6px;color:var(--muted);text-align:center;
+  background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(95,220,255,.14),transparent 70%),var(--inset);
+}
+.ph::after{content:"";position:absolute;left:50%;bottom:8px;width:72px;height:4px;margin-left:-36px;border-radius:2px;background:var(--cyan);box-shadow:0 0 10px var(--cyan);opacity:.7}
+.ph strong{color:var(--fg);font-size:17px}
+.ph code{font:500 13px var(--font-mono);overflow-wrap:anywhere;color:var(--cyan-soft)}
+
+/* copy block */
+.block{text-align:left;display:flex;flex-direction:column;gap:10px}
+pre{margin:0;background:var(--inset);border:1px solid var(--green-dim);border-radius:12px;padding:12px;font:400 13.5px/1.55 var(--font-mono);color:var(--green-text);white-space:pre-wrap;overflow-wrap:anywhere;text-align:left}
+.copy{align-self:flex-start;min-height:48px;min-width:120px;font:800 16px var(--font-ui);color:var(--green-ink);background:var(--green);border:0;border-radius:12px;padding:10px 20px;cursor:pointer;box-shadow:0 0 14px rgba(61,255,143,.4)}
+.copy:hover{box-shadow:0 0 20px rgba(61,255,143,.6)}
+.copied{font-size:15px;color:var(--green);min-height:1.2em;margin:0}
+.badge{align-self:flex-start;font:600 14px var(--font-ui);color:var(--yellow);background:var(--yellow-soft);border:1px solid var(--yellow);border-radius:10px;padding:6px 10px}
+
+/* step text */
+.title{margin:0;font:800 26px/1.15 var(--font-ui);color:#fff}
+.parts{margin:0;display:flex;flex-direction:column;gap:12px}
+.parts div{border-left:3px solid var(--cyan);padding-left:12px}
+.parts div.ck{border-left-color:var(--green)}
+.parts div.cu{border-left-color:var(--yellow)}
+.parts dt{font:700 12px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--cyan-soft)}
+.parts div.ck dt{color:var(--green)}
+.parts div.cu dt{color:var(--yellow)}
+.parts dd{margin:3px 0 0;font-size:17px}
+.help{background:var(--row);border:1px solid var(--cyan-dim);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.help p{margin:0;font-weight:600}
+.rank{margin:0;padding:10px 12px;border:1px solid var(--yellow);border-radius:12px;background:var(--yellow-soft);color:var(--yellow);font-weight:700;text-align:center}
+.rank span{display:block;font-weight:500;color:var(--fg)}
+
+/* navigation */
+.nav{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.nav button{min-height:52px;font:800 16px var(--font-ui);border-radius:12px;cursor:pointer;padding:8px 12px}
+.prev{color:var(--fg);background:var(--row);border:1px solid var(--cyan-dim)}
+.next{color:var(--green-ink);background:var(--green);border:1px solid var(--green);box-shadow:0 0 14px rgba(61,255,143,.35)}
+.nav button:disabled{opacity:.45;cursor:default;box-shadow:none}
+.tip{color:var(--muted);font-size:14px;margin:0;text-align:center}
+
+/* footer */
+.foot{display:flex;flex-direction:column;gap:8px;align-items:center;color:var(--muted);font-size:14px;text-align:center}
+.foot .flag{width:96px}
+.foot p{margin:0}
+
+@media (max-width:420px){h1{font-size:26px}.emblem{width:52px;height:52px}.title{font-size:23px}}
+@media (prefers-reduced-motion:reduce){
+  .ring,.dot.now{animation:none}
+  .app{transition:none}
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="flag" aria-hidden="true"></div>
+    <div class="brand">
+      <svg class="emblem" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <!-- own design: hooded robot apprentice, practice saber, small Argentine sun -->
+        <path d="M32 7C19 7 11 18 11 31v18c0 4 3 6 7 6h28c4 0 7-2 7-6V31C53 18 45 7 32 7z" fill="#0f2040" stroke="#5fdcff" stroke-width="2"/>
+        <path d="M32 13c-9 0-14 9-14 19 0 9 6 15 14 15s14-6 14-15c0-10-5-19-14-19z" fill="#02060f" stroke="#1d3557" stroke-width="1.5"/>
+        <circle cx="26.5" cy="31" r="2.6" fill="#3dff8f"/>
+        <circle cx="37.5" cy="31" r="2.6" fill="#3dff8f"/>
+        <rect x="27" y="39" width="10" height="2" rx="1" fill="#5fdcff"/>
+        <rect x="6" y="57" width="10" height="4" rx="1.5" fill="#a9bdd6"/>
+        <rect x="16" y="58" width="42" height="2" rx="1" fill="#3dff8f"/>
+        <g fill="#f6b40e" stroke="#f6b40e" stroke-width="1.4" stroke-linecap="round">
+          <circle cx="54" cy="10" r="3.6"/>
+          <path d="M54 2.5v2.3M54 15.2v2.3M46.5 10h2.3M59.2 10h2.3M48.7 4.7l1.6 1.6M57.7 13.7l1.6 1.6M48.7 15.3l1.6-1.6M57.7 6.3l1.6-1.6" fill="none"/>
+        </g>
+      </svg>
+      <div>
+        <p class="kicker">Padawan Protocol · Transmisión desde Coruscant</p>
+        <h1>Que tu chat lo sepa siempre</h1>
+      </div>
+    </div>
+    <p class="lead">Guardá tus reglas una sola vez, y tu chat las lee solo en cada chat nuevo. Te llevamos paso a paso.</p>
+    <div class="note"><span class="pill">🧪 en prueba</span><span>Si algo no coincide con tu pantalla, confiá en tu pantalla.</span></div>
+    <div class="note"><a href="instrucciones-fijas.md">Ver la versión en texto</a></div>
+  </header>
+
+  <section class="card" id="pick" aria-labelledby="h-pick">
+    <div><h2 id="h-pick">Elegí tu nave</h2><p class="cap"><b>¿Qué app usás?</b> Tocá la tuya. Tu avance queda guardado en este aparato.</p></div>
+    <div class="apps" id="apps"></div>
+  </section>
+
+  <section class="card" id="guide" aria-labelledby="g-title" hidden>
+    <div class="top">
+      <button class="link" type="button" id="back">← Volver a elegir app</button>
+      <span class="appname" id="g-app"></span>
+    </div>
+    <div aria-live="polite"><p class="count" id="g-count"></p></div>
+    <div class="dots" id="g-dots" aria-hidden="true"></div>
+    <div class="shot" id="g-shot"></div>
+    <span class="badge" id="g-badge" hidden>⚠️ sin verificar: el nombre puede ser distinto en tu pantalla</span>
+    <h2 class="title" id="g-title" tabindex="-1"></h2>
+    <dl class="parts">
+      <div><dt>Qué hacés</dt><dd id="g-que"></dd></div>
+      <div><dt>Por qué</dt><dd id="g-porque"></dd></div>
+      <div class="ck"><dt>Cómo comprobás</dt><dd id="g-comprobas"></dd></div>
+      <div class="cu"><dt>Cuidado</dt><dd id="g-cuidado"></dd></div>
+    </dl>
+    <div class="help" id="g-help" hidden>
+      <p>¿No lo encontrás? Preguntale a tu chat:</p>
+      <pre id="g-fallback"></pre>
+      <button class="copy" type="button" data-copy="g-fallback">Copiar</button>
+      <p class="copied" aria-live="polite"></p>
+    </div>
+    <p class="rank" id="g-rank" hidden>Último paso: de Padawan a Caballero ☀<span>Que la Fuerza te acompañe, che.</span></p>
+    <div class="nav">
+      <button class="prev" type="button" id="prev">← Anterior</button>
+      <button class="next" type="button" id="next">Siguiente →</button>
+    </div>
+    <p class="tip">También podés deslizar el dedo o usar las flechas del teclado.</p>
+  </section>
+
+  <footer class="foot">
+    <div class="flag" aria-hidden="true"></div>
+    <p>Padawan Protocol · hecho en Argentina, a pulmón y con mate.</p>
+  </footer>
+</div>
+
+<script type="application/json" id="steps">
+{
+  "block": "Soy principiante con la tecnología. En cada chat nuevo:\n- Hablame simple, sin palabras técnicas. Un paso por vez.\n- Si te escribo con \"vos\", respondeme con \"vos\".\n- No empieces con \"¡Claro!\" ni con frases entusiasmadas.\n- Si necesitás varios datos, pedímelos juntos (3 como máximo).\n- Si no estás seguro de algo, decímelo. No inventes.\n- Nunca mandes, publiques, imprimas ni compres nada por mí.\n- Antes de cambiar algo que escribí yo, mostrame el cambio.\n- Si te paso datos de otra persona, recordame que puedo taparlos.\n- Si es para mi trabajo: decime qué me vas a entregar, marcá lo\n  que no se lea, separá riesgos de propuestas y dame las fuentes\n  con la fecha en que las miraste.\n- Si es para mandar o imprimir: dame la versión final limpia.\nSigo la guía Padawan para chat. Si podés abrir links, leé la\nversión más nueva y seguila:\nhttps://raw.githubusercontent.com/GuidoB22/Padawan-Protocol/master/chat/guia-para-pegar.md\nSi no podés abrirlo, seguí con estas reglas sin mencionarlo.",
+  "fallback": "¿Dónde guardo instrucciones fijas en esta app, para que las\nleas en cada chat nuevo? Guiame clic por clic, un paso por vez.",
+  "apps": [
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "steps": [
+        {"kind": "copy", "img": null, "hotspot": null, "unverified": false,
+         "title": "Copiá el texto corto",
+         "que": "Tocá el botón Copiar.",
+         "porque": "Es el texto con tus reglas. Lo vas a pegar en tu app.",
+         "comprobas": "Aparece el aviso \"¡Copiado!\" debajo del botón.",
+         "cuidado": "Copiá todo, sin cortar nada. Si el botón no anda, mantené apretado el texto y elegí Copiar."},
+        {"img": "pantallazos/chatgpt-01-configuracion.png", "hotspot": null, "unverified": true,
+         "shows": "La pantalla de Configuración de ChatGPT abierta.",
+         "title": "Abrí la Configuración",
+         "que": "Abrí ChatGPT y buscá la Configuración.",
+         "porque": "Ahí adentro está el lugar para tus reglas.",
+         "comprobas": "Ves una lista de opciones de la app.",
+         "cuidado": "Si no la ves, tocá tu nombre o tu foto: muchas veces está ahí."},
+        {"img": "pantallazos/chatgpt-02-personalizacion.png", "hotspot": null, "unverified": true,
+         "shows": "Configuración abierta, con la opción Personalización a la vista.",
+         "title": "Entrá a Personalización",
+         "que": "Tocá Personalización.",
+         "porque": "Ahí elegís cómo querés que te hable.",
+         "comprobas": "Ves la opción Instrucciones personalizadas.",
+         "cuidado": "El nombre puede cambiar un poco. Buscá uno parecido."},
+        {"img": "pantallazos/chatgpt-03-instrucciones.png", "hotspot": null, "unverified": true,
+         "shows": "La pantalla de Instrucciones personalizadas, con el cuadro para escribir.",
+         "title": "Abrí Instrucciones personalizadas",
+         "que": "Tocá Instrucciones personalizadas.",
+         "porque": "Es el lugar que ChatGPT lee en cada chat nuevo.",
+         "comprobas": "Ves un cuadro para escribir.",
+         "cuidado": "Si ya hay algo escrito, leelo antes de borrarlo."},
+        {"img": "pantallazos/chatgpt-04-pegar-guardar.png", "hotspot": null, "unverified": true,
+         "shows": "El cuadro con el texto corto pegado y el botón para guardar.",
+         "title": "Pegá el texto y guardá",
+         "que": "Tocá el cuadro, pegá el texto y tocá Guardar.",
+         "porque": "Si no guardás, el texto se pierde.",
+         "comprobas": "Si salís y volvés a entrar, tu texto sigue ahí.",
+         "cuidado": "ChatGPT gratis deja 1.500 letras. Tu texto tiene menos de 1.000, así que entra entero."},
+        {"kind": "test", "img": "pantallazos/chatgpt-05-probalo.png", "hotspot": null, "unverified": false,
+         "shows": "Un chat nuevo de ChatGPT con \"hola\" y una respuesta corta y simple.",
+         "title": "Probalo",
+         "que": "Abrí un chat nuevo y escribí solo: hola.",
+         "porque": "Así ves si el chat ya lee tus reglas.",
+         "comprobas": "Te contesta corto y simple, sin palabras técnicas.",
+         "cuidado": "Si te contesta largo o con \"¡Claro!\", volvé un paso atrás y fijate que se haya guardado."}
+      ]
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "steps": [
+        {"kind": "copy", "img": null, "hotspot": null, "unverified": false,
+         "title": "Copiá el texto corto",
+         "que": "Tocá el botón Copiar.",
+         "porque": "Es el texto con tus reglas. Lo vas a pegar en tu app.",
+         "comprobas": "Aparece el aviso \"¡Copiado!\" debajo del botón.",
+         "cuidado": "Copiá todo, sin cortar nada. Si el botón no anda, mantené apretado el texto y elegí Copiar."},
+        {"img": "pantallazos/gemini-01-configuracion.png", "hotspot": null, "unverified": true,
+         "shows": "La pantalla de Configuración de Gemini abierta.",
+         "title": "Abrí la Configuración",
+         "que": "Abrí Gemini y buscá la Configuración.",
+         "porque": "Ahí adentro está el lugar para tus reglas.",
+         "comprobas": "Ves una lista de opciones de la app.",
+         "cuidado": "Si no la ves, tocá tu foto o el menú: muchas veces está ahí."},
+        {"img": "pantallazos/gemini-02-informacion-guardada.png", "hotspot": null, "unverified": true,
+         "shows": "La pantalla de Información guardada (o Contexto personal).",
+         "title": "Entrá a Información guardada",
+         "que": "Tocá Información guardada. En algunas cuentas se llama Contexto personal.",
+         "porque": "Ahí Gemini guarda lo que querés que tenga en cuenta.",
+         "comprobas": "Ves un lugar para agregar información.",
+         "cuidado": "Puede que no te aparezca: todavía no está en todos los países ni en todos los tipos de cuenta. Si no está, pegá el texto al empezar cada chat."},
+        {"img": "pantallazos/gemini-03-pegar-guardar.png", "hotspot": null, "unverified": true,
+         "shows": "El texto corto pegado en Información guardada, listo para guardar.",
+         "title": "Pegá el texto y guardá",
+         "que": "Pegá el texto y guardalo.",
+         "porque": "Así Gemini lo tiene en cuenta en cada chat nuevo.",
+         "comprobas": "Tu texto aparece en la lista de información guardada.",
+         "cuidado": "Si te pide que confirmes, confirmá. Si no te deja guardarlo, pegá el texto al empezar cada chat."},
+        {"kind": "test", "img": "pantallazos/gemini-04-probalo.png", "hotspot": null, "unverified": false,
+         "shows": "Un chat nuevo de Gemini con \"hola\" y una respuesta corta y simple.",
+         "title": "Probalo",
+         "que": "Abrí un chat nuevo y escribí solo: hola.",
+         "porque": "Así ves si el chat ya lee tus reglas.",
+         "comprobas": "Te contesta corto y simple, sin palabras técnicas.",
+         "cuidado": "Si te contesta largo o con \"¡Claro!\", volvé un paso atrás y fijate que se haya guardado."}
+      ]
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "steps": [
+        {"kind": "copy", "img": null, "hotspot": null, "unverified": false,
+         "title": "Copiá el texto corto",
+         "que": "Tocá el botón Copiar.",
+         "porque": "Es el texto con tus reglas. Lo vas a pegar en tu app.",
+         "comprobas": "Aparece el aviso \"¡Copiado!\" debajo del botón.",
+         "cuidado": "Copiá todo, sin cortar nada. Si el botón no anda, mantené apretado el texto y elegí Copiar."},
+        {"img": "pantallazos/claude-01-menu.png", "hotspot": null, "unverified": false,
+         "shows": "Claude abierto, con tu nombre o tus iniciales abajo a la izquierda y el menú abierto.",
+         "title": "Tocá tu nombre",
+         "que": "Abrí Claude y tocá tu nombre o tus iniciales, abajo a la izquierda.",
+         "porque": "Ahí se abre el menú de tu cuenta.",
+         "comprobas": "Se abre un menú chico con opciones.",
+         "cuidado": "En el celular puede estar en otro lugar. Buscá tu nombre o tus iniciales."},
+        {"img": "pantallazos/claude-02-configuracion.png", "hotspot": null, "unverified": false,
+         "shows": "La pantalla de Configuración de Claude abierta.",
+         "title": "Entrá a Configuración",
+         "que": "Tocá Configuración.",
+         "porque": "Ahí están las opciones de Claude.",
+         "comprobas": "Ves la pantalla de Configuración, con varias secciones.",
+         "cuidado": "No cambies otras opciones. Solo vas a tocar una."},
+        {"img": "pantallazos/claude-03-your-claude.png", "hotspot": null, "unverified": false,
+         "shows": "La sección Your Claude (o Perfil) abierta, con el lugar de Instrucciones.",
+         "title": "Abrí Your Claude",
+         "que": "Tocá Your Claude. En algunas pantallas se llama Perfil.",
+         "porque": "Ahí está lo que Claude sabe de vos.",
+         "comprobas": "Ves un lugar que dice Instrucciones.",
+         "cuidado": "Your Claude está en inglés. Es normal, no te equivocaste."},
+        {"img": "pantallazos/claude-04-instrucciones.png", "hotspot": null, "unverified": false,
+         "shows": "El cuadro de Instrucciones con el texto corto pegado.",
+         "title": "Pegá en Instrucciones y guardá",
+         "que": "Tocá el cuadro de Instrucciones, pegá el texto y guardá.",
+         "porque": "Claude lo lee al empezar cada chat nuevo.",
+         "comprobas": "Si salís y volvés a entrar, tu texto sigue ahí.",
+         "cuidado": "Si ya había algo escrito, leelo antes de borrarlo."},
+        {"kind": "test", "img": "pantallazos/claude-05-probalo.png", "hotspot": null, "unverified": false,
+         "shows": "Un chat nuevo de Claude con \"hola\" y una respuesta corta y simple.",
+         "title": "Probalo",
+         "que": "Abrí un chat nuevo y escribí solo: hola.",
+         "porque": "Así ves si el chat ya lee tus reglas.",
+         "comprobas": "Te contesta corto y simple, sin palabras técnicas.",
+         "cuidado": "Si te contesta largo o con \"¡Claro!\", volvé un paso atrás y fijate que se haya guardado."}
+      ]
+    },
+    {
+      "id": "metaai",
+      "name": "Meta AI (WhatsApp)",
+      "steps": [
+        {"kind": "copy", "img": null, "hotspot": null, "unverified": false,
+         "title": "Copiá el texto corto",
+         "que": "Tocá el botón Copiar.",
+         "porque": "Es el texto con tus reglas. Se lo vas a pegar a Meta AI.",
+         "comprobas": "Aparece el aviso \"¡Copiado!\" debajo del botón.",
+         "cuidado": "Copiá todo, sin cortar nada. Si el botón no anda, mantené apretado el texto y elegí Copiar."},
+        {"img": "pantallazos/metaai-01-abrir-chat.png", "hotspot": null, "unverified": true,
+         "shows": "WhatsApp con el chat de Meta AI abierto.",
+         "title": "Abrí el chat de Meta AI",
+         "que": "En WhatsApp, abrí el chat con Meta AI.",
+         "porque": "Meta AI no tiene un lugar fijo para reglas. Se las decís en el chat.",
+         "comprobas": "Arriba del chat dice Meta AI.",
+         "cuidado": "Fijate que sea el chat con Meta AI y no el de una persona."},
+        {"img": "pantallazos/metaai-02-pegar.png", "hotspot": null, "unverified": true,
+         "shows": "El texto corto pegado en el chat de Meta AI, con \"acordate de esto para la próxima\" al final.",
+         "title": "Pegá el texto y pedile que se acuerde",
+         "que": "Pegá el texto. Al final agregá: acordate de esto para la próxima. Después mandalo.",
+         "porque": "Así le pedís que lo tenga en cuenta la próxima vez.",
+         "comprobas": "Te contesta que lo va a tener en cuenta.",
+         "cuidado": "Puede que no se acuerde siempre. No es un lugar fijo como en las otras apps."},
+        {"kind": "test", "img": "pantallazos/metaai-03-probalo.png", "hotspot": null, "unverified": false,
+         "shows": "El chat de Meta AI con \"hola\" y una respuesta corta y simple.",
+         "title": "Probalo",
+         "que": "Más tarde, escribile solo: hola.",
+         "porque": "Así ves si se acordó de tus reglas.",
+         "comprobas": "Te contesta corto y simple, sin palabras técnicas.",
+         "cuidado": "Si no se acordó, pegale el texto de nuevo. Con Meta AI pasa."}
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var DATA=JSON.parse($("steps").textContent);
+  var KEY="padawan.guiaVisual.v1";
+  var cur=null,idx=0;
+
+  /* progress: {appId: stepIndex}; stepIndex === steps.length means finished. Works without storage. */
+  function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+  function save(id,i){try{var p=load();p[id]=i;localStorage.setItem(KEY,JSON.stringify(p))}catch(e){}}
+
+  function renderApps(){
+    var box=$("apps"),p=load();box.textContent="";
+    DATA.apps.forEach(function(a){
+      var b=document.createElement("button");b.type="button";b.className="app";
+      b.appendChild(document.createTextNode(a.name));
+      var s=document.createElement("small"),n=p[a.id];
+      if(typeof n==="number"&&n>=a.steps.length)s.textContent="✓ Ya lo hiciste";
+      else if(typeof n==="number"&&n>0)s.textContent="Seguís en el paso "+(n+1)+" de "+a.steps.length;
+      else s.textContent=a.steps.length+" pasos";
+      b.appendChild(s);
+      b.onclick=function(){open(a)};
+      box.appendChild(b);
+    });
+  }
+
+  function open(a){
+    cur=a;var n=load()[a.id];
+    idx=(typeof n==="number"&&n>0&&n<a.steps.length)?n:0;
+    $("pick").hidden=true;$("guide").hidden=false;$("g-app").textContent=a.name;
+    render();$("g-title").focus({preventScroll:false});
+  }
+  function close(){cur=null;$("guide").hidden=true;$("pick").hidden=false;renderApps();window.scrollTo(0,0)}
+
+  function copyBox(text,id){
+    var w=document.createElement("div");w.className="block";
+    var pre=document.createElement("pre");pre.id=id;pre.textContent=text;
+    var b=document.createElement("button");b.type="button";b.className="copy";b.textContent="Copiar";b.setAttribute("data-copy",id);
+    var m=document.createElement("p");m.className="copied";m.setAttribute("aria-live","polite");
+    w.appendChild(pre);w.appendChild(b);w.appendChild(m);return w;
+  }
+
+  function placeholder(st){
+    var d=document.createElement("div");d.className="ph";
+    var t=document.createElement("strong");t.textContent="📷 Pantallazo pendiente";
+    var c=document.createElement("code");c.textContent=st.img;
+    var s=document.createElement("span");s.textContent="Tiene que mostrar: "+st.shows;
+    d.appendChild(t);d.appendChild(c);d.appendChild(s);return d;
+  }
+
+  function shot(st){
+    var box=$("g-shot");box.textContent="";
+    if(st.kind==="copy"){box.appendChild(copyBox(DATA.block,"g-block"));return}
+    var f=document.createElement("div");f.className="frame";
+    var img=document.createElement("img");img.alt="Pantallazo: "+st.shows;
+    img.onerror=function(){box.textContent="";box.appendChild(placeholder(st))};
+    img.onload=function(){
+      var h=st.hotspot;
+      if(h&&typeof h.x==="number"){
+        var r=document.createElement("div");r.className="ring";r.setAttribute("aria-hidden","true");
+        r.style.left=h.x+"%";r.style.top=h.y+"%";r.style.width=h.w+"%";r.style.height=h.h+"%";
+        f.appendChild(r);
+      }
+    };
+    img.src=st.img;
+    f.appendChild(img);box.appendChild(f);
+  }
+
+  function render(){
+    var steps=cur.steps,st=steps[idx],last=steps.length-1;
+    $("g-count").textContent="Paso "+(idx+1)+" de "+steps.length+": "+st.title;
+    var dots=$("g-dots");dots.textContent="";
+    steps.forEach(function(_,k){var d=document.createElement("span");d.className="dot"+(k<idx?" done":k===idx?" now":"");dots.appendChild(d)});
+    shot(st);
+    $("g-badge").hidden=!st.unverified;
+    $("g-help").hidden=!st.unverified;
+    $("g-fallback").textContent=DATA.fallback;
+    $("g-help").querySelector(".copied").textContent="";
+    $("g-title").textContent=st.title;
+    $("g-que").textContent=st.que;$("g-porque").textContent=st.porque;
+    $("g-comprobas").textContent=st.comprobas;$("g-cuidado").textContent=st.cuidado;
+    $("prev").disabled=idx===0;
+    $("next").textContent=idx===last?"Terminé ✓":"Siguiente →";
+    $("g-rank").hidden=idx!==last;
+    save(cur.id,idx);
+  }
+
+  function go(d){
+    if(!cur)return;
+    var last=cur.steps.length-1;
+    if(d>0&&idx===last){save(cur.id,cur.steps.length);close();return}
+    var n=idx+d;if(n<0||n>last)return;
+    idx=n;render();
+    var g=$("guide");if(g.getBoundingClientRect().top<0)g.scrollIntoView();
+  }
+
+  /* copy: clipboard API first, then execCommand, then leave the text selected for a manual copy */
+  function selectText(el){try{var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r)}catch(e){}}
+  function legacyCopy(text){
+    var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");
+    ta.style.position="fixed";ta.style.top="0";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
+    var ok=false;try{ok=document.execCommand("copy")}catch(e){}
+    document.body.removeChild(ta);return ok;
+  }
+  function doCopy(btn){
+    var pre=$(btn.getAttribute("data-copy")),msg=btn.parentNode.querySelector(".copied"),text=pre.textContent;
+    function done(){msg.textContent="¡Copiado! Ahora tocá Siguiente."}
+    function manual(){selectText(pre);msg.textContent="Ya quedó marcado. Mantené apretado el texto y elegí Copiar (en la compu: Ctrl+C)."}
+    if(navigator.clipboard&&window.isSecureContext){
+      navigator.clipboard.writeText(text).then(done,function(){legacyCopy(text)?done():manual()});
+    }else{legacyCopy(text)?done():manual()}
+  }
+  document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-copy]");if(b)doCopy(b)});
+
+  $("prev").onclick=function(){go(-1)};
+  $("next").onclick=function(){go(1)};
+  $("back").onclick=close;
+
+  document.addEventListener("keydown",function(e){
+    if(!cur||e.altKey||e.ctrlKey||e.metaKey)return;
+    var t=e.target.tagName;if(t==="INPUT"||t==="TEXTAREA")return;
+    if(e.key==="ArrowRight")go(1);else if(e.key==="ArrowLeft")go(-1);
+  });
+
+  var sx=null,sy=null;
+  $("guide").addEventListener("touchstart",function(e){var t=e.changedTouches[0];sx=t.clientX;sy=t.clientY},{passive:true});
+  $("guide").addEventListener("touchend",function(e){
+    if(sx===null)return;var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;sx=null;
+    var sel=window.getSelection&&String(window.getSelection());if(sel)return;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)go(dx<0?1:-1);
+  },{passive:true});
+
+  renderApps();
+})();
+</script>
+</body>
+</html>
