@@ -40,6 +40,8 @@ Tiene menos de 1.000 letras, así que entra incluso en ChatGPT gratis, que deja 
 
 ## 2. Guardalo en tu app
 
+¿Preferís verlo con dibujos? Abrí la [guía visual paso a paso](guia-visual-instrucciones-fijas.html) (🧪 en prueba).
+
 Buscá en la configuración de tu app un lugar que se llame parecido a esto:
 
 | App | Dónde buscar |
