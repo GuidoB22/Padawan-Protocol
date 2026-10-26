@@ -42,6 +42,12 @@ Muchos chats no se acuerdan de vos de una conversación a la otra. Por eso la gu
 
 Es como dejarle una nota en la heladera a quien te ayuda: la próxima vez la lee y ya sabe por dónde seguir.
 
+## 📌 Que lo sepa siempre, sin pegar nada
+
+¿Te cansa pegar la guía en cada chat nuevo? Casi todas las apps (ChatGPT, Claude, Gemini) tienen un lugar para guardar **instrucciones fijas**, que el chat lee solo cada vez que empieza. Ahí podés dejar una versión corta de la guía, con el link a la versión más nueva.
+
+Seguí los pasos en [instrucciones-fijas.md](instrucciones-fijas.md) (🧪 en prueba). Es una sola vez, y después ya no tenés que pegar nada.
+
 ## 📋 ¿Qué es una chuleta?
 
 Un **molde para rellenar** que guardás y volvés a usar. Por ejemplo: "Invitación de [ocasión] para [nombre], el [día] a las [hora], en [lugar]". La próxima vez pegás la chuleta, cambiás lo que está entre corchetes, y listo. Tu chat te va a ofrecer armar una cada vez que terminen algo.
