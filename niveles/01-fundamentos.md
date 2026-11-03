@@ -47,6 +47,8 @@ Estas cinco cosas tienen que pasar, en este orden:
 4. Corre un comando de solo lectura sin problemas (o te avisa con claridad si no puede hacerlo — no es grave, es solo información).
 5. Cuando le pedís que te diga qué dice el archivo, te repite el contenido correcto — el que él mismo escribió, no algo inventado.
 
+**Prueba:** vos abrís `hola.md` en esa ruta y ves lo mismo que te dijo tu agente: la línea "Primer contacto", tu sistema operativo y si puede usar la terminal. El chequeo de estado no mira este nivel: la prueba es el archivo.
+
 ---
 
 > [!TIP]

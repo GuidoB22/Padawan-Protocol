@@ -20,6 +20,8 @@ Con esas tres respuestas, tu agente guarda un resumen corto en un archivo (`quie
 
 Existe el archivo `quien-soy.md` con tus tres respuestas resumidas, y tu agente te las repite en una frase para confirmar que entendió bien.
 
+**Prueba:** tu agente corre el chequeo de estado (Regla #12) y te muestra la línea `[OK] Nivel 00 -- contexto (quien-soy.md)`. Vos confirmás que su frase resume bien tus tres respuestas.
+
 ---
 
 > [!TIP]

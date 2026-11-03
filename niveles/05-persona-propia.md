@@ -86,6 +86,8 @@ Y después, probala a propósito: decile algo mal planteado o confuso, y fijate 
 
 El agente frena ante tu prueba, te explica por qué, y te lo dice en tu idioma y con tu tono — no con el del ejemplo de arriba.
 
+**Prueba:** existe el archivo de tu persona (por ejemplo `CLAUDE.md`) con tu texto, y en una sesión nueva tu agente te frena igual, sin que se lo recuerdes. El chequeo de estado no mira este nivel: la prueba son el archivo y esa respuesta.
+
 ---
 
 > [!TIP]

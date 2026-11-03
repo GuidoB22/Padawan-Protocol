@@ -31,6 +31,8 @@ Es como dejar el cuaderno de notas siempre en el mismo cajón: si cada vez lo gu
 
 Cerrá la sesión, abrí una nueva, y preguntale "¿qué hicimos la última vez?" — tiene que responder correctamente SIN que se lo repitas vos.
 
+**Prueba:** en la sesión nueva, tu agente corre el chequeo de estado (Regla #12) y te muestra la línea `[OK] Nivel 02 -- memoria persistente (memoria.md)`. Después contesta qué hicieron, sin que le cuentes nada.
+
 ---
 
 > [!TIP]

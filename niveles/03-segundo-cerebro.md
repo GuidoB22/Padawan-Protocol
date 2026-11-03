@@ -160,6 +160,8 @@ Elegí un tema real que te importe (no tiene que ser grande). Pedile al agente q
 
 Días después (o ahora mismo, simulando), preguntale al agente algo sobre ese tema — tiene que poder buscar en las notas y responder con lo que ahí escribiste, no inventar.
 
+**Prueba:** en `segundo-cerebro/` están las dos notas, la segunda con un link a la primera, y tu agente te dice de qué nota sacó cada dato. Si instalaste Obsidian, el chequeo de estado (Regla #12) muestra `[OK]` en `Nivel 03 -- Obsidian abierto (.obsidian/)` y en los plugins.
+
 ---
 
 > [!TIP]

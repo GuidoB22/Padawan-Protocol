@@ -56,6 +56,8 @@ Probá dos cosas:
 
 Si las dos pasan, el nivel está listo.
 
+**Prueba:** tu agente te dice en qué archivo anotó tu rama (la lista, la tarea en curso y el freno de mano), y vos lo abrís y lo ves escrito. El chequeo de estado no mira este nivel: la prueba son ese archivo y las dos cosas de arriba.
+
 ---
 
 > [!TIP]
