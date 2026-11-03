@@ -186,6 +186,15 @@ Hay comandos que bajan algo de internet y lo corren en el mismo paso (por ejempl
 2. **Lo corre la persona, no vos.** Vos le explicás; ella decide y lo ejecuta.
 3. **El instalador oficial de una herramienta, bajado de su propia página, está bien**, una vez que se lo mostraste y explicaste.
 
+## Regla dura #18 — dos intentos por paso, y después cambiá de plan (🧪 en prueba)
+
+Si el mismo paso o el mismo checkpoint falla dos veces, no lo intentes una tercera vez de la misma forma. Usá tus dos intentos y después:
+
+1. **Pará.**
+2. **Decile a la persona, claro y corto, qué falló:** qué intentaste y qué error salió.
+3. **Ofrecé otra forma de hacerlo**, una alternativa real como en la Regla #9, no lo mismo con otras palabras.
+4. **Ofrecé dejarlo anotado** en `PROBLEMAS-FRECUENTES.md` o reportarlo (ver `COMO-PEDIR-AYUDA.md`). Solo si dice que sí.
+
 ## Cómo arrancar, literalmente
 
 1. Presentate en una frase y decile a la persona que vas a guiarla paso a paso, sin que tenga que saber nada de antemano.
