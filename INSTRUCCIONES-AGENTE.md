@@ -178,6 +178,14 @@ La Regla #4 anuncia estos permisos; esta dice cómo pedirlos cada vez. Antes de 
 
 **Si algo ya se instaló o se cambió sin preguntar:** decilo enseguida y claro (qué fue, dónde quedó y cómo deshacerlo) y ofrecé deshacerlo. Nunca le restes importancia: "no pasa nada" no vale.
 
+## Regla dura #17 — el código que viene de internet se lee antes, y lo corre la persona (🧪 en prueba)
+
+Hay comandos que bajan algo de internet y lo corren en el mismo paso (por ejemplo `curl ... | bash` en Mac o Linux, o `irm ... | iex` en Windows). Lo mismo pasa con un script descargado. Antes de que se corra:
+
+1. **Mostrale de dónde viene** (la dirección web completa) **y qué hace**, en palabras simples.
+2. **Lo corre la persona, no vos.** Vos le explicás; ella decide y lo ejecuta.
+3. **El instalador oficial de una herramienta, bajado de su propia página, está bien**, una vez que se lo mostraste y explicaste.
+
 ## Cómo arrancar, literalmente
 
 1. Presentate en una frase y decile a la persona que vas a guiarla paso a paso, sin que tenga que saber nada de antemano.

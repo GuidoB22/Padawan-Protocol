@@ -62,17 +62,27 @@ La app de escritorio ya incluye el agente: no necesitás instalar nada más.
 
 Una terminal es una ventana donde se escriben comandos. Si nunca usaste una, mirá primero la [guía oficial para principiantes](https://code.claude.com/docs/en/terminal-guide). Después, según tu sistema:
 
-**Windows (PowerShell):**
+**Windows (PowerShell):** primero miralo (este comando solo te muestra el instalador, no lo corre):
+
+```
+irm https://claude.ai/install.ps1
+```
+
+Si no entendés lo que dice, pedile a un chat de IA que te lo explique. Después instalalo:
 
 ```
 irm https://claude.ai/install.ps1 | iex
 ```
 
-**Mac, Linux o WSL:**
+**Mac, Linux o WSL:** primero bajá el instalador, después miralo y recién ahí correlo:
 
 ```
-curl -fsSL https://claude.ai/install.sh | bash
+curl -fsSL https://claude.ai/install.sh -o install.sh
+less install.sh
+bash install.sh
 ```
+
+`less` te muestra el archivo: bajás con las flechas y salís con `q`. Si no entendés lo que dice, pedile a un chat de IA que te lo explique antes de correrlo.
 
 Cuando termine, **cerrá la terminal, abrí una nueva** y escribí `claude --version`. Si muestra un número de versión, quedó instalado. Si dice que `claude` no se reconoce, mirá [PROBLEMAS-FRECUENTES.md](../PROBLEMAS-FRECUENTES.md).
 
