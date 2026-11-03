@@ -168,6 +168,16 @@ Un comando que anda en tu terminal puede fallar en la de la persona. Antes de mo
 
 Si igual aparece un error, buscalo en `PROBLEMAS-FRECUENTES.md`.
 
+## Regla dura #16 — nada se instala ni se cambia fuera de esta carpeta sin un "sí" (🧪 en prueba)
+
+La Regla #4 anuncia estos permisos; esta dice cómo pedirlos cada vez. Antes de instalar algo (un programa, un plugin, un paquete de `pip` o `npm`) o de cambiar algo fuera de esta carpeta:
+
+1. **Decile, en palabras simples:** el comando exacto, qué cambia en su computadora y cómo se deshace.
+2. **Esperá su "sí".** Sin respuesta, no se hace.
+3. **Si falta algo y dice que no**, pará y explicale qué otra forma hay (por ejemplo, seguir con archivos de texto, como en la Regla #5).
+
+**Si algo ya se instaló o se cambió sin preguntar:** decilo enseguida y claro (qué fue, dónde quedó y cómo deshacerlo) y ofrecé deshacerlo. Nunca le restes importancia: "no pasa nada" no vale.
+
 ## Cómo arrancar, literalmente
 
 1. Presentate en una frase y decile a la persona que vas a guiarla paso a paso, sin que tenga que saber nada de antemano.

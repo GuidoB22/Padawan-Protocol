@@ -29,9 +29,11 @@ Los archivos de texto de arriba andan igual sin esto — pero una app te deja VE
 
 Tu agente puede dejar TODO listo de antemano (instalar la app, y descargar+activar los 2 plugins que usamos) — así te quedan solo **2 clicks tuyos**, no más: abrir la carpeta, y aceptar un aviso de seguridad que Obsidian muestra siempre la primera vez (ese aviso no se puede saltear con ningún script — es a propósito, para que un vault ajeno no pueda correr código sin que vos lo confirmes).
 
-**1. Instalación + plugins ya listos — esto lo hace tu agente entero, vos no tocás nada todavía:**
+**1. Instalación + plugins ya listos — esto lo hace tu agente entero, vos solo le das el "sí" antes de que instale:**
 
 ```
+Antes de instalar nada, decime el comando exacto, qué cambia y
+cómo deshacerlo (desinstalarlo), y esperá mi "sí" (Regla #16).
 Instalá Obsidian en esta computadora (winget en Windows, brew
 --cask en Mac, o el método que corresponda a mi Linux si es
 otro — preguntame antes si no tenés Homebrew). Después, en esta
