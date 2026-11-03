@@ -49,6 +49,10 @@ No hace falta que algo se rompa para dejar un aviso. Si una explicación no qued
 3. **El repositorio es público.** Nada personal, del trabajo ni de la empresa (ver la sección de abajo).
 4. Usá la misma vía de arriba: Discord, o `gh issue create --title "[mejora] resumen corto" --body-file archivo.md` (con la plantilla completada en `archivo.md`), o a mano desde la pestaña **Issues → New issue → Pregunta o mejora**.
 
+## Si tu agente cambió algo sin preguntarte
+
+Preguntale directo: *"¿qué cambiaste, dónde, y cómo lo deshago?"*. Tiene que contestarte claro y ofrecerte deshacerlo (Regla dura #16 de `INSTRUCCIONES-AGENTE.md`). Si te dice "no pasa nada" sin explicarte, pedile el detalle otra vez. Si querés, dejalo anotado como dice arriba.
+
 ## Qué NO poner en el reporte, sea Discord o GitHub
 
 Nada personal de la persona (nombre real si no quiere, datos sensibles, capturas con información privada). El reporte es sobre la GUÍA, no sobre quién la está usando — describí el problema técnico o de explicación, nada más.

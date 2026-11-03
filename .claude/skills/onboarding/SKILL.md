@@ -17,11 +17,14 @@ Antes del paso 1 (que ya usa internet), fijate si existen `memoria.md` o `quien-
 
 ## 1. Chequeo de version (Regla dura #7 de INSTRUCCIONES-AGENTE.md)
 
+Dos comandos, uno después del otro (Regla dura #15):
+
 ```
-git fetch && git log HEAD..origin/master --oneline
+git fetch
+git log HEAD..origin/master --oneline
 ```
 
-Si no devuelve nada, seguí normal. Si devuelve algo Y esta carpeta ya tiene `memoria.md` o `quien-soy.md`, hacé el repaso completo de la Regla #7 antes de seguir (en qué nivel había quedado, qué cambió en formato corto, preguntar cómo seguir) — no lo saltees por estar dentro de este skill.
+Si el segundo no devuelve nada, seguí normal. Si devuelve algo Y esta carpeta ya tiene `memoria.md` o `quien-soy.md`, hacé el repaso completo de la Regla #7 antes de seguir (en qué nivel había quedado, qué cambió en formato corto, preguntar cómo seguir) — no lo saltees por estar dentro de este skill.
 
 ## 2. Chequeo de estado — qué ya está armado en esta carpeta
 

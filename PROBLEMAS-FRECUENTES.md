@@ -87,3 +87,20 @@ Ver Nivel 03, sección de conexión MCP, para el detalle completo de las dos cau
 2. Si aparece algo que no estaba en la lista, pedile a tu agente que te explique qué es antes de aprobarlo.
 3. No elijas "permitir todo" para ahorrarte clics.
 4. Contanos qué pasó (qué agente usás y si viste o no la ventana), como dice la sección "Preguntas y mejoras" de [COMO-PEDIR-AYUDA.md](COMO-PEDIR-AYUDA.md). Así sabemos si funciona y lo sacamos de "en prueba".
+
+---
+
+## "El token '&&' no es un separador de instrucciones válido en esta versión"
+
+**Síntoma**: pegaste en la terminal de Windows un comando como `git fetch && git log ...` y apareció ese error en rojo.
+
+**Causa**: la PowerShell que viene con Windows (versión 5.1) no entiende `&&`, que sirve para unir dos comandos. Otras terminales sí lo entienden, por eso muchos ejemplos (y a veces tu agente) lo usan.
+
+**Solución**: corré cada parte por separado, una línea por vez:
+
+```
+git fetch
+git log HEAD..origin/master --oneline
+```
+
+También podés cambiar `&&` por `;`. Si el comando te lo dio tu agente, recordale la Regla dura #15 de `INSTRUCCIONES-AGENTE.md`.

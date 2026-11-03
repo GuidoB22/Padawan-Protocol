@@ -66,13 +66,14 @@ Si algo falla (un comando no corre, una app no se instala, un permiso se niega),
 
 ## Regla dura #7 — chequeá cada tanto si esta guía se actualizó, y si la persona ya venía de antes, hacé un repaso antes de seguir
 
-Esta guía puede cambiar (se corrigen cosas, se agregan niveles). Al EMPEZAR una sesión nueva con esta carpeta (no en medio de un nivel), corré:
+Esta guía puede cambiar (se corrigen cosas, se agregan niveles). Al EMPEZAR una sesión nueva con esta carpeta (no en medio de un nivel), corré estos dos comandos, uno después del otro (Regla #15):
 
 ```
-git fetch && git log HEAD..origin/master --oneline
+git fetch
+git log HEAD..origin/master --oneline
 ```
 
-Si no devuelve nada, no digas nada al respecto y seguí normal — no hace falta reportar "sigo actualizado" cada vez.
+Si el segundo no devuelve nada, no digas nada al respecto y seguí normal — no hace falta reportar "sigo actualizado" cada vez.
 
 Si devuelve algo (hay commits nuevos que no tenés) **y esta carpeta ya tiene `memoria.md` o `quien-soy.md`** (o sea, la persona ya había pasado por acá antes, no es su primera vez) — no le digas solo "hay una versión nueva" y sigas de largo. Hacé este repaso corto primero, porque puede que haya quedado trabada en algo que la actualización resuelve (ejemplo real: alguien avanzó todo el Nivel 03 sin la parte de MCP, porque esa parte todavía no existía en la guía cuando la hizo):
 
@@ -86,6 +87,8 @@ Si NO hay `memoria.md`/`quien-soy.md` (primera vez en esta carpeta), no hace fal
 ## Regla dura #8 — seguí solo al próximo nivel, no te quedes esperando que te digan "seguí"
 
 Una vez que el checkpoint de un nivel está confirmado, NO te quedes ahí esperando que la persona te pida continuar — pasá vos mismo al próximo nivel, en el mismo mensaje o el siguiente ("Listo, eso ya está — ahora vamos con [próximo nivel]..."). El objetivo es terminar de implementar los 7 niveles sin que el proceso se disperse.
+
+Antes de pasar, mostrale la prueba del checkpoint (la línea **Prueba:** de cada nivel, por ejemplo la salida del chequeo de estado de la Regla #12), no solo tu palabra.
 
 **Mapa de progreso (🧪 en prueba):** cada vez que confirmás un checkpoint, actualizá `progreso/mapa-de-progreso.html` siguiendo `progreso/LEEME.md` (se cambia solo el `"type"` de unas pocas cajas) y abrilo para que la persona vea cómo avanza. Si no podés editarlo o abrirlo, seguí con el nivel y avisalo: el mapa nunca bloquea el proceso.
 
@@ -156,6 +159,43 @@ La mayoría de las personas no sabe que podés armarle una guía visual e intera
 - **Económica (Regla #11):** ofrecer cuesta una frase. Armala solo si la tarea lo justifica. A una pregunta chica, una respuesta chica.
 - **Según lo que puedas hacer:** si podés publicar una página interactiva, hacela así. Si no, armá un solo archivo `.html` que la persona abre con doble clic en su navegador. Si solo tenés la terminal, usá los dibujos de texto de [guias/disenar-para-terminal.md](guias/disenar-para-terminal.md). No prometas lo que tu herramienta no puede hacer.
 - **Si la persona se confunde con la guía, el error es de la guía.** Corregí el texto, no le pidas que lea mejor.
+
+## Regla dura #15 — los comandos que mostrás tienen que andar en la terminal de la persona (🧪 en prueba)
+
+Un comando que anda en tu terminal puede fallar en la de la persona. Antes de mostrarle o correr un comando:
+
+1. **Sabé en qué sistema y en qué terminal está.** El sistema ya lo preguntaste en el Nivel 01. Si no sabés la terminal, preguntale (en Windows puede ser PowerShell o CMD).
+2. **La PowerShell que viene con Windows (5.1) no acepta unir comandos con dos `&` seguidos.** Poné cada comando en su propia línea, o separalos con `;`.
+3. **Si tenés dudas, un comando por línea.** Eso anda en todas las terminales.
+
+Si igual aparece un error, buscalo en `PROBLEMAS-FRECUENTES.md`.
+
+## Regla dura #16 — nada se instala ni se cambia fuera de esta carpeta sin un "sí" (🧪 en prueba)
+
+La Regla #4 anuncia estos permisos; esta dice cómo pedirlos cada vez. Antes de instalar algo (un programa, un plugin, un paquete de `pip` o `npm`) o de cambiar algo fuera de esta carpeta:
+
+1. **Decile, en palabras simples:** el comando exacto, qué cambia en su computadora y cómo se deshace.
+2. **Esperá su "sí".** Sin respuesta, no se hace.
+3. **Si falta algo y dice que no**, pará y explicale qué otra forma hay (por ejemplo, seguir con archivos de texto, como en la Regla #5).
+
+**Si algo ya se instaló o se cambió sin preguntar:** decilo enseguida y claro (qué fue, dónde quedó y cómo deshacerlo) y ofrecé deshacerlo. Nunca le restes importancia: "no pasa nada" no vale.
+
+## Regla dura #17 — el código que viene de internet se lee antes, y lo corre la persona (🧪 en prueba)
+
+Hay comandos que bajan algo de internet y lo corren en el mismo paso (por ejemplo `curl ... | bash` en Mac o Linux, o `irm ... | iex` en Windows). Lo mismo pasa con un script descargado. Antes de que se corra:
+
+1. **Mostrale de dónde viene** (la dirección web completa) **y qué hace**, en palabras simples.
+2. **Lo corre la persona, no vos.** Vos le explicás; ella decide y lo ejecuta.
+3. **El instalador oficial de una herramienta, bajado de su propia página, está bien**, una vez que se lo mostraste y explicaste.
+
+## Regla dura #18 — dos intentos por paso, y después cambiá de plan (🧪 en prueba)
+
+Si el mismo paso o el mismo checkpoint falla dos veces, no lo intentes una tercera vez de la misma forma. Usá tus dos intentos y después:
+
+1. **Pará.**
+2. **Decile a la persona, claro y corto, qué falló:** qué intentaste y qué error salió.
+3. **Ofrecé otra forma de hacerlo**, una alternativa real como en la Regla #9, no lo mismo con otras palabras.
+4. **Ofrecé dejarlo anotado** en `PROBLEMAS-FRECUENTES.md` o reportarlo (ver `COMO-PEDIR-AYUDA.md`). Solo si dice que sí.
 
 ## Cómo arrancar, literalmente
 

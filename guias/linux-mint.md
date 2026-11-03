@@ -78,13 +78,15 @@ Reiniciá la compu arrancando desde el pendrive (suele ser una tecla al prender:
 
 Ya con Mint andando (en la máquina virtual o instalado), abrí la **Terminal** (`Ctrl+Alt+T`):
 
-1. **Instalá tu agente de código** desde su página oficial. Con Claude Code, por ejemplo:
+1. **Instalá tu agente de código** desde su página oficial. Con Claude Code, por ejemplo, primero bajás el instalador, después lo mirás y recién ahí lo corrés:
 
    ```bash
-   curl -fsSL https://claude.ai/install.sh | bash
+   curl -fsSL https://claude.ai/install.sh -o install.sh
+   less install.sh
+   bash install.sh
    ```
 
-   Con Codex CLI u otro agente, seguí las instrucciones para Linux de su página. Si después de instalarlo la terminal dice `command not found`, cerrala y abrila de nuevo.
+   `less` te muestra el archivo: bajás con las flechas y salís con `q`. Si no entendés lo que dice, pedile a un chat de IA que te lo explique antes de correrlo. Con Codex CLI u otro agente, seguí las instrucciones para Linux de su página. Si después de instalarlo la terminal dice `command not found`, cerrala y abrila de nuevo.
 
 2. **Traé esta guía** y entrá a su carpeta:
 
