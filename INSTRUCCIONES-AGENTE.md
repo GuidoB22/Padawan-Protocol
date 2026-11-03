@@ -66,13 +66,14 @@ Si algo falla (un comando no corre, una app no se instala, un permiso se niega),
 
 ## Regla dura #7 — chequeá cada tanto si esta guía se actualizó, y si la persona ya venía de antes, hacé un repaso antes de seguir
 
-Esta guía puede cambiar (se corrigen cosas, se agregan niveles). Al EMPEZAR una sesión nueva con esta carpeta (no en medio de un nivel), corré:
+Esta guía puede cambiar (se corrigen cosas, se agregan niveles). Al EMPEZAR una sesión nueva con esta carpeta (no en medio de un nivel), corré estos dos comandos, uno después del otro (Regla #15):
 
 ```
-git fetch && git log HEAD..origin/master --oneline
+git fetch
+git log HEAD..origin/master --oneline
 ```
 
-Si no devuelve nada, no digas nada al respecto y seguí normal — no hace falta reportar "sigo actualizado" cada vez.
+Si el segundo no devuelve nada, no digas nada al respecto y seguí normal — no hace falta reportar "sigo actualizado" cada vez.
 
 Si devuelve algo (hay commits nuevos que no tenés) **y esta carpeta ya tiene `memoria.md` o `quien-soy.md`** (o sea, la persona ya había pasado por acá antes, no es su primera vez) — no le digas solo "hay una versión nueva" y sigas de largo. Hacé este repaso corto primero, porque puede que haya quedado trabada en algo que la actualización resuelve (ejemplo real: alguien avanzó todo el Nivel 03 sin la parte de MCP, porque esa parte todavía no existía en la guía cuando la hizo):
 
@@ -156,6 +157,16 @@ La mayoría de las personas no sabe que podés armarle una guía visual e intera
 - **Económica (Regla #11):** ofrecer cuesta una frase. Armala solo si la tarea lo justifica. A una pregunta chica, una respuesta chica.
 - **Según lo que puedas hacer:** si podés publicar una página interactiva, hacela así. Si no, armá un solo archivo `.html` que la persona abre con doble clic en su navegador. Si solo tenés la terminal, usá los dibujos de texto de [guias/disenar-para-terminal.md](guias/disenar-para-terminal.md). No prometas lo que tu herramienta no puede hacer.
 - **Si la persona se confunde con la guía, el error es de la guía.** Corregí el texto, no le pidas que lea mejor.
+
+## Regla dura #15 — los comandos que mostrás tienen que andar en la terminal de la persona (🧪 en prueba)
+
+Un comando que anda en tu terminal puede fallar en la de la persona. Antes de mostrarle o correr un comando:
+
+1. **Sabé en qué sistema y en qué terminal está.** El sistema ya lo preguntaste en el Nivel 01. Si no sabés la terminal, preguntale (en Windows puede ser PowerShell o CMD).
+2. **La PowerShell que viene con Windows (5.1) no acepta unir comandos con dos `&` seguidos.** Poné cada comando en su propia línea, o separalos con `;`.
+3. **Si tenés dudas, un comando por línea.** Eso anda en todas las terminales.
+
+Si igual aparece un error, buscalo en `PROBLEMAS-FRECUENTES.md`.
 
 ## Cómo arrancar, literalmente
 
