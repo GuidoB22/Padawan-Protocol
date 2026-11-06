@@ -27,7 +27,7 @@ Mirá `plantillas/segundo-cerebro/_ejemplo-nota.md` para ver la forma mínima.
 
 Los archivos de texto de arriba andan igual sin esto — pero una app te deja VER las notas con formato lindo y las conexiones entre ellas dibujadas, en vez de abrir cada `.md` a mano.
 
-Tu agente puede dejar TODO listo de antemano (instalar la app, y descargar+activar los 2 plugins que usamos) — así te quedan solo **2 clicks tuyos**, no más: abrir la carpeta, y aceptar un aviso de seguridad que Obsidian muestra siempre la primera vez (ese aviso no se puede saltear con ningún script — es a propósito, para que un vault ajeno no pueda correr código sin que vos lo confirmes).
+Tu agente puede dejar TODO listo de antemano: instala la app, descarga y activa los 2 plugins que usamos, y hasta te abre Obsidian ya parado en tu carpeta. Así te queda solo **1 click tuyo**: aceptar un aviso de seguridad que Obsidian muestra siempre la primera vez. Ese aviso no se puede saltear con ningún script, y está bien que así sea: es para que una carpeta ajena no pueda correr código sin que vos lo confirmes.
 
 **1. Instalación + plugins ya listos — esto lo hace tu agente entero, vos solo le das el "sí" antes de que instale:**
 
@@ -45,23 +45,48 @@ y agregá sus IDs a .obsidian/community-plugins.json. Avisame
 cuando todo esto esté listo.
 ```
 
-**2. Los 2 clicks que te quedan a vos — con guía oficial de Obsidian:**
+**2. Obsidian se abre solo, ya en tu carpeta — esto también lo hace tu agente (🧪 en prueba):**
 
-Solo esto es manual (nadie puede scriptearlo por vos, ni siquiera Obsidian mismo lo permite):
+Elegir una carpeta dentro de Obsidian confunde a casi todo el mundo: parece que hay que elegir un archivo, y no. Por eso se lo dejás a tu agente. Lo que hace es anotar tu carpeta en la lista de "lugares conocidos" de Obsidian y después abrirla con un link especial, como cuando guardás un contacto en el celular y después lo llamás con un toque.
 
-- **Abrir esta carpeta como vault** — guía oficial: [obsidian.md/help/vault](https://obsidian.md/help/vault) (sección "Open existing folder"). Es 3 pasos: click en "Open" al lado de "Open folder as vault", elegís esta carpeta, click en "Open".
-- **Confirmar que confiás en los plugins** — la primera vez que abras esta carpeta, Obsidian te va a preguntar si confiás en el autor del vault (porque ya trae plugins con código dentro) — guía oficial: [obsidian.md/help/community-plugins](https://obsidian.md/help/community-plugins). Como sos vos quien lo armó (con tu agente), confiá y aceptá.
+```
+Ahora abrime Obsidian ya parado en esta carpeta, sin que yo tenga
+que buscarla. Esto cambia un archivo de Obsidian que está fuera de
+esta carpeta, así que antes decime qué vas a hacer y esperá mi
+"sí" (Regla #16). Pasos:
+1) Fijate que Obsidian esté cerrado. Si está abierto, pedime que
+   lo cierre (abierto no relee su lista y no funciona).
+2) Guardá una copia del archivo obsidian.json, que es la lista de
+   carpetas de Obsidian (Windows: %APPDATA%\obsidian\ — Mac:
+   ~/Library/Application Support/obsidian/ — Linux:
+   ~/.config/obsidian/). Esa copia es cómo se deshace.
+3) Agregá esta carpeta a esa lista sin borrar lo que ya esté: un
+   id nuevo de 16 caracteres hexadecimales, con "path" (la ruta
+   completa de esta carpeta) y "ts" (la hora actual en
+   milisegundos). Si el archivo no existe, crealo con
+   {"vaults":{...}}.
+4) Abrí el link obsidian://open?path=<ruta de esta carpeta,
+   codificada para URL>.
+Si Obsidian no se abre en esta carpeta, devolvé la copia del paso
+2 y guiame con el camino manual.
+```
 
-Esos links son la documentación OFICIAL de Obsidian — son de texto, sin capturas de pantalla (así es como Obsidian la mantiene). Si en algún paso no entendés qué estás viendo en tu pantalla, describíselo a tu agente y que te ayude a identificarlo — no hace falta que la imagen esté en un documento para que tu agente te pueda orientar.
+**3. El único click que te queda a vos:**
+
+- **Confirmar que confiás en los plugins.** Cuando Obsidian se abra, te va a preguntar si confiás en el autor de esta carpeta, porque ya trae plugins con código adentro. Guía oficial: [obsidian.md/help/community-plugins](https://obsidian.md/help/community-plugins). Como la armaste vos (con tu agente), confiá y aceptá.
+
+**¿No se abrió solo?** Pasa a veces, no hiciste nada mal. Abrí Obsidian vos y elegí "Open folder as vault" (abrir carpeta como vault). Ojo: ahí se elige la **carpeta** entera, no un archivo de adentro. Entrás a la carpeta y tocás "Seleccionar carpeta". Guía oficial: [obsidian.md/help/vault](https://obsidian.md/help/vault) (sección "Open existing folder").
+
+Esos links son la documentación OFICIAL de Obsidian. Son de texto, sin capturas de pantalla (así la mantiene Obsidian). Si no entendés qué estás viendo en tu pantalla, describíselo a tu agente y que te oriente.
 
 > [!TIP]
-> 🧭 **Decile esto a tu agente (después de tus 2 clicks):**
+> 🧭 **Decile esto a tu agente (después de tu click):**
 >
 > ```
-> Ya abrí la carpeta como vault y confirmé que confío en los
-> plugins. Confirmá que ves la carpeta .obsidian/plugins/ con
-> dataview y obsidian-git adentro, y contame en una línea para
-> qué sirve cada uno con tus propias palabras.
+> Ya se abrió Obsidian y confirmé que confío en los plugins.
+> Confirmá que ves la carpeta .obsidian/plugins/ con dataview y
+> obsidian-git adentro, y contame en una línea para qué sirve
+> cada uno con tus propias palabras.
 > ```
 
 **¿Preferís no instalar nada por ahora?** Está perfecto — seguí con los archivos de texto plano de arriba, funcionan igual. Podés volver a esto cuando quieras.
@@ -91,7 +116,7 @@ primera vez — así el plugin arranca con el servidor simple ya
 prendido, sin que yo tenga que tocar ningún toggle en sus ajustes.
 ```
 
-**2. Después de tus 2 clicks de siempre (abrir como vault + confirmar que confiás), decile esto a tu agente:**
+**2. Después de que Obsidian se abra y confirmes que confiás en los plugins, decile esto a tu agente:**
 
 ```
 Ya abrí el vault con el plugin Local REST API activado. Este plugin
