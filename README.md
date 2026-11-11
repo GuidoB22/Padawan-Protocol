@@ -139,6 +139,10 @@ En el ejemplo, **Tu persona** queda en amarillo hasta el final: a veces un paso 
 
 Después del Nivel 03 podés hacer los **casos de uso**: recetas de trabajo real (un reporte recurrente, ordenar la información de un proyecto, conectar un servicio con una API key). Son independientes entre sí y no cambian el camino de los 7 niveles. Ver [casos-de-uso/README.md](casos-de-uso/README.md).
 
+## 🧗 ¿Ya programás y querés una misión larga?
+
+Los **senderos** son misiones guiadas en un campo concreto, para quien ya programa y ya trabaja con un agente. El primero te lleva a proponer un fix en un proyecto open source. No reemplazan los niveles ni los casos de uso. Ver [senderos/README.md](senderos/README.md) (🧪 en prueba).
+
 ## 🐧 ¿Querés hacerla en Linux?
 
 Funciona igual. Ver [guias/linux-mint.md](guias/linux-mint.md): cómo conseguir Linux Mint de la página oficial, probarlo en una máquina virtual sin riesgo o instalarlo con un pendrive y Rufus, y arrancar la guía ahí con tu agente.
