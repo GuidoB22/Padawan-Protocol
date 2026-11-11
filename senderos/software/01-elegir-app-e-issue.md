@@ -56,7 +56,7 @@ Descartalo si es una lista de sugerencias, algo "por diseño", un pedido de func
 
 ## ¿Ya está arreglado? Hacelo ANTES de levantar nada
 
-🔴 **Lección:** nos pasó que el bug ya estaba arreglado en una versión más nueva, un día antes de abrirse el issue. Perdimos horas reproduciendo algo resuelto. Esta revisión toma 5 minutos y necesita el repositorio clonado (el clone está en la misión 02, pendiente; si todavía no lo tenés, clonalo ahora solo para mirar el historial):
+🔴 **Lección:** nos pasó que el bug ya estaba arreglado en una versión más nueva, un día antes de abrirse el issue. Perdimos horas reproduciendo algo resuelto. Esta revisión toma 5 minutos y necesita el repositorio clonado (el clone completo se hace en la misión 02; si todavía no lo tenés, clonalo ahora solo para mirar el historial):
 
 ```
 git fetch --all --tags
@@ -107,4 +107,4 @@ Abrí `CONTRIBUTING.md` y la plantilla de PR (en `.github/`). Anotá:
 - [ ] Dejé mi comentario en el issue (lo escribí yo).
 - [ ] Leí `CONTRIBUTING.md` y la plantilla de PR, y anoté rama destino y formato de título.
 
-Siguiente: misión 02 — Levantar y reproducir (🔴 pendiente de escribir).
+Siguiente: [misión 02 — Levantar y reproducir](02-levantar-y-reproducir.md).

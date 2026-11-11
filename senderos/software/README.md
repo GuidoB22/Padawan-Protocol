@@ -57,8 +57,8 @@ Crear una carpeta de trabajo (por ejemplo `C:\Workspace`) y, dentro, un archivo 
 | Misión | Qué lográs |
 |---|---|
 | [01 — Elegir app e issue](01-elegir-app-e-issue.md) | Elegir app e issue con criterios, y comprobar que el bug no esté ya arreglado |
-| 02 — Levantar y reproducir | 🔴 pendiente de escribir |
-| 03 — Causa y fix | 🔴 pendiente de escribir |
+| [02 — Levantar y reproducir](02-levantar-y-reproducir.md) | Clonar, levantar e instalar la app, y ver el error con tus ojos sin tocar código |
+| [03 — Causa y fix](03-causa-y-fix.md) | Cadena causal con archivo y línea, fix chico con plan de tres líneas y pruebas con evidencia |
 | 04 — Pull request y después | 🔴 pendiente de escribir |
 
 Se hacen en orden. No se pasa a la siguiente hasta confirmar el checkpoint de la anterior.
