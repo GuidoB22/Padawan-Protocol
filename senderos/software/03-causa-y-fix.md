@@ -117,4 +117,4 @@ Limpiá los datos de simulación: volvé a poner el valor original en la base.
 - [ ] Limpié los datos de simulación.
 - [ ] La tabla de evidencia está completa en la bitácora.
 
-Siguiente: misión 04 — Pull request y después (🔴 pendiente de escribir).
+Siguiente: [misión 04 — Pull request y después](04-pull-request-y-despues.md).
