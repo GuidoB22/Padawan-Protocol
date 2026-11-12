@@ -57,9 +57,9 @@ Crear una carpeta de trabajo (por ejemplo `C:\Workspace`) y, dentro, un archivo 
 | Misión | Qué lográs |
 |---|---|
 | [01 — Elegir app e issue](01-elegir-app-e-issue.md) | Elegir app e issue con criterios, y comprobar que el bug no esté ya arreglado |
-| 02 — Levantar y reproducir | 🔴 pendiente de escribir |
-| 03 — Causa y fix | 🔴 pendiente de escribir |
-| 04 — Pull request y después | 🔴 pendiente de escribir |
+| [02 — Levantar y reproducir](02-levantar-y-reproducir.md) | Clonar, levantar e instalar la app, y ver el error con tus ojos sin tocar código |
+| [03 — Causa y fix](03-causa-y-fix.md) | Cadena causal con archivo y línea, fix chico con plan de tres líneas y pruebas con evidencia |
+| [04 — Pull request y después](04-pull-request-y-despues.md) | Commit limpio, PR honesto, y el cierre: comentario en el issue, feedback y limpieza |
 
 Se hacen en orden. No se pasa a la siguiente hasta confirmar el checkpoint de la anterior.
 
@@ -74,6 +74,21 @@ Se hacen en orden. No se pasa a la siguiente hasta confirmar el checkpoint de la
 > seguir. Mantené mi bitácora al día. Si fallamos dos veces en el
 > mismo problema, parate y replanteá en vez de insistir.
 > ```
+
+## Resumen de una página
+
+1. Elegir app e issue con criterios (misión 01).
+2. Revisar si el bug ya está arreglado antes de levantar nada.
+3. Leer `CONTRIBUTING` y la plantilla de PR.
+4. Levantar la app, leyendo los logs desde el final.
+5. Instalar; cumplir módulos y permisos.
+6. Reproducir con capturas y logs. Si no reproduce, variar **una** condición por vez.
+7. Encontrar la causa con historial y experimentos reversibles.
+8. Diseñar el fix chico, copiando el patrón del proyecto.
+9. Probar: control A/B, regresión, seguridad.
+10. Commit por nombre, en la rama correcta, sin parches de entorno.
+11. PR corto, honesto, sin cerrar issues por error.
+12. Comentar, atender feedback y limpiar.
 
 ## Checkpoint
 
