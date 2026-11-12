@@ -7,7 +7,7 @@
 
 ## Qué es un sendero
 
-Un sendero es una **misión larga en un campo concreto**, que hacés con tu agente como mentor. Se divide en misiones, cada una con un checkpoint con evidencia. Al final queda **algo real entregado**, no solo algo aprendido.
+Un sendero es una **misión larga en un campo concreto**, que hacés con tu agente como par. Se divide en misiones, cada una con un checkpoint con evidencia. Al final queda **algo real entregado**, no solo algo aprendido.
 
 ## En qué se diferencia del resto
 
