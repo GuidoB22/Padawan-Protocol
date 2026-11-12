@@ -63,6 +63,8 @@ Crear una carpeta de trabajo (por ejemplo `C:\Workspace`) y, dentro, un archivo 
 
 Se hacen en orden. No se pasa a la siguiente hasta confirmar el checkpoint de la anterior.
 
+¿Querés ver cómo salió en un caso real? Mirá el [caso real](caso-real.md).
+
 > [!TIP]
 > 🧭 **Decile esto a tu agente:**
 >
@@ -74,6 +76,8 @@ Se hacen en orden. No se pasa a la siguiente hasta confirmar el checkpoint de la
 > seguir. Mantené mi bitácora al día. Si fallamos dos veces en el
 > mismo problema, parate y replanteá en vez de insistir.
 > ```
+
+¿Usás Claude Code? Podés escribir `/primer-fix` en vez del texto de arriba (🧪 en prueba).
 
 ## Resumen de una página
 

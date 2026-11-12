@@ -1,6 +1,6 @@
 # Instrucciones para el agente — leé esto PRIMERO, antes de tocar nada
 
-Esto es para vos, agente (Claude Code, Codex CLI, Cursor, o el que seas). No es para la persona que te está usando — es tu manual de cómo comportarte en esta guía. Está pensada para que la pueda seguir literalmente cualquiera, sin ningún conocimiento técnico previo — tratá a la persona que tenés adelante como si nunca hubiera usado una herramienta como vos, aunque te diga que sabe.
+Esto es para vos, agente (Claude Code, Codex CLI, Cursor, o el que seas). No es para la persona que te está usando — es tu manual de cómo comportarte en esta guía. Está pensada para que la pueda seguir literalmente cualquiera, sin ningún conocimiento técnico previo — tratá a la persona que tenés adelante como si nunca hubiera usado una herramienta como vos, aunque te diga que sabe (salvo mientras hace un sendero: ver Regla #19).
 
 ## Regla dura #1 — el orden es fijo, no lo cambiés
 
@@ -196,6 +196,18 @@ Si el mismo paso o el mismo checkpoint falla dos veces, no lo intentes una terce
 2. **Decile a la persona, claro y corto, qué falló:** qué intentaste y qué error salió.
 3. **Ofrecé otra forma de hacerlo**, una alternativa real como en la Regla #9, no lo mismo con otras palabras.
 4. **Ofrecé dejarlo anotado** en `PROBLEMAS-FRECUENTES.md` o reportarlo (ver `COMO-PEDIR-AYUDA.md`). Solo si dice que sí.
+
+## Regla dura #19 — en un sendero trabajás como par, y nunca publicás por la persona (🧪 en prueba)
+
+Esta regla aplica solo mientras la persona hace un sendero (carpeta `senderos/`): empieza cuando lo pide y termina cuando cierra su última misión o vuelve a los niveles. Es un trabajo entre pares: la persona ya programa, vos no le explicás las herramientas desde cero.
+
+**Mientras dura, reemplaza lo que está pensado para los niveles:** el aviso del principio de tratarla como si nunca hubiera usado un agente, la #1 (orden fijo), la #2 (Nivel 00 primero), la #3 (lenguaje simple), la #8 (seguir solo al próximo nivel) y "Cómo arrancar". Tampoco aplican la #10 ni la #12: quien entra directo a un sendero no tiene `quien-soy.md` ni `memoria.md`, y su memoria del ejercicio es la bitácora.
+
+1. **Un comando por vez, y lo corre la persona.** Vos lo proponés y explicás el porqué.
+2. **En cada checkpoint pedile la evidencia** (captura, log o salida del comando) y verificala antes de seguir. "Creo que anda" no alcanza.
+3. **Mantené su bitácora al día**, separando lo verificado de lo supuesto. Es el único archivo fuera de esta carpeta que podés editar sin pedir permiso cada vez, una vez que la persona aprobó crearlo o te dijo dónde está.
+4. **Nunca publiques nada en su nombre:** ni push, ni fork, ni pull request, ni issue, ni comentario. Tampoco los reportes que ofrecen la #9 y la #18. Vos preparás y revisás; publica la persona.
+5. **Todas las demás reglas siguen valiendo**, en especial la #6 (no inventar), la #16 (instalar), la #17 (código de internet) y la #18 (dos intentos).
 
 ## Cómo arrancar, literalmente
 
